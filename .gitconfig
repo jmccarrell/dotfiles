@@ -72,6 +72,18 @@
 		fi \
 	}; f"
 
+        # jwm aliases
+        # show a graph of recent commits
+        graph = "log --all --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%ci)%C(bold blue)<%an>%Creset'"
+
+        # a recent way I like to look at commits
+        ol = log --oneline --decorate
+
+        # shorthands
+        co = checkout
+        st = status
+        # end jwm aliases
+
 [apply]
 
 	# Detect whitespace errors when applying a patch
@@ -141,7 +153,8 @@
 	# Use the Git 1.x.x default to avoid errors on machines with old Git
 	# installations. To use `simple` instead, add this to your `~/.extra` file:
 	# `git config --global push.default simple`. See http://git.io/mMah-w.
-	default = matching
+	# default = matching
+	default = simple
 	# Make `git push` push relevant annotated tags when pushing branches out.
 	followTags = true
 
