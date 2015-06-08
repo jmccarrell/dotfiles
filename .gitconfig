@@ -77,7 +77,7 @@
         graph = "log --all --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%ci)%C(bold blue)<%an>%Creset'"
 
         # a recent way I like to look at commits
-        ol = log --oneline --decorate
+        ol = log --oneline --decorate -n 20
 
         # shorthands
         co = checkout
