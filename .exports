@@ -26,3 +26,9 @@ export MANPAGER='less -X';
 
 # Always enable colored `grep` output.
 export GREP_OPTIONS='--color=auto';
+
+# jwm
+#  from brew install coreutils
+if which brew > /dev/null; then
+    export MANPATH=$(brew --prefix coreutils)/libexec/gnuman:$MANPATH
+fi
