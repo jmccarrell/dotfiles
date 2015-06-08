@@ -107,6 +107,8 @@ brew install ccrypt
 brew install fping
 brew install python
 brew install python3
+brew install emacs
+brew cask install emacs
 
 # Remove outdated versions from the cellar.
 brew cleanup
