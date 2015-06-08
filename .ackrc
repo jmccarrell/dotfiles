@@ -1,0 +1,10 @@
+# turn off grouping; from http://dotfiles.org/~petdance/.ackrc
+#  noheading == print filename match on same line as match content, like grep
+--noheading
+--break
+
+# search in .txt files
+--type-add=tt=.txt
+
+# add velocity templates to java search types
+--type-add=java=.vm
