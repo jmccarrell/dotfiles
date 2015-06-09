@@ -109,6 +109,7 @@ brew install python
 brew install python3
 brew install emacs
 brew cask install emacs
+brew install tmux
 
 # Remove outdated versions from the cellar.
 brew cleanup
