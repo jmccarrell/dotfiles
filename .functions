@@ -244,3 +244,13 @@ function getcertnames() {
 function tre() {
 	tree -aC -I '.git|node_modules|bower_components' --dirsfirst "$@" | less -FRNX;
 }
+
+# set the title string in terminal.  See also .bash_prompt.
+function termtitle() {
+    if [[ -z "$@" ]]; then
+        unset TERM_TITLE
+    else
+        TERM_TITLE="$@"
+    fi
+    source ~/.bash_prompt
+}

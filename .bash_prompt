@@ -103,8 +103,15 @@ else
 	hostStyle="${yellow}";
 fi;
 
-# Set the terminal title to the current working directory.
-PS1="\[\033]0;\w\007\]";
+# Allow the user to set the title of the terminal. See function: termtitle
+if [[ "${TERM_TITLE}" ]]; then
+    termTitle="${TERM_TITLE}"
+else
+    termTitle='\w'  # default to working directory
+fi
+
+# Set the terminal title
+PS1="\[\033]0;${termTitle}\007\]";
 PS1+="\[${bold}\]"; # drop header blank line
 PS1+="\[${userStyle}\]\u"; # username
 PS1+="\[${white}\] at ";
