@@ -29,6 +29,6 @@ export GREP_OPTIONS='--color=auto';
 
 # jwm
 #  from brew install coreutils
-if which brew > /dev/null; then
+if which brew > /dev/null 2>&1; then
     export MANPATH=$(brew --prefix coreutils)/libexec/gnuman:$MANPATH
 fi
