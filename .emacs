@@ -258,3 +258,9 @@
 ;; (when (locate-library "epa-file.el")
 ;;   (require 'epa-file)
 ;;   (epa-file-enable))
+
+;; load in support for editing yaml files when availble.
+;;  I got my yaml-mode from git@github.com:yoshiki/yaml-mode.git
+(when (locate-library "yaml-mode.el")
+  (require 'yaml-mode)
+  (add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode)))
