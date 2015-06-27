@@ -1,13 +1,13 @@
 ;;; jwms emacs startup file
 ;;;
 
-;; Prepend my directories to the load path
-(setq load-path
-      (append (list (expand-file-name "~/src/emacs")) load-path))
+;; add in my dotfile-controlled emacs lisp when it is available
+(cond ((file-exists-p "~/.emacs.jwm.d/elisp")
+       (add-to-list 'load-path "~/.emacs.jwm.d/elisp")))
 
 ;; add in the brew emacs directory when it exists
 (cond ((file-exists-p "/usr/local/share/emacs/site-lisp")
-       (setq load-path (append load-path (list "/usr/local/share/emacs/site-lisp")))))
+       (add-to-list 'load-path "/usr/local/share/emacs/site-lisp")))
 
 ;; support for el-get https://github.com/dimitri/el-get
 (add-to-list 'load-path "~/.emacs.d/el-get/el-get")
@@ -30,16 +30,16 @@
 ;; this is cut-and-paste from the emacs info node "Saving Customizations"
 (cond ((< emacs-major-version 22)
        ;; Emacs 21 or less customization.
-       (setq custom-file "~/.emacs-custom-21.el"))
+       (setq custom-file "~/.emacs.jwm.d/emacs-custom-21.el"))
       ((= emacs-major-version 22)
-       (setq custom-file "~/.emacs-custom-22.el"))
+       (setq custom-file "~/.emacs.jwm.d/emacs-custom-22.el"))
       ((= emacs-major-version 23)
-       (setq custom-file "~/.emacs-custom-23.el"))
+       (setq custom-file "~/.emacs.jwm.d/emacs-custom-23.el"))
       ((= emacs-major-version 24)
-       (setq custom-file "~/.emacs-custom-24.el"))
+       (setq custom-file "~/.emacs.jwm.d/emacs-custom-24.el"))
       (t
-       ;; past Emacs 23
-       (setq custom-file "~/.emacs-custom-future.el")))
+       ;; past Emacs 24
+       (setq custom-file "~/.emacs.jwm.d/emacs-custom-future.el")))
 
 (load custom-file)
 
