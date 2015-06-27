@@ -28,12 +28,7 @@
 
 ;; set up my customization file
 ;; this is cut-and-paste from the emacs info node "Saving Customizations"
-(cond ((< emacs-major-version 22)
-       ;; Emacs 21 or less customization.
-       (setq custom-file "~/.emacs.jwm.d/emacs-custom-21.el"))
-      ((= emacs-major-version 22)
-       (setq custom-file "~/.emacs.jwm.d/emacs-custom-22.el"))
-      ((= emacs-major-version 23)
+(cond ((< emacs-major-version 24)
        (setq custom-file "~/.emacs.jwm.d/emacs-custom-23.el"))
       ((= emacs-major-version 24)
        (setq custom-file "~/.emacs.jwm.d/emacs-custom-24.el"))
