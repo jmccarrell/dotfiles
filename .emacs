@@ -9,6 +9,22 @@
 (cond ((file-exists-p "/usr/local/share/emacs/site-lisp")
        (setq load-path (append load-path (list "/usr/local/share/emacs/site-lisp")))))
 
+;; support for el-get https://github.com/dimitri/el-get
+(add-to-list 'load-path "~/.emacs.d/el-get/el-get")
+
+(unless (require 'el-get nil 'noerror)
+  (with-current-buffer
+      (url-retrieve-synchronously
+       "https://raw.githubusercontent.com/dimitri/el-get/master/el-get-install.el")
+    (goto-char (point-max))
+    (eval-print-last-sexp)))
+
+(add-to-list 'el-get-recipe-path "~/.emacs.d/el-get-user/recipes")
+(el-get 'sync)
+;; end el-get support
+
+;; I prefer solarized-dark
+(load-theme 'solarized-dark t)
 
 ;; set up my customization file
 ;; this is cut-and-paste from the emacs info node "Saving Customizations"
@@ -100,6 +116,7 @@
 (if (and (>= emacs-major-version 23) (eq 'darwin system-type))
     (add-to-list 'default-frame-alist '(font . "Monaco-12"))
   (add-to-list 'default-frame-alist '(font . "9x15")))
+
 
 (setq frame-title-format '("emacs: " buffer-file-name))
 ;; (set-language-environment "English")
@@ -265,19 +282,3 @@
   (require 'yaml-mode)
   (add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode)))
 
-;; support for el-get https://github.com/dimitri/el-get
-(add-to-list 'load-path "~/.emacs.d/el-get/el-get")
-
-(unless (require 'el-get nil 'noerror)
-  (with-current-buffer
-      (url-retrieve-synchronously
-       "https://raw.githubusercontent.com/dimitri/el-get/master/el-get-install.el")
-    (goto-char (point-max))
-    (eval-print-last-sexp)))
-
-(add-to-list 'el-get-recipe-path "~/.emacs.d/el-get-user/recipes")
-(el-get 'sync)
-;; end el-get support
-
-;; I prefer solarized-dark
-(load-theme 'solarized-dark t)
