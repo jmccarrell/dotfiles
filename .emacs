@@ -277,3 +277,7 @@
 
 (add-to-list 'el-get-recipe-path "~/.emacs.d/el-get-user/recipes")
 (el-get 'sync)
+;; end el-get support
+
+;; I prefer solarized-dark
+(load-theme 'solarized-dark t)
