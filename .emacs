@@ -116,7 +116,7 @@
 	    ))
 ;;; (add-to-list 'default-frame-alist '(font . "lucidasanstypewriter-14"))
 (if (and (>= emacs-major-version 23) (eq 'darwin system-type))
-    (add-to-list 'default-frame-alist '(font . "Monaco-12"))
+    (add-to-list 'default-frame-alist '(font . "Monaco-14"))
   (add-to-list 'default-frame-alist '(font . "9x15")))
 
 
