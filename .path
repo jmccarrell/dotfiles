@@ -1,0 +1,17 @@
+# set my path exactly how I want it.
+
+# initialize AP to ANACONDA_PATH, if set, or the empty string
+AP=${ANACONDA_PATH-}
+
+unset PATH
+for p in $HOME/bin $AP /usr/local/bin /usr/bin /bin /usr/sbin /sbin /opt/X11/bin; do
+    if [ -e "$p" ]; then
+        if [ -z "$PATH" ]; then
+            PATH="$p"
+        else
+            PATH="$PATH:$p"
+        fi
+    fi
+done
+unset p
+export PATH

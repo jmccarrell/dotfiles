@@ -1,0 +1,29 @@
+#! /usr/bin/env bash
+#
+# ensure anaconda:
+#  - is installed
+#  - is in the path, near the front
+#
+# run like this:
+# source ~/bin/load_anaconda
+# or the equiv
+# . ~/bin/load_anaconda
+
+err=0
+PATH_TO_A_BIN=/j/proj/anaconda3/bin
+
+
+if [ ! -e ${PATH_TO_A_BIN} ]; then
+    echo "cant seem to find anaconda; expected bin at ${PATH_TO_A_BIN}"
+    err=1
+fi
+
+if [ $err == 0 ]; then
+    export ANACONDA_PATH=${PATH_TO_A_BIN}
+    exec /usr/bin/env bash -l
+    # source ~/.path
+else
+    echo "error"
+fi
+
+
