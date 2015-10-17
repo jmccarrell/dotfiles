@@ -10,7 +10,7 @@
 # . ~/bin/load_anaconda
 
 err=0
-PATH_TO_A_BIN=/j/proj/anaconda3/bin
+PATH_TO_A_BIN=/j/sw/anaconda3/bin
 
 
 if [ ! -e ${PATH_TO_A_BIN} ]; then
