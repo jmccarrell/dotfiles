@@ -23,9 +23,6 @@
 (el-get 'sync)
 ;; end el-get support
 
-;; I prefer solarized-dark
-(load-theme 'solarized-dark t)
-
 ;; set up my customization file
 ;; this is cut-and-paste from the emacs info node "Saving Customizations"
 (cond ((< emacs-major-version 24)
@@ -141,6 +138,15 @@
   (set-face-background 'font-lock-warning-face "Tomato")
 )
 
+;; I prefer solarized-dark
+(load-theme 'solarized-dark t)
+
+;; prefer xterm-color for color output inside an emacs shell
+(when (locate-library "xterm-color.el")
+  (load (locate-library "xterm-color.el"))
+  (progn (add-hook 'comint-preoutput-filter-functions 'xterm-color-filter)
+         (setq comint-output-filter-functions (remove 'ansi-color-process-output comint-output-filter-functions))
+         (setq font-lock-unfontify-region-function 'xterm-color-unfontify-region)))
 
 ;;(setq truncate-partial-width-windows t)
 ;; (setq-default case-fold-search nil)
