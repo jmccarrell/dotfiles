@@ -139,7 +139,8 @@
 )
 
 ;; I prefer solarized-dark
-(load-theme 'solarized-dark t)
+(when (locate-library "solarized")
+  (load-theme 'solarized-dark t))
 
 ;; prefer xterm-color for color output inside an emacs shell
 (when (locate-library "xterm-color.el")
