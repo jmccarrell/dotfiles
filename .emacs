@@ -48,8 +48,8 @@
 ;; reveal trailing whitespace
 ;; I am using the default; there is a fancier mechanism here:
 ;;   http://www.emacswiki.org/emacs/whitespace.el
-(when (>= emacs-major-version 22)
-  (setq-default show-trailing-whitespace t))
+;; (when (>= emacs-major-version 22)
+;;   (setq-default show-trailing-whitespace t))
 
 ;; always end a file with a newline
 (setq require-final-newline t)
@@ -107,7 +107,9 @@
             ;; so bring it up a notch or two
             '(foreground-color . "grey54")  ;; foreground from solarized-emacs
 	    ;; '(background-color . "black")
-	    '(background-color . "#002b36")  ;; backround from solarized-emacs
+	    ;; '(background-color . "#002b36")  ;; backround from solarized-emacs
+                                                ;; but it does not work well with shell-mode, so choose a named color
+	    '(background-color . "color-235")  ;; this is a black from list-colors-display
 	    ;; '(cursor-color . "DarkOrange")
 	    '(cursor-color . "DarkOrange3")  ;; tone down cursor some with solarized colors
 	    ))
@@ -145,9 +147,16 @@
 ;; prefer xterm-color for color output inside an emacs shell
 (when (locate-library "xterm-color.el")
   (load (locate-library "xterm-color.el"))
+  ;; this is the init code from xterm-color.el for the general purpose...
   (progn (add-hook 'comint-preoutput-filter-functions 'xterm-color-filter)
          (setq comint-output-filter-functions (remove 'ansi-color-process-output comint-output-filter-functions))
-         (setq font-lock-unfontify-region-function 'xterm-color-unfontify-region)))
+         (setq font-lock-unfontify-region-function 'xterm-color-unfontify-region))
+  ;; ...and configured for eshell
+  (add-hook 'eshell-mode-hook
+            (lambda ()
+              (setq xterm-color-preserve-properties t))))
+  ;; (add-to-list 'eshell-preoutput-filter-functions 'xterm-color-filter)
+  ;; (setq eshell-output-filter-functions (remove 'eshell-handle-ansi-color eshell-output-filter-functions)))
 
 ;;(setq truncate-partial-width-windows t)
 ;; (setq-default case-fold-search nil)
