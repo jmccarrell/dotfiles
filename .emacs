@@ -117,10 +117,11 @@
 )
 
 ;; I prefer solarized-dark
-(when (locate-library "solarized")
-  (message "found and loading solarized theme")
-  (let ((theme-loaded (load-theme 'solarized-dark t)))
-    (if theme-loaded (message "solarized loaded success") (message "solarized load failed"))))
+(when window-system
+  (when (locate-library "solarized")
+    (message "found and loading solarized theme")
+    (let ((theme-loaded (load-theme 'solarized-dark t)))
+      (if theme-loaded (message "solarized loaded success") (message "solarized load failed")))))
 
 ;; prefer xterm-color for color output inside an emacs shell
 (when (locate-library "xterm-color.el")
@@ -255,7 +256,7 @@
 ;; ;;; load up support for R in emacs when installed.
 ;; (when (locate-library "ess-site") (require 'ess-site))
 
-;; ;;; set up nxhtml for php-mode when installed
+;;; set up nxhtml for php-mode when installed
 (when (locate-library "nxhtml/autostart.el")
   (load (locate-library "nxhtml/autostart.el")))
 
@@ -306,7 +307,13 @@
 )
 
 ;;; preferences on a raw terminal
-
+(unless window-system             ;;; terminal, not window system
+  (set-face-foreground 'minibuffer-prompt "wheat3")
+  (set-face-foreground 'dired-ignored "rosybrown3")
+  (set-face-foreground 'file-name-shadow "wheat1")
+  (set-face-foreground 'file-name-shadow "wheat1")
+  (set-face-foreground 'shadow "wheat1")
+)
 
 ;;; on OS X, set binding for meta to be command key, next to space bar
 ;;;  disable meaning of option key, so it is passed into emacs.
