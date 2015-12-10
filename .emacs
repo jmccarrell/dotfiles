@@ -95,30 +95,6 @@
 ;; (define-key global-map "\C-x\C-z" 'shell)
 ;; (define-key global-map "\C-z" 'shell)
 
-;;; Setup up window preferences
-(setq default-frame-alist
-      (list '(menu-bar-lines . 1)
-	    '(tool-bar-lines . 0)
-	    '(vertical-scroll-bars . nil)
-	    '(width . 100)
-	    '(height . 52)
-	    ;; '(foreground-color . "white")
-            ;; '(foreground-color . "#839496")  ;; foreground from solarized-emacs
-            ;; I think the solarized foreground is a little too quiet;
-            ;;  it corresponds about to grey-44 in the standard colors in list-colors-display
-            ;; so bring it up a notch or two
-            '(foreground-color . "grey54")  ;; foreground from solarized-emacs
-	    ;; '(background-color . "black")
-	    '(background-color . "#002b36")  ;; background from solarized-emacs
-	    ;; '(cursor-color . "DarkOrange")
-	    '(cursor-color . "DarkOrange3")  ;; tone down cursor some with solarized colors
-	    ))
-;;; (add-to-list 'default-frame-alist '(font . "lucidasanstypewriter-14"))
-(if (and (>= emacs-major-version 23) (eq 'darwin system-type))
-    (add-to-list 'default-frame-alist '(font . "Monaco-14"))
-  (add-to-list 'default-frame-alist '(font . "9x15")))
-
-
 (setq frame-title-format '("emacs: " buffer-file-name))
 ;; (set-language-environment "English")
 (set-language-environment "UTF-8")
@@ -142,7 +118,9 @@
 
 ;; I prefer solarized-dark
 (when (locate-library "solarized")
-  (load-theme 'solarized-dark t))
+  (message "found and loading solarized theme")
+  (let ((theme-loaded (load-theme 'solarized-dark t)))
+    (if theme-loaded (message "solarized loaded success") (message "solarized load failed"))))
 
 ;; prefer xterm-color for color output inside an emacs shell
 (when (locate-library "xterm-color.el")
@@ -299,6 +277,36 @@
 (when (locate-library "yaml-mode.el")
   (require 'yaml-mode)
   (add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode)))
+
+;;; set up my visual preferences
+
+;;; preferences when under a window system, which these days is pretty much os x
+(when window-system
+  (setq default-frame-alist
+        (list '(menu-bar-lines . 1)
+              '(tool-bar-lines . 0)
+              '(vertical-scroll-bars . nil)
+              '(width . 100)
+              '(height . 52)
+              ;; '(foreground-color . "white")
+              ;; '(foreground-color . "#839496")  ;; foreground from solarized-emacs
+              ;; I think the solarized foreground is a little too quiet;
+              ;;  it corresponds about to grey-44 in the standard colors in list-colors-display
+              ;; so bring it up a notch or two
+              '(foreground-color . "grey54")  ;; foreground from solarized-emacs
+              ;; '(background-color . "black")
+              '(background-color . "#002b36")  ;; background from solarized-emacs
+              ;; '(cursor-color . "DarkOrange")
+              '(cursor-color . "DarkOrange3")  ;; tone down cursor some with solarized colors
+              ))
+  ;;; (add-to-list 'default-frame-alist '(font . "lucidasanstypewriter-14"))
+  (if (and (>= emacs-major-version 23) (eq 'darwin system-type))
+      (add-to-list 'default-frame-alist '(font . "Monaco-14"))
+    (add-to-list 'default-frame-alist '(font . "9x15")))
+)
+
+;;; preferences on a raw terminal
+
 
 ;;; on OS X, set binding for meta to be command key, next to space bar
 ;;;  disable meaning of option key, so it is passed into emacs.
