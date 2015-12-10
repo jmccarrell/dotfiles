@@ -1,16 +1,19 @@
 ;;; jwms emacs startup file
 ;;;
 
-;; add in my dotfile-controlled emacs lisp when it is available
-(cond ((file-exists-p "~/.emacs.jwm.d/elisp")
-       (add-to-list 'load-path "~/.emacs.jwm.d/elisp")))
+;; set up emacs loading paths; add-to-list pushes onto the front of 'load-path, so
+;;   higher precedence is given to later calls here
+;;
+;; support for el-get https://github.com/dimitri/el-get
+(add-to-list 'load-path "~/.emacs.d/el-get/el-get")
 
 ;; add in the brew emacs directory when it exists
 (cond ((file-exists-p "/usr/local/share/emacs/site-lisp")
        (add-to-list 'load-path "/usr/local/share/emacs/site-lisp")))
 
-;; support for el-get https://github.com/dimitri/el-get
-(add-to-list 'load-path "~/.emacs.d/el-get/el-get")
+;; add in my dotfile-controlled emacs lisp when it is available
+(cond ((file-exists-p "~/.emacs.jwm.d/elisp")
+       (add-to-list 'load-path "~/.emacs.jwm.d/elisp")))
 
 (unless (require 'el-get nil 'noerror)
   (with-current-buffer
@@ -37,6 +40,11 @@
 
 (setq user-full-name "Jeff McCarrell")
 (setq user-mail-address "jeff@mccarrell.org")
+
+;; prefer utf-8 encoding in all cases.
+(prefer-coding-system 'utf-8)
+(set-terminal-coding-system 'utf-8)
+(set-keyboard-coding-system 'utf-8)
 
 ;; always show syntax highlighting
 (when (fboundp 'global-font-lock-mode)
@@ -79,12 +87,6 @@
 (put 'narrow-to-region 'disabled nil)
 (put 'downcase-region 'disabled nil)
 
-;;; on OS X, set binding for meta to be command key, next to space bar
-(when (eq 'darwin system-type)
-  (setq mac-command-key-is-meta t)
-  (setq mac-command-modifier 'meta)
-  (setq mac-option-modifier nil))
-
 ;;; set up some key bindings
 (define-key global-map "\C-xy" 'revert-buffer)
 (define-key global-map "\C-c\C-c" 'comment-region)
@@ -107,9 +109,7 @@
             ;; so bring it up a notch or two
             '(foreground-color . "grey54")  ;; foreground from solarized-emacs
 	    ;; '(background-color . "black")
-	    ;; '(background-color . "#002b36")  ;; backround from solarized-emacs
-                                                ;; but it does not work well with shell-mode, so choose a named color
-	    '(background-color . "color-235")  ;; this is a black from list-colors-display
+	    '(background-color . "#002b36")  ;; background from solarized-emacs
 	    ;; '(cursor-color . "DarkOrange")
 	    '(cursor-color . "DarkOrange3")  ;; tone down cursor some with solarized colors
 	    ))
@@ -299,4 +299,13 @@
 (when (locate-library "yaml-mode.el")
   (require 'yaml-mode)
   (add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode)))
+
+;;; on OS X, set binding for meta to be command key, next to space bar
+;;;  disable meaning of option key, so it is passed into emacs.
+;;;  I use these semantics so that, e.g., option-v gives me the square root character.
+;;;
+;;; I have had this code much higher in this init file; however, I run into eval order
+;;;  issues.  When I leave it here late in the sequence, it seems to do what I want.
+(when (and window-system (eq 'ns window-system))
+  (set-variable (quote mac-option-modifier) 'none))
 
