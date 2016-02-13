@@ -4,7 +4,7 @@
 AP=${ANACONDA_PATH-}
 
 unset PATH
-for p in $HOME/bin $AP /usr/local/bin /usr/local/sbin /usr/bin /bin /usr/sbin /sbin /opt/X11/bin; do
+for p in $HOME/bin $AP /usr/local/bin /usr/local/sbin /usr/bin /bin /usr/sbin /sbin /opt/X11/bin /Library/TeX/texbin; do
     if [ -e "$p" ]; then
         if [ -z "$PATH" ]; then
             PATH="$p"
