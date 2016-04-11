@@ -156,9 +156,15 @@
 	(rplacd (car list) val)
       (alist-put (cdr list) prop val))))
 
+
+(setq c-default-style '((java-mode . "java")
+                        (awk-mode . "awk")
+                        (other . "k&r")))
+
 (add-hook 'c-mode-hook
       (function
        (lambda ()
+         (c-set-style "k&r")
 	 (defconst indent-tabs-mode nil)
 	 (defconst c-basic-offset 4)
 	 (defconst c-argdecl-indent 4)
