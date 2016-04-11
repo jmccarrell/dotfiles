@@ -154,3 +154,10 @@ alias afk="/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resource
 
 # Reload the shell (i.e. invoke as a login shell)
 alias reload="exec $SHELL -l"
+
+## jeffs aliases (some more up by pushd/popd)
+
+# c compilation; from 21st Century C, by Ben Klemens
+go_libs="-lm"
+go_flags="-g -Wall -include all_headers.h -O3"
+alias go_c="gcc $go_libs $go_flags"
