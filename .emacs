@@ -191,6 +191,12 @@
 	 (modify-syntax-entry 95 "w"))))
 
 
+;;; python-mode
+(add-hook 'python-mode-hook
+          (lambda ()
+            (setq python-shell-interpreter "python3")))
+
+
 ;;; cperl-mode is preferred to perl-mode
 (add-hook 'cperl-mode-hook
 	  (function
