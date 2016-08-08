@@ -144,7 +144,8 @@
 [commit]
 
 	# https://help.github.com/articles/signing-commits-using-gpg/
-	gpgsign = true
+	# jwm: nope; I don't have a gpg key at github
+	# gpgsign = true
 
 [diff]
 
