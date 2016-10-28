@@ -40,11 +40,11 @@ fi
 # jwm: enable legacy perforce command line access
 export P4CONFIG=.p4config
 
-# jwm: setup for virtualenvwrapper when I have installed into the base python
-if pip install virtualenvwrapper 2>&1 | grep -E 'already satisfied.*virtualenvwrapper' 2>&1 > /dev/null; then
-    export WORKON_HOME=$HOME/tmp/venvs-python2
-    if [ -d /w/be ]; then
-        export PROJECT_HOME=/w/be
-    fi
-    source /usr/local/bin/virtualenvwrapper.sh
-fi
+# jwm: setup for virtualenvwrapper when I need python2 work and I have installed into the base python
+# if pip install virtualenvwrapper 2>&1 | grep -E 'already satisfied.*virtualenvwrapper' 2>&1 > /dev/null; then
+#     export WORKON_HOME=$HOME/tmp/venvs-python2
+#     if [ -d /w/be ]; then
+#         export PROJECT_HOME=/w/be
+#     fi
+#     source /usr/local/bin/virtualenvwrapper.sh
+# fi
