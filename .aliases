@@ -12,12 +12,11 @@ alias -- -="cd -"
 alias d="cd ~/Documents/Dropbox"
 alias dl="cd ~/Downloads"
 alias dt="cd ~/Desktop"
+# jwm-start
 # alias p="cd ~/projects"
-if [[ -d /Applications/Emacs ]]; then
-  alias e="open /Applications/Emacs.app"
-fi
 alias p=pushd
 alias P=popd
+# jwm-end
 # alias g="git"
 alias h="history"
 alias j="jobs"
