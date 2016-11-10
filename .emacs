@@ -49,6 +49,10 @@
 (set-terminal-coding-system 'utf-8)
 (set-keyboard-coding-system 'utf-8)
 
+;; magit
+(require 'magit)
+(global-set-key (kbd "C-x g") 'magit-status)
+
 ;; always show syntax highlighting
 (when (fboundp 'global-font-lock-mode)
   (global-font-lock-mode t))
