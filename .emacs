@@ -130,19 +130,32 @@
     (let ((theme-loaded (load-theme 'solarized-dark t)))
       (if theme-loaded (message "solarized loaded success") (message "solarized load failed")))))
 
-;; prefer xterm-color for color output inside an emacs shell
-(when (locate-library "xterm-color.el")
-  (load (locate-library "xterm-color.el"))
-  ;; this is the init code from xterm-color.el for the general purpose...
-  (progn (add-hook 'comint-preoutput-filter-functions 'xterm-color-filter)
-         (setq comint-output-filter-functions (remove 'ansi-color-process-output comint-output-filter-functions))
-         (setq font-lock-unfontify-region-function 'xterm-color-unfontify-region))
-  ;; ...and configured for eshell
-  (add-hook 'eshell-mode-hook
-            (lambda ()
-              (setq xterm-color-preserve-properties t))))
-  ;; (add-to-list 'eshell-preoutput-filter-functions 'xterm-color-filter)
-  ;; (setq eshell-output-filter-functions (remove 'eshell-handle-ansi-color eshell-output-filter-functions)))
+;; begin-jwm: xterm-color config as of 20161104.1949
+;; xterm-color config from: https://github.com/atomontage/xterm-color
+;; comint install
+(progn (add-hook 'comint-preoutput-filter-functions 'xterm-color-filter)
+       (setq comint-output-filter-functions (remove 'ansi-color-process-output comint-output-filter-functions)))
+
+;; comint uninstall
+(progn (remove-hook 'comint-preoutput-filter-functions 'xterm-color-filter)
+       (add-to-list 'comint-output-filter-functions 'ansi-color-process-output))
+
+;; For M-x shell, also set TERM accordingly (xterm-256color)
+
+;; You can also use it with eshell (and thus get color output from system ls):
+
+(require 'eshell)
+
+(add-hook 'eshell-mode-hook
+          (lambda ()
+            (setq xterm-color-preserve-properties t)))
+
+(add-to-list 'eshell-preoutput-filter-functions 'xterm-color-filter)
+(setq eshell-output-filter-functions (remove 'eshell-handle-ansi-color eshell-output-filter-functions))
+
+;;  Don't forget to setenv TERM xterm-256color
+;; end-jwm: xterm-color config as of 20161104.1949
+
 
 ;;(setq truncate-partial-width-windows t)
 ;; (setq-default case-fold-search nil)
