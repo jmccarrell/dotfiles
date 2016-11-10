@@ -3,18 +3,26 @@
 
 ;; set up emacs loading paths; add-to-list pushes onto the front of 'load-path, so
 ;;   higher precedence is given to later calls here
-;;
-;; support for el-get https://github.com/dimitri/el-get
+
+;; begin-jwm package.el support
+;; Added by Package.el.  This must come before configurations of
+;; installed packages.  Don't delete this line.  If you don't want it,
+;; just comment it out by adding a semicolon to the start of the line.
+;; You may delete these explanatory comments.
+(require 'package) ;; You might already have this line
+;; begin-jwm MELPA support
+(add-to-list 'package-archives
+             '("melpa" . "https://melpa.org/packages/"))
+(when (< emacs-major-version 24)
+  ;; For important compatibility libraries like cl-lib
+  (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/")))
+;; end-jwm MELPA
+(package-initialize)
+;; end-jwm package.el
+
+
+;; begin el-get support
 (add-to-list 'load-path "~/.emacs.d/el-get/el-get")
-
-;; add in the brew emacs directory when it exists
-(cond ((file-exists-p "/usr/local/share/emacs/site-lisp")
-       (add-to-list 'load-path "/usr/local/share/emacs/site-lisp")))
-
-;; add in my dotfile-controlled emacs lisp when it is available
-(cond ((file-exists-p "~/.emacs.jwm.d/elisp")
-       (add-to-list 'load-path "~/.emacs.jwm.d/elisp")))
-
 (unless (require 'el-get nil 'noerror)
   (with-current-buffer
       (url-retrieve-synchronously
@@ -25,6 +33,15 @@
 (add-to-list 'el-get-recipe-path "~/.emacs.d/el-get-user/recipes")
 (el-get 'sync)
 ;; end el-get support
+
+
+;; add in the brew emacs directory when it exists
+(cond ((file-exists-p "/usr/local/share/emacs/site-lisp")
+       (add-to-list 'load-path "/usr/local/share/emacs/site-lisp")))
+
+;; add in my dotfile-controlled emacs lisp when it is available
+(cond ((file-exists-p "~/.emacs.jwm.d/elisp")
+       (add-to-list 'load-path "~/.emacs.jwm.d/elisp")))
 
 ;; set up my customization file
 ;; this is cut-and-paste from the emacs info node "Saving Customizations"
