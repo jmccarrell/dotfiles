@@ -52,3 +52,6 @@ complete -o "nospace" -W "Contacts Calendar Dock Finder Mail Safari iTunes Syste
 if which brew &> /dev/null && $(brew --prefix autoenv > /dev/null 2>&1); then
     source $(brew --prefix autoenv)/activate.sh;
 fi;
+
+# jwm: add support for front-row env
+[ -f "$HOME/.bashrc-frontrow" ] && source "$HOME/.bashrc-frontrow"
