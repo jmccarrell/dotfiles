@@ -18,6 +18,7 @@
   (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/")))
 ;; end-jwm MELPA
 (package-initialize)
+(package-refresh-contents)
 ;; end-jwm package.el
 
 
