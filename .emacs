@@ -357,3 +357,9 @@
 (when (and window-system (eq 'ns window-system))
   (set-variable (quote mac-option-modifier) 'none))
 
+
+;;;
+;;; load intero; racier haskell-mode
+;;;
+(package-install 'intero)
+(add-hook 'haskell-mode-hook 'intero-mode)
