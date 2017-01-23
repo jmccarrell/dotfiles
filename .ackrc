@@ -8,3 +8,6 @@
 
 # add velocity templates to java search types
 --type-add=java=.vm
+
+# don't search in haskell / stack build artifacts
+--ignore-directory=.stack-work
