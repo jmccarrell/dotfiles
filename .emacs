@@ -334,9 +334,13 @@
               '(cursor-color . "DarkOrange3")  ;; tone down cursor some with solarized colors
               ))
   ;;; (add-to-list 'default-frame-alist '(font . "lucidasanstypewriter-14"))
-  (if (and (>= emacs-major-version 23) (eq 'darwin system-type))
-      (add-to-list 'default-frame-alist '(font . "Monaco-14"))
-    (add-to-list 'default-frame-alist '(font . "9x15")))
+  (cond ((and (>= emacs-major-version 23) (eq 'darwin system-type))
+         (add-to-list 'default-frame-alist '(font . "Monaco-14")))
+        ((eq 'gnu/linux system-type)
+         (add-to-list 'default-frame-alist '(font . "Ubuntu Mono-11")))
+        (t
+         ;; default to changing nothing
+         t))
 )
 
 ;;; preferences on a raw terminal
