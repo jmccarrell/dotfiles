@@ -337,11 +337,17 @@
   (cond ((and (>= emacs-major-version 23) (eq 'darwin system-type))
          (add-to-list 'default-frame-alist '(font . "Monaco-14")))
         ((eq 'gnu/linux system-type)
-         (add-to-list 'default-frame-alist '(font . "Ubuntu Mono-11")))
+         ;;; (message "display height %d" (display-pixel-height))
+         (cond ((>= (display-pixel-height) 3000)
+                (add-to-list 'default-frame-alist '(font . "Ubuntu Mono-18")))
+               (t
+                (add-to-list 'default-frame-alist '(font . "Ubuntu Mono-11")))
+               ))
         (t
          ;; default to changing nothing
-         t))
-)
+         t)
+        )
+  )
 
 ;;; preferences on a raw terminal
 (unless window-system             ;;; terminal, not window system
