@@ -17,8 +17,15 @@
   ;; For important compatibility libraries like cl-lib
   (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/")))
 ;; end-jwm MELPA
+
+;; package-refresh-contents causes a pause for every emacs invocation
+;;  as it makes the network connection to the package archives.
+;;  especially annoying when git invokes emacs as my EDITOR
+;;  so make this conditional on emacs being started under a window system
+;;  and attempt to make EDITOR="emacs --no-window-system"
 (package-initialize)
-(package-refresh-contents)
+(when window-system
+  (package-refresh-contents))
 ;; end-jwm package.el
 
 
@@ -337,10 +344,12 @@
   (cond ((and (>= emacs-major-version 23) (eq 'darwin system-type))
          (add-to-list 'default-frame-alist '(font . "Monaco-14")))
         ((eq 'gnu/linux system-type)
-         ;;; (message "display height %d" (display-pixel-height))
-         (cond ((>= (display-pixel-height) 3000)
+         (message "jwm: display height %d" (display-pixel-height))
+         (cond ((>= (display-pixel-height) 1800)
+                (message "jwm: detected high res monitor.")
                 (add-to-list 'default-frame-alist '(font . "Ubuntu Mono-18")))
                (t
+                (message "jwm: default monitor size chosen.")
                 (add-to-list 'default-frame-alist '(font . "Ubuntu Mono-11")))
                ))
         (t
