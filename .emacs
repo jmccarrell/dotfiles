@@ -143,15 +143,16 @@
     (let ((theme-loaded (load-theme 'solarized-dark t)))
       (if theme-loaded (message "solarized loaded success") (message "solarized load failed")))))
 
-;; begin-jwm: xterm-color config as of 20161104.1949
+;; begin-jwm: xterm-color config as of 20170102.1525
 ;; xterm-color config from: https://github.com/atomontage/xterm-color
 ;; comint install
+(require 'xterm-color)
 (progn (add-hook 'comint-preoutput-filter-functions 'xterm-color-filter)
        (setq comint-output-filter-functions (remove 'ansi-color-process-output comint-output-filter-functions)))
 
 ;; comint uninstall
-(progn (remove-hook 'comint-preoutput-filter-functions 'xterm-color-filter)
-       (add-to-list 'comint-output-filter-functions 'ansi-color-process-output))
+;; (progn (remove-hook 'comint-preoutput-filter-functions 'xterm-color-filter)
+;;        (add-to-list 'comint-output-filter-functions 'ansi-color-process-output))
 
 ;; For M-x shell, also set TERM accordingly (xterm-256color)
 
