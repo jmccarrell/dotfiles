@@ -61,6 +61,11 @@
 (require 'magit)
 (global-set-key (kbd "C-x g") 'magit-status)
 
+;; yasnippet
+(require 'yasnippet)
+(yas-reload-all)
+(add-hook 'markdown-mode-hook #'yas-minor-mode)
+
 ;; always show syntax highlighting
 (when (fboundp 'global-font-lock-mode)
   (global-font-lock-mode t))
