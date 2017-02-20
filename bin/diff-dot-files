@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+
+proj_dir='/j/proj/jwm-dotfiles'
+
+for file in \
+ .ackrc \
+ .aliases \
+ .bash_profile \
+ .bash_prompt \
+ .bashrc \
+ .curlrc \
+ .editorconfig \
+ .emacs \
+ .exports \
+ .functions \
+ .gdbinit \
+ .gitattributes \
+ .gitconfig \
+ .gitignore \
+ .gvimrc \
+ .hgignore \
+ .inputrc \
+ .iterm2_shell_integration.bash \
+ .macos \
+ .path \
+ .screenrc \
+ .tmux.conf \
+ .vimrc \
+ .wgetrc; do
+    diff -q "${HOME}/${file}" "${proj_dir}/${file}"
+done;
