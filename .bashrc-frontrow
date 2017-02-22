@@ -6,3 +6,13 @@ chruby 2.2.2
 export PATH=~/.npm-packages/bin:$PATH
 
 export PATH=~/code/megarepo/dist:$PATH
+
+#
+# set up aliases to front row hosts
+#
+alias dbanalytics='psql -h "db-analytics-prod.czdcwthissq0.us-east-1.rds.amazonaws.com" -U postgres -d classroom_prod'
+alias dbdev='sudo -u postgres psql -d classroom_dev'
+# dev10 is Jeffs dev machine, set up by David Tue Feb 21 16:43:27 PST 2017
+alias dbdev10='psql -h "db-standby-1-dev10.ct5lkhtswod5.us-east-1.rds.amazonaws.com" -U postgres -d classroom_prod'
+alias dbprod='psql -h "db-standby-1-prod.czdcwthissq0.us-east-1.rds.amazonaws.com" -U postgres -d classroom_prod'
+alias dbtest='sudo -u postgres psql -d classroom_test'
