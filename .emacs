@@ -379,9 +379,12 @@
 ;;;
 ;;; I have had this code much higher in this init file; however, I run into eval order
 ;;;  issues.  When I leave it here late in the sequence, it seems to do what I want.
-(when (and window-system (eq 'ns window-system))
-  (set-variable (quote mac-option-modifier) 'none))
 
+;;; circa Feb 2017, I want to move away from entering the special characters from the keyboard
+;;;  and back toward using the keys at the bottom of the keyboard for meta keys.
+;;; so this has to go.
+;; (when (and window-system (eq 'ns window-system))
+;;   (set-variable (quote mac-option-modifier) 'none))
 
 ;;;
 ;;; load intero; racier haskell-mode
