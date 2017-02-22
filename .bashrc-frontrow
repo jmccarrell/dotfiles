@@ -1,0 +1,8 @@
+# Ruby
+source /usr/local/share/chruby/chruby.sh
+chruby 2.2.2
+
+# Local npm path
+export PATH=~/.npm-packages/bin:$PATH
+
+export PATH=~/code/megarepo/dist:$PATH
