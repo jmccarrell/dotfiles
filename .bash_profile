@@ -63,4 +63,4 @@ if which brew &> /dev/null && $(brew --prefix autoenv > /dev/null 2>&1); then
 fi;
 
 # jwm: add support for front-row env
-[ -f "$HOME/.bashrc-frontrow" ] && source "$HOME/.bashrc-frontrow"
+[ -f "$HOME/.bashrc-frontrow" ] && [ -d "$HOME/code/megarepo" ] && source "$HOME/.bashrc-frontrow"
