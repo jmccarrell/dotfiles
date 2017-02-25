@@ -395,6 +395,22 @@
 ;; (when (and window-system (eq 'ns window-system))
 ;;   (set-variable (quote mac-option-modifier) 'none))
 
+;;; now invert the bindings of meta and super on the mac
+;;;  so that meta is closest to the space bar (command key on the mac keyboard)
+;;;          super is to the left of meta     (option/alt key on the mac keyboard)
+;;;  and leave right option unbound to insert accented characters.
+;;;
+;;; possible mac variables to bind
+;;  	mac-command-modifier
+;; mac-control-modifier 	mac-function-modifier
+;; mac-option-modifier 	mac-right-command-modifier
+;; mac-right-control-modifier 	mac-right-option-modifier
+(when (and window-system (eq 'ns window-system))
+  (message "setting mac meta/super key bindings")
+  (set-variable (quote mac-option-modifier) 'super)
+  (set-variable (quote mac-command-modifier) 'meta)
+  (set-variable (quote mac-right-option-modifier) 'none))
+
 ;;;
 ;;; load intero; racier haskell-mode
 ;;;
