@@ -411,6 +411,23 @@
   (set-variable (quote mac-command-modifier) 'meta)
   (set-variable (quote mac-right-option-modifier) 'none))
 
+;;; jwm experiment with solarized
+(require 'dash)
+(require 's)
+
+(-each
+   (-map
+      (lambda (item)
+      (format "~/.emacs.d/elpa/%s" item))
+   (-filter
+      (lambda (item) (s-contains? "theme" item))
+      (directory-files "~/.emacs.d/elpa/")))
+   (lambda (item)
+      (add-to-list 'custom-theme-load-path item)))
+
+(load-theme 'solarized t)
+;;;
+
 ;;;
 ;;; load intero; racier haskell-mode
 ;;;

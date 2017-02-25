@@ -29,5 +29,5 @@ for file in \
  .vimrc \
  .wgetrc; do
     # -q is a bit too quiet...
-    diff "${HOME}/${file}" "${proj_dir}/${file}"
+    diff -n "${HOME}/${file}" "${proj_dir}/${file}"
 done;
