@@ -11,6 +11,7 @@ for file in \
  .curlrc \
  .editorconfig \
  .emacs \
+ .emacs.jwm.d/emacs-custom-future.el \
  .exports \
  .functions \
  .gdbinit \
@@ -27,5 +28,6 @@ for file in \
  .tmux.conf \
  .vimrc \
  .wgetrc; do
-    diff -q "${HOME}/${file}" "${proj_dir}/${file}"
+    # -q is a bit too quiet...
+    diff "${HOME}/${file}" "${proj_dir}/${file}"
 done;
