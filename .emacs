@@ -425,7 +425,7 @@
    (lambda (item)
       (add-to-list 'custom-theme-load-path item)))
 
-(load-theme 'solarized t)
+;; (load-theme 'solarized t)
 ;;;
 
 ;;;
