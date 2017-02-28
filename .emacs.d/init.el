@@ -120,11 +120,91 @@
 
 ;;; Configure libraries
 
+(use-package helm
+  :ensure t
+  :diminish helm-mode
+  :init (progn
+          (require 'helm-config)
+          ;; (use-package helm-projectile
+          ;;   :ensure t
+          ;;   :commands helm-projectile
+          ;;   :bind ("C-c p h" . helm-projectile))
+          (use-package helm-ag :defer 10  :ensure t)
+          (setq helm-locate-command "mdfind -interpret -name %s %s"
+                helm-ff-newfile-prompt-p nil
+                helm-M-x-fuzzy-match t)
+          (helm-mode)
+          (use-package helm-swoop
+            :ensure t
+            :bind ("H-w" . helm-swoop)))
+  :bind (("C-c h" . helm-command-prefix)
+         ("C-x b" . helm-mini)
+         ("C-`" . helm-resume)
+         ("M-x" . helm-M-x)
+         ("C-x C-f" . helm-find-files)))
+
+(use-package intero
+  :ensure t
+  :config
+  (add-hook 'haskell-mode-hook 'intero-mode))
+
+(use-package macrostep
+  :ensure t
+  :bind ("C-c e m" . macrostep-expand))
+
+(use-package magit
+  :ensure t
+  :defer t
+  :bind ("C-x g" . magit-status))
+
+(use-package nxml-mode
+  :commands nxml-mode
+  :init
+  (defalias 'xml-mode 'nxml-mode)
+  :config
+  (defun my-nxml-mode-hook ()
+    (bind-key "<return>" #'newline-and-indent nxml-mode-map))
+
+  (add-hook 'nxml-mode-hook 'my-nxml-mode-hook)
+
+  (defun tidy-xml-buffer ()
+    (interactive)
+    (save-excursion
+      (call-process-region (point-min) (point-max) "tidy" t t nil
+                           "-xml" "-i" "-wrap" "0" "-omit" "-q" "-utf8")))
+
+  (bind-key "C-c M-h" #'tidy-xml-buffer nxml-mode-map)
+
+  (require 'hideshow)
+  (require 'sgml-mode)
+
+  (add-to-list 'hs-special-modes-alist
+               '(nxml-mode
+                 "<!--\\|<[^/>]*[^/]>"
+                 "-->\\|</[^/>]*[^/]>"
+
+                 "<!--"
+                 sgml-skip-tag-forward
+                 nil))
+
+  (add-hook 'nxml-mode-hook 'hs-minor-mode)
+
+  ;; optional key bindings, easier than hs defaults
+  (bind-key "C-c h" #'hs-toggle-hiding nxml-mode-map))
+
 (use-package solarized-theme
   :init
   (progn
     (load-theme 'solarized-dark t))
   :ensure t)
+
+(use-package yasnippet
+  :ensure t
+  :defer t
+  :diminish yas-minor-mode
+  :config
+  (setq yas-snippet-dirs (concat user-emacs-directory "snippets"))
+  (yas-global-mode))
 
 ;;; Post initialization
 
