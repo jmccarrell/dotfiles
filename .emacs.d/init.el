@@ -29,7 +29,10 @@
 (require 'bind-key)
 (require 'diminish nil t)
 
-(setq custom-file (expand-file-name "custom.el" user-emacs-directory))
+;;;
+;;; jwm: leave the custom settings in settings.el
+;;;  it is good enough for jwiegley
+(setq custom-file (expand-file-name "settings.el" user-emacs-directory))
 (load custom-file)
 
 ;;; Enable disabled commands
