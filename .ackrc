@@ -17,3 +17,6 @@
 
 # and dont search static ally defined stuff
 --ignore-directory=static
+
+# and don't search mathjax
+--ignore-directory=mathjax
