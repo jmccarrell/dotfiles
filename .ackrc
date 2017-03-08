@@ -11,3 +11,9 @@
 
 # don't search in haskell / stack build artifacts
 --ignore-directory=.stack-work
+
+# don't search in log directories
+--ignore-directory=log
+
+# and dont search static ally defined stuff
+--ignore-directory=static
