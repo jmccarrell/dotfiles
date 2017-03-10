@@ -274,7 +274,7 @@
       (append '(
 ;;		("\\.cgi$"      . cperl-mode)
 		("\\.t$"        . cperl-mode)
-		("\\.js$"       . java-mode)
+;;		("\\.js$"       . java-mode)
                 ("\\.m$"        . octave-mode)
 ;; 		("\\.htm[l]*$"  . html-helper-mode)
 ;; 		("\\.shtm[l]*$" . html-helper-mode)
