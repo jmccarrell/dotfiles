@@ -274,7 +274,7 @@
       (append '(
 ;;		("\\.cgi$"      . cperl-mode)
 		("\\.t$"        . cperl-mode)
-		("\\.js$"       . java-mode)
+;;		("\\.js$"       . java-mode)
                 ("\\.m$"        . octave-mode)
 ;; 		("\\.htm[l]*$"  . html-helper-mode)
 ;; 		("\\.shtm[l]*$" . html-helper-mode)
@@ -362,7 +362,7 @@
          (message "jwm: display height %d" (display-pixel-height))
          (cond ((>= (display-pixel-height) 1800)
                 (message "jwm: detected high res monitor.")
-                (add-to-list 'default-frame-alist '(font . "Ubuntu Mono-18")))
+                (add-to-list 'default-frame-alist '(font . "Ubuntu Mono-16")))
                (t
                 (message "jwm: default monitor size chosen.")
                 (add-to-list 'default-frame-alist '(font . "Ubuntu Mono-11")))
@@ -412,20 +412,20 @@
   (set-variable (quote mac-right-option-modifier) 'none))
 
 ;;; jwm experiment with solarized
-(require 'dash)
-(require 's)
+;; (require 'dash)
+;; (require 's)
 
-(-each
-   (-map
-      (lambda (item)
-      (format "~/.emacs.d/elpa/%s" item))
-   (-filter
-      (lambda (item) (s-contains? "theme" item))
-      (directory-files "~/.emacs.d/elpa/")))
-   (lambda (item)
-      (add-to-list 'custom-theme-load-path item)))
+;; (-each
+;;    (-map
+;;       (lambda (item)
+;;       (format "~/.emacs.d/elpa/%s" item))
+;;    (-filter
+;;       (lambda (item) (s-contains? "theme" item))
+;;       (directory-files "~/.emacs.d/elpa/")))
+;;    (lambda (item)
+;;       (add-to-list 'custom-theme-load-path item)))
 
-;; (load-theme 'solarized t)
+;;; (load-theme 'solarized t)
 ;;;
 
 ;;;
