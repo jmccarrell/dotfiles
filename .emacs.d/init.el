@@ -123,6 +123,12 @@
 
 ;;; Configure libraries
 
+;; ag config dervied from danielmai's config
+(use-package ag
+  :commands ag
+  :ensure t)
+
+;; helm config derived from danielmai's config
 (use-package helm
   :ensure t
   :diminish helm-mode
@@ -137,9 +143,10 @@
                 helm-ff-newfile-prompt-p nil
                 helm-M-x-fuzzy-match t)
           (helm-mode)
-          (use-package helm-swoop
-            :ensure t
-            :bind ("H-w" . helm-swoop)))
+          ;; (use-package helm-swoop
+          ;;   :ensure t
+          ;;   :bind ("H-w" . helm-swoop))
+          )
   :bind (("C-c h" . helm-command-prefix)
          ("C-x b" . helm-mini)
          ("C-`" . helm-resume)
