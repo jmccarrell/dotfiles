@@ -1,5 +1,4 @@
 # ignore generated files from emacs
-.emacs.d/config.el
 .emacs.d/elpa/
 .emacs.d/auto-save-list
 

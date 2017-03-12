@@ -12,6 +12,8 @@ for file in \
  .editorconfig \
  .emacs \
  .emacs.jwm.d/emacs-custom-future.el \
+ .emacs.d/init.el \
+ .emacs.d/settings.el \
  .exports \
  .functions \
  .gdbinit \
@@ -27,7 +29,9 @@ for file in \
  .screenrc \
  .tmux.conf \
  .vimrc \
- .wgetrc; do
+ .wgetrc \
+ bin/diff-dot-files \
+ ; do
     # -q is a bit too quiet...
-    diff -n "${HOME}/${file}" "${proj_dir}/${file}"
+    git diff "${HOME}/${file}" "${proj_dir}/${file}"
 done;
