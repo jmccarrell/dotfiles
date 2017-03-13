@@ -137,6 +137,35 @@
 (set-face-background 'font-lock-warning-face "Tomato")
 ;;; end jeffs colors
 
+;;; on OS X, set binding for meta to be command key, next to space bar
+;;;  disable meaning of option key, so it is passed into emacs.
+;;;  I use these semantics so that, e.g., option-v gives me the square root character.
+;;;
+;;; I have had this code much higher in this init file; however, I run into eval order
+;;;  issues.  When I leave it here late in the sequence, it seems to do what I want.
+
+;;; circa Feb 2017, I want to move away from entering the special characters from the keyboard
+;;;  and back toward using the keys at the bottom of the keyboard for meta keys.
+;;; so this has to go.
+;; (when (and window-system (eq 'ns window-system))
+;;   (set-variable (quote mac-option-modifier) 'none))
+
+;;; now invert the bindings of meta and super on the mac
+;;;  so that meta is closest to the space bar (command key on the mac keyboard)
+;;;          super is to the left of meta     (option/alt key on the mac keyboard)
+;;;  and leave right option unbound to insert accented characters.
+;;;
+;;; possible mac variables to bind
+;;  	mac-command-modifier
+;; mac-control-modifier 	mac-function-modifier
+;; mac-option-modifier 	mac-right-command-modifier
+;; mac-right-control-modifier 	mac-right-option-modifier
+(when (and window-system (eq 'ns window-system))
+  (message "setting mac meta/super key bindings")
+  (set-variable (quote mac-option-modifier) 'super)
+  (set-variable (quote mac-command-modifier) 'meta)
+  (set-variable (quote mac-right-option-modifier) 'none))
+
 
 ;;; Configure libraries
 
