@@ -69,6 +69,21 @@
 (set-selection-coding-system 'utf-8)
 (prefer-coding-system 'utf-8)
 
+(setq inhibit-startup-message t)
+;; needed for emacs23
+(setq inhibit-splash-screen t)
+
+;; complete things without hesitation
+(setq completion-auto-help nil)
+(setq completion-ignore-case t)
+;; (define-key minibuffer-local-completion-map " " 'minibuffer-complete)
+;; (define-key minibuffer-local-must-match-map " " 'minibuffer-complete)
+
+;; kill the whole line when at the beginning of it
+(setq kill-whole-line t)
+
+;; use the gnome/X cut buffers for killing and yanking
+(setq select-enable-clipboard t)
 ;; enable visual feedback on selections
 (setq-default transient-mark-mode t)
 
