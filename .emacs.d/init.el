@@ -137,6 +137,44 @@
 (set-face-background 'font-lock-warning-face "Tomato")
 ;;; end jeffs colors
 
+;;; frame settings under window system
+;;; preferences when under a window system, which these days is pretty much os x
+(when window-system
+  (setq default-frame-alist
+        (list '(menu-bar-lines . 1)
+              '(tool-bar-lines . 0)
+              '(vertical-scroll-bars . nil)
+              '(width . 100)
+              '(height . 52)
+              ;; '(foreground-color . "white")
+              ;; '(foreground-color . "#839496")  ;; foreground from solarized-emacs
+              ;; I think the solarized foreground is a little too quiet;
+              ;;  it corresponds about to grey-44 in the standard colors in list-colors-display
+              ;; so bring it up a notch or two
+              '(foreground-color . "grey54")  ;; foreground from solarized-emacs
+              ;; '(background-color . "black")
+              '(background-color . "#002b36")  ;; background from solarized-emacs
+              ;; '(cursor-color . "DarkOrange")
+              '(cursor-color . "DarkOrange3")  ;; tone down cursor some with solarized colors
+              ))
+  ;;; (add-to-list 'default-frame-alist '(font . "lucidasanstypewriter-14"))
+  (cond ((and (>= emacs-major-version 23) (eq 'darwin system-type))
+         (add-to-list 'default-frame-alist '(font . "Monaco-14")))
+        ((eq 'gnu/linux system-type)
+         (message "jwm: display height %d" (display-pixel-height))
+         (cond ((>= (display-pixel-height) 1800)
+                (message "jwm: detected high res monitor.")
+                (add-to-list 'default-frame-alist '(font . "Ubuntu Mono-16")))
+               (t
+                (message "jwm: default monitor size chosen.")
+                (add-to-list 'default-frame-alist '(font . "Ubuntu Mono-11")))
+               ))
+        (t
+         ;; default to changing nothing
+         t)
+        )
+  )
+
 ;;; on OS X, set binding for meta to be command key, next to space bar
 ;;;  disable meaning of option key, so it is passed into emacs.
 ;;;  I use these semantics so that, e.g., option-v gives me the square root character.
