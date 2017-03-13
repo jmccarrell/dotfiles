@@ -59,6 +59,8 @@
 ;; Keep all backup and auto-save files in one directory
 ;; (setq backup-directory-alist '(("." . "~/.emacs.d/backups")))
 ;; (setq auto-save-file-name-transforms '((".*" "~/.emacs.d/auto-save-list/" t)))
+;; (setq auto-save-list-file-prefix
+;;       (expand-file-name "~/tmp/emacs/emacs-saves"))
 
 ;; prefer utf-8 encoding in all cases.
 (setq locale-coding-system 'utf-8)
