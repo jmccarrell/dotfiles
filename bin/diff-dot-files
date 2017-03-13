@@ -10,7 +10,6 @@ for file in \
  .bashrc \
  .curlrc \
  .editorconfig \
- .emacs \
  .emacs.jwm.d/emacs-custom-future.el \
  .emacs.d/init.el \
  .emacs.d/settings.el \
