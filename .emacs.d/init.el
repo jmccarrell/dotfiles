@@ -79,6 +79,11 @@
 ;; (define-key minibuffer-local-completion-map " " 'minibuffer-complete)
 ;; (define-key minibuffer-local-must-match-map " " 'minibuffer-complete)
 
+;; key some global key bindings I happen to like.
+(define-key global-map "\C-xy" 'revert-buffer)
+(define-key global-map "\C-x\C-e" 'compile)
+(define-key global-map "\e\C-g" 'goto-line)
+
 ;;; no longer needed with kill-visual-line
 ;; kill the whole line when at the beginning of it
 ;;(setq kill-whole-line t)
