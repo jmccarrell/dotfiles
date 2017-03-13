@@ -79,8 +79,9 @@
 ;; (define-key minibuffer-local-completion-map " " 'minibuffer-complete)
 ;; (define-key minibuffer-local-must-match-map " " 'minibuffer-complete)
 
+;;; no longer needed with kill-visual-line
 ;; kill the whole line when at the beginning of it
-(setq kill-whole-line t)
+;;(setq kill-whole-line t)
 
 ;; use the gnome/X cut buffers for killing and yanking
 (setq select-enable-clipboard t)
