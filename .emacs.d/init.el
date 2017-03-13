@@ -93,8 +93,8 @@
 ;; prefer spaces to tabs
 (setq-default indent-tabs-mode nil)
 
-;; Turn off the blinking cursor
-(blink-cursor-mode -1)
+;; blink the cursor 10 times, then stop
+(blink-cursor-mode 10)
 
 (setq-default indicate-empty-lines t)
 
