@@ -341,6 +341,10 @@
     (load-theme 'solarized-dark t))
   :ensure t)
 
+(use-package yaml-mode
+  :ensure t
+  :mode ("\\.ya?ml\\'" . yaml-mode))
+
 (use-package yasnippet
   :ensure t
   :defer t
