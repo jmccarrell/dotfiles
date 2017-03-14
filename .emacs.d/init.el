@@ -99,6 +99,9 @@
 ;; prefer spaces to tabs
 (setq-default indent-tabs-mode nil)
 
+;; set a high fill column
+(setq-default fill-column 108)
+
 ;; blink the cursor 10 times, then stop
 (blink-cursor-mode 10)
 
