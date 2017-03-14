@@ -122,7 +122,11 @@
 (setq uniquify-buffer-name-style 'forward)
 
 ;; -i gets alias definitions from .bash_profile
-(setq shell-command-switch "-ic")
+;; jwm: but when I turn this on, I get:
+;; bash: cannot set terminal process group (-1): Inappropriate ioctl for device
+;; bash: no job control in this shell
+;; so turn it off
+;; (setq shell-command-switch "-ic")
 
 ;; Don't beep at me
 (setq visible-bell t)
