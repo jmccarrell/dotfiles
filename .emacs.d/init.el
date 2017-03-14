@@ -131,6 +131,34 @@
 ;; Don't beep at me
 (setq visible-bell t)
 
+;; prefer xterm-color
+;; begin-jwm: xterm-color config as of 20170102.1525
+;; xterm-color config from: https://github.com/atomontage/xterm-color
+;; comint install
+(require 'xterm-color)
+(progn (add-hook 'comint-preoutput-filter-functions 'xterm-color-filter)
+       (setq comint-output-filter-functions (remove 'ansi-color-process-output comint-output-filter-functions)))
+
+;; comint uninstall
+;; (progn (remove-hook 'comint-preoutput-filter-functions 'xterm-color-filter)
+;;        (add-to-list 'comint-output-filter-functions 'ansi-color-process-output))
+
+;; For M-x shell, also set TERM accordingly (xterm-256color)
+
+;; You can also use it with eshell (and thus get color output from system ls):
+
+(require 'eshell)
+
+(add-hook 'eshell-mode-hook
+          (lambda ()
+            (setq xterm-color-preserve-properties t)))
+
+(add-to-list 'eshell-preoutput-filter-functions 'xterm-color-filter)
+(setq eshell-output-filter-functions (remove 'eshell-handle-ansi-color eshell-output-filter-functions))
+
+;;  Don't forget to setenv TERM xterm-256color
+;; end-jwm: xterm-color config as of 20161104.1949
+
 ;;; jeffs colors
 (set-face-foreground 'font-lock-builtin-face "Peru")
 (set-face-foreground 'font-lock-comment-face "DeepSkyBlue1")
