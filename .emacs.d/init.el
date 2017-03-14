@@ -250,6 +250,14 @@
   :commands ag
   :ensure t)
 
+;; a better ace-jump-mode; derivedd from jwiegley
+(use-package avy
+  :ensure t
+  :load-path "site-lisp/avy"
+  :bind ("M-h" . avy-goto-char)
+  :config
+  (avy-setup-default))
+
 ;; helm config derived from danielmai's config
 (use-package helm
   :ensure t
