@@ -3,8 +3,7 @@
 # Make vim the default editor.
 # export EDITOR='vim';
 # jwm: emacs forever
-# jwm: try --no-window-system
-export EDITOR='emacs --no-window-system';
+export EDITOR=emacsclient;
 
 # Enable persistent REPL history for `node`.
 export NODE_REPL_HISTORY=~/.node_history;
