@@ -124,6 +124,16 @@
 
 (setq uniquify-buffer-name-style 'forward)
 
+;; enable the week of the year in calendar.
+(setq calendar-week-start-day 1
+      calendar-intermonth-text
+      '(propertize
+        (format "%2d"
+                (car
+                 (calendar-iso-from-absolute
+                  (calendar-absolute-from-gregorian (list month day year)))))
+        'font-lock-face 'font-lock-function-name-face))
+
 ;; -i gets alias definitions from .bash_profile
 ;; jwm: but when I turn this on, I get:
 ;; bash: cannot set terminal process group (-1): Inappropriate ioctl for device
