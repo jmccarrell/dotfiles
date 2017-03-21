@@ -166,3 +166,6 @@ alias path='echo -e ${PATH//:/\\n}'
 go_libs="-lm"
 go_flags="-g -Wall -include all_headers.h -O3"
 alias go_c="gcc $go_libs $go_flags"
+
+# run emacsforosx
+alias emacsclient=ec

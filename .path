@@ -4,9 +4,10 @@
 AP=${ANACONDA_PATH-}
 
 # haskell stack puts things in $HOME/.local/bin
+# ensure ~/bin/MacOS is very early in the path for emacsforosx
 
 unset PATH
-for p in $HOME/bin $HOME/.local/bin $AP /usr/local/bin /usr/local/sbin /usr/bin /bin /usr/sbin /sbin /opt/X11/bin /Library/TeX/texbin; do
+for p in $HOME/bin/MacOS $HOME/bin $HOME/.local/bin $AP /usr/local/bin /usr/local/sbin /usr/bin /bin /usr/sbin /sbin /opt/X11/bin /Library/TeX/texbin; do
     if [ -e "$p" ]; then
         if [ -z "$PATH" ]; then
             PATH="$p"
