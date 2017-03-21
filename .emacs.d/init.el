@@ -296,6 +296,10 @@
          ("M-x" . helm-M-x)
          ("C-x C-f" . helm-find-files)))
 
+(use-package helm-make
+  :ensure t
+  :commands (helm-make helm-make-projectile))
+
 (use-package intero
   :ensure t
   :config
@@ -344,6 +348,24 @@
 
   ;; optional key bindings, easier than hs defaults
   (bind-key "C-c h" #'hs-toggle-hiding nxml-mode-map))
+
+(use-package projectile
+  :ensure t
+  :diminish projectile-mode
+  :commands projectile-global-mode
+  :defer 5
+  :bind-keymap ("C-c p" . projectile-command-map)
+  :config
+  (use-package helm-projectile
+    :config
+    (setq projectile-completion-system 'helm)
+    (helm-projectile-on))
+  (projectile-global-mode)
+  (bind-key "s s"
+            #'(lambda ()
+                (interactive)
+                (helm-do-grep-1 (list (projectile-project-root)) t))
+            'projectile-command-map))
 
 (use-package solarized-theme
   :init
