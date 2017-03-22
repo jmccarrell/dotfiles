@@ -367,6 +367,51 @@
                 (helm-do-grep-1 (list (projectile-project-root)) t))
             'projectile-command-map))
 
+(use-package session
+  :if (not noninteractive)
+  :ensure t
+  :preface
+  (defun remove-session-use-package-from-settings ()
+    (when (string= (file-name-nondirectory (buffer-file-name)) "settings.el")
+      (save-excursion
+        (goto-char (point-min))
+        (when (re-search-forward "^ '(session-use-package " nil t)
+          (delete-region (line-beginning-position)
+                         (1+ (line-end-position)))))))
+
+  ;; expanded folded secitons as required
+  (defun le::maybe-reveal ()
+    (when (and (or (memq major-mode  '(org-mode outline-mode))
+                   (and (boundp 'outline-minor-mode)
+                        outline-minor-mode))
+               (outline-invisible-p))
+      (if (eq major-mode 'org-mode)
+          (org-reveal)
+        (show-subtree))))
+
+  (defvar server-process nil)
+
+  (defun save-information ()
+    (with-temp-message "Saving Emacs information..."
+      (recentf-cleanup)
+
+      (loop for func in kill-emacs-hook
+            unless (memq func '(exit-gnus-on-exit server-force-stop))
+            do (funcall func))
+
+      (unless (or noninteractive
+                  running-alternate-emacs
+                  running-development-emacs
+                  (and server-process
+                       (eq 'listen (process-status server-process))))
+        (server-start))))
+
+  :config
+  (add-hook 'before-save-hook 'remove-session-use-package-from-settings)
+  (add-hook 'session-after-jump-to-last-change-hook 'le::maybe-reveal)
+  (run-with-idle-timer 60 t 'save-information)
+  (add-hook 'after-init-hook 'session-initialize t))
+
 (use-package solarized-theme
   :init
   (progn
