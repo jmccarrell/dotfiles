@@ -15,7 +15,7 @@
 # don't search in log directories
 --ignore-directory=log
 
-# and dont search static ally defined stuff
+# and dont search statically defined stuff
 --ignore-directory=static
 
 # and don't search mathjax
