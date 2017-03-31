@@ -50,6 +50,10 @@
 
 ;;; jeffs settings
 
+;; mirror the mac user gesture for switching frames
+(when (eq 'darwin system-type)
+  (bind-key "M-`" 'other-frame))
+
 ;; Answering just 'y' or 'n' will do
 (defalias 'yes-or-no-p 'y-or-n-p)
 
