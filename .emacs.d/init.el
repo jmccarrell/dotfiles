@@ -11,8 +11,13 @@
 (package-initialize)
 
 (unless (package-installed-p 'use-package)
-  (package-refresh-contents)
   (package-install 'use-package))
+(setq use-package-verbose t)
+(setq use-package-always-ensure t)
+(require 'use-package)
+(use-package auto-compile
+  :config (auto-compile-on-load-mode))
+(setq load-prefer-newer t)
 
 (eval-and-compile
   ;; (mapc #'(lambda (path)
@@ -264,12 +269,10 @@
 
 ;; ag config dervied from danielmai's config
 (use-package ag
-  :commands ag
-  :ensure t)
+  :commands ag)
 
-;; a better ace-jump-mode; derivedd from jwiegley
+;; a better ace-jump-mode; derived from jwiegley
 (use-package avy
-  :ensure t
   :load-path "site-lisp/avy"
   :bind ("M-h" . avy-goto-char)
   :config
@@ -277,7 +280,6 @@
 
 ;; helm config derived from danielmai's config
 (use-package helm
-  :ensure t
   :diminish helm-mode
   :init (progn
           (require 'helm-config)
@@ -301,20 +303,16 @@
          ("C-x C-f" . helm-find-files)))
 
 (use-package helm-make
-  :ensure t
   :commands (helm-make helm-make-projectile))
 
 (use-package intero
-  :ensure t
   :config
   (add-hook 'haskell-mode-hook 'intero-mode))
 
 (use-package macrostep
-  :ensure t
   :bind ("C-c e m" . macrostep-expand))
 
 (use-package magit
-  :ensure t
   :defer t
   :bind ("C-x g" . magit-status))
 
@@ -354,7 +352,6 @@
   (bind-key "C-c h" #'hs-toggle-hiding nxml-mode-map))
 
 (use-package projectile
-  :ensure t
   :diminish projectile-mode
   :commands projectile-global-mode
   :defer 5
@@ -373,7 +370,6 @@
 
 (use-package session
   :if (not noninteractive)
-  :ensure t
   :preface
   (defun remove-session-use-package-from-settings ()
     (when (string= (file-name-nondirectory (buffer-file-name)) "settings.el")
@@ -419,15 +415,12 @@
 (use-package solarized-theme
   :init
   (progn
-    (load-theme 'solarized-dark t))
-  :ensure t)
+    (load-theme 'solarized-dark t)))
 
 (use-package yaml-mode
-  :ensure t
   :mode ("\\.ya?ml\\'" . yaml-mode))
 
 (use-package yasnippet
-  :ensure t
   :defer t
   :diminish yas-minor-mode
   :config
