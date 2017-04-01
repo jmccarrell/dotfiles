@@ -317,40 +317,40 @@
   :defer t
   :bind ("C-x g" . magit-status))
 
-(use-package nxml-mode
-  :commands nxml-mode
-  :init
-  (defalias 'xml-mode 'nxml-mode)
-  :config
-  (defun my-nxml-mode-hook ()
-    (bind-key "<return>" #'newline-and-indent nxml-mode-map))
+;; (use-package nxml-mode
+;;   :commands nxml-mode
+;;   :init
+;;   (defalias 'xml-mode 'nxml-mode)
+;;   :config
+;;   (defun my-nxml-mode-hook ()
+;;     (bind-key "<return>" #'newline-and-indent nxml-mode-map))
 
-  (add-hook 'nxml-mode-hook 'my-nxml-mode-hook)
+;;   (add-hook 'nxml-mode-hook 'my-nxml-mode-hook)
 
-  (defun tidy-xml-buffer ()
-    (interactive)
-    (save-excursion
-      (call-process-region (point-min) (point-max) "tidy" t t nil
-                           "-xml" "-i" "-wrap" "0" "-omit" "-q" "-utf8")))
+;;   (defun tidy-xml-buffer ()
+;;     (interactive)
+;;     (save-excursion
+;;       (call-process-region (point-min) (point-max) "tidy" t t nil
+;;                            "-xml" "-i" "-wrap" "0" "-omit" "-q" "-utf8")))
 
-  (bind-key "C-c M-h" #'tidy-xml-buffer nxml-mode-map)
+;;   (bind-key "C-c M-h" #'tidy-xml-buffer nxml-mode-map)
 
-  (require 'hideshow)
-  (require 'sgml-mode)
+;;   (require 'hideshow)
+;;   (require 'sgml-mode)
 
-  (add-to-list 'hs-special-modes-alist
-               '(nxml-mode
-                 "<!--\\|<[^/>]*[^/]>"
-                 "-->\\|</[^/>]*[^/]>"
+;;   (add-to-list 'hs-special-modes-alist
+;;                '(nxml-mode
+;;                  "<!--\\|<[^/>]*[^/]>"
+;;                  "-->\\|</[^/>]*[^/]>"
 
-                 "<!--"
-                 sgml-skip-tag-forward
-                 nil))
+;;                  "<!--"
+;;                  sgml-skip-tag-forward
+;;                  nil))
 
-  (add-hook 'nxml-mode-hook 'hs-minor-mode)
+;;   (add-hook 'nxml-mode-hook 'hs-minor-mode)
 
-  ;; optional key bindings, easier than hs defaults
-  (bind-key "C-c h" #'hs-toggle-hiding nxml-mode-map))
+;;   ;; optional key bindings, easier than hs defaults
+;;   (bind-key "C-c h" #'hs-toggle-hiding nxml-mode-map))
 
 (use-package projectile
   :diminish projectile-mode
