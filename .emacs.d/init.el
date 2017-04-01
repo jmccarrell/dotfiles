@@ -236,16 +236,6 @@
         )
   )
 
-;; set no character background color; let the terminals default come through.
-;; taken from: http://stackoverflow.com/questions/19054228/emacs-disable-theme-background-color-in-terminal
-
-;; jwm: this did not have the desired effect for me; my terminal emacs still have a dark blue background.
-
-;; (defun on-after-init
-;;     (unless (graphic-display-p (selected-frame))
-;;       (set-face-background 'default nil (selected-frame))))
-;; (add-hook 'window-setup-hook 'on-after-init)
-
 ;;; on OS X, set binding for meta to be command key, next to space bar
 ;;;  disable meaning of option key, so it is passed into emacs.
 ;;;  I use these semantics so that, e.g., option-v gives me the square root character.
@@ -426,7 +416,8 @@
 (use-package solarized-theme
   :init
   (progn
-    (load-theme 'solarized-dark t)))
+    (when (display-graphic-p)
+      (load-theme 'solarized-dark t))))
 
 (use-package yaml-mode
   :mode ("\\.ya?ml\\'" . yaml-mode))
