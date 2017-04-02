@@ -410,7 +410,7 @@
   :config
   (add-hook 'before-save-hook 'remove-session-use-package-from-settings)
   (add-hook 'session-after-jump-to-last-change-hook 'le::maybe-reveal)
-  (run-with-idle-timer 60 t 'save-information)
+  ;; (run-with-idle-timer 60 t 'save-information)
   (add-hook 'after-init-hook 'session-initialize t))
 
 (use-package solarized-theme
