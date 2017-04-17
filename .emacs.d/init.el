@@ -419,6 +419,17 @@
     (when (display-graphic-p)
       (load-theme 'solarized-dark t))))
 
+(use-package try)
+
+(use-package undo-tree
+  :config
+  (progn
+    (global-undo-tree-mode)))
+
+(use-package which-key
+  :config
+  (which-key-mode 1))
+
 (use-package yaml-mode
   :mode ("\\.ya?ml\\'" . yaml-mode))
 
