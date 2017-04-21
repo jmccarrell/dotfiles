@@ -422,12 +422,14 @@
 (use-package try)
 
 (use-package undo-tree
+  :disabled nil
   :config
   (progn
     (global-undo-tree-mode)))
 
 (use-package which-key
   :config
+  :diminish which-key-mode
   (which-key-mode 1))
 
 (use-package yaml-mode
