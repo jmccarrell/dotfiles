@@ -430,6 +430,7 @@
 (use-package which-key
   :config
   :diminish which-key-mode
+  :config
   (which-key-mode 1))
 
 (use-package yaml-mode
