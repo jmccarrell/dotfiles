@@ -18,3 +18,25 @@ for p in $HOME/bin/MacOS $HOME/bin $HOME/.local/bin $AP /usr/local/bin /usr/loca
 done
 unset p
 export PATH
+
+# add support for pyenv
+if which pyenv > /dev/null 2>&1; then
+  export PATH="/Users/jeff/.pyenv/shims:${PATH}"
+  export PYENV_SHELL=bash
+  source '/usr/local/Cellar/pyenv/1.0.10/libexec/../completions/pyenv.bash'
+  command pyenv rehash 2>/dev/null
+  pyenv() {
+    local command
+    command="$1"
+    if [ "$#" -gt 0 ]; then
+      shift
+    fi
+
+    case "$command" in
+    rehash|shell)
+      eval "$(pyenv "sh-$command" "$@")";;
+    *)
+      command pyenv "$command" "$@";;
+    esac
+  }
+fi
