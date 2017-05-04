@@ -94,6 +94,13 @@
 ;; (define-key global-map "\C-x\C-e" 'compile)
 (define-key global-map "\e\C-g" 'goto-line)
 
+;;
+;; org mode wants these default global bindings set up.
+(global-set-key "\C-cl" 'org-store-link)
+(global-set-key "\C-cc" 'org-capture)
+(global-set-key "\C-ca" 'org-agenda)
+(global-set-key "\C-cb" 'org-iswitchb)
+
 ;;; no longer needed with kill-visual-line
 ;; kill the whole line when at the beginning of it
 ;;(setq kill-whole-line t)
