@@ -95,11 +95,24 @@
 (define-key global-map "\e\C-g" 'goto-line)
 
 ;;
+;; org mode
+;;
 ;; org mode wants these default global bindings set up.
 (global-set-key "\C-cl" 'org-store-link)
 (global-set-key "\C-cc" 'org-capture)
 (global-set-key "\C-ca" 'org-agenda)
 (global-set-key "\C-cb" 'org-iswitchb)
+;;
+;; my agenda files
+;;  code shamelessly stolen from Sacha Chua's config
+(setq org-agenda-files
+      (delq nil
+            (mapcar (lambda (x) (and (file-exists-p x) x))
+                    `("/j/notes/todo.org",
+                      "/c/davo/notes/davo.org",
+                      "/c/yadle/notes/yadle.org"))))
+(add-to-list 'auto-mode-alist '("\\.txt$" . org-mode))
+
 
 ;;; no longer needed with kill-visual-line
 ;; kill the whole line when at the beginning of it
