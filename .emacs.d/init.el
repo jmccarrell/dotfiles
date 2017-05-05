@@ -300,6 +300,9 @@
   (avy-setup-default))
 
 ;; helm config derived from danielmai's config
+;;  I don't use the Hyper key, so change the "H-w" binding to something I can live with.
+;;  jwm: I choose M-i
+;; the next thing I need to do is add the bindings that support moving between i-search and helm-swoop
 (use-package helm
   :diminish helm-mode
   :init (progn
@@ -313,9 +316,9 @@
                 helm-ff-newfile-prompt-p nil
                 helm-M-x-fuzzy-match t)
           (helm-mode)
-          ;; (use-package helm-swoop
-          ;;   :ensure t
-          ;;   :bind ("H-w" . helm-swoop))
+          (use-package helm-swoop
+            :ensure t
+            :bind ("M-i" . helm-swoop))
           )
   :bind (("C-c h" . helm-command-prefix)
          ("C-x b" . helm-mini)
