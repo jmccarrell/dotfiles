@@ -111,7 +111,8 @@
                     `("/j/notes/todo.org",
                       "/c/davo/notes/davo.org",
                       "/c/yadle/notes/yadle.org"))))
-(add-to-list 'auto-mode-alist '("\\.txt$" . org-mode))
+;; jwm: I don't like org mode for txt files.
+;; (add-to-list 'auto-mode-alist '("\\.txt$" . org-mode))
 
 
 ;;; no longer needed with kill-visual-line
