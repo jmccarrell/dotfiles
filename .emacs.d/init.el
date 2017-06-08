@@ -91,8 +91,29 @@
 
 ;; key some global key bindings I happen to like.
 (define-key global-map "\C-xy" 'revert-buffer)
-(define-key global-map "\C-x\C-e" 'compile)
+;; (define-key global-map "\C-x\C-e" 'compile)
 (define-key global-map "\e\C-g" 'goto-line)
+
+;;
+;; org mode
+;;
+;; org mode wants these default global bindings set up.
+(global-set-key "\C-cl" 'org-store-link)
+(global-set-key "\C-cc" 'org-capture)
+(global-set-key "\C-ca" 'org-agenda)
+(global-set-key "\C-cb" 'org-iswitchb)
+;;
+;; my agenda files
+;;  code shamelessly stolen from Sacha Chua's config
+(setq org-agenda-files
+      (delq nil
+            (mapcar (lambda (x) (and (file-exists-p x) x))
+                    `("/j/notes/todo.org",
+                      "/c/davo/notes/davo.org",
+                      "/c/yadle/notes/yadle.org"))))
+;; jwm: I don't like org mode for txt files.
+;; (add-to-list 'auto-mode-alist '("\\.txt$" . org-mode))
+
 
 ;;; no longer needed with kill-visual-line
 ;; kill the whole line when at the beginning of it
@@ -280,6 +301,9 @@
   (avy-setup-default))
 
 ;; helm config derived from danielmai's config
+;;  I don't use the Hyper key, so change the "H-w" binding to something I can live with.
+;;  jwm: I choose M-i
+;; the next thing I need to do is add the bindings that support moving between i-search and helm-swoop
 (use-package helm
   :diminish helm-mode
   :init (progn
@@ -293,9 +317,9 @@
                 helm-ff-newfile-prompt-p nil
                 helm-M-x-fuzzy-match t)
           (helm-mode)
-          ;; (use-package helm-swoop
-          ;;   :ensure t
-          ;;   :bind ("H-w" . helm-swoop))
+          (use-package helm-swoop
+            :ensure t
+            :bind ("M-i" . helm-swoop))
           )
   :bind (("C-c h" . helm-command-prefix)
          ("C-x b" . helm-mini)
@@ -410,7 +434,7 @@
   :config
   (add-hook 'before-save-hook 'remove-session-use-package-from-settings)
   (add-hook 'session-after-jump-to-last-change-hook 'le::maybe-reveal)
-  (run-with-idle-timer 60 t 'save-information)
+  ;; (run-with-idle-timer 60 t 'save-information)
   (add-hook 'after-init-hook 'session-initialize t))
 
 (use-package solarized-theme
@@ -418,6 +442,20 @@
   (progn
     (when (display-graphic-p)
       (load-theme 'solarized-dark t))))
+
+(use-package try)
+
+(use-package undo-tree
+  :disabled nil
+  :config
+  (progn
+    (global-undo-tree-mode)))
+
+(use-package which-key
+  :config
+  :diminish which-key-mode
+  :config
+  (which-key-mode 1))
 
 (use-package yaml-mode
   :mode ("\\.ya?ml\\'" . yaml-mode))

@@ -1,6 +1,7 @@
 # ignore generated files from emacs
 .emacs.d/elpa/
 .emacs.d/auto-save-list
+.emacs.d/settings.el
 
 # Compiled Python files
 *.pyc
