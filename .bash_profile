@@ -57,7 +57,9 @@ if which brew &> /dev/null; then
     complete -o "nospace" -W "Contacts Calendar Dock Finder Mail Safari iTunes SystemUIServer Terminal Twitter" killall;
 fi;
 
+# prefer direnv when I get to wanting per-directory state
+#  it is preferred by KReitz and has direct emacs support.
 # jwm: add support for autoenv by Kenneth Reitz
-if which brew &> /dev/null && $(brew --prefix autoenv > /dev/null 2>&1); then
-    source $(brew --prefix autoenv)/activate.sh;
-fi;
+# if which brew &> /dev/null && $(brew --prefix autoenv > /dev/null 2>&1); then
+#     source $(brew --prefix autoenv)/activate.sh;
+# fi;
