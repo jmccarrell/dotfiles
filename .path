@@ -18,8 +18,3 @@ for p in $HOME/bin/MacOS $HOME/bin $HOME/.local/bin $AP /usr/local/bin /usr/loca
 done
 unset p
 export PATH
-
-# add support for pyenv
-if which pyenv > /dev/null 2>&1; then
-  eval "$(pyenv init -)"
-fi
