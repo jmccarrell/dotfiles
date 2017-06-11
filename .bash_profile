@@ -61,6 +61,3 @@ fi;
 if which brew &> /dev/null && $(brew --prefix autoenv > /dev/null 2>&1); then
     source $(brew --prefix autoenv)/activate.sh;
 fi;
-
-# jwm: add support for front-row env
-[ -f "$HOME/.bashrc-frontrow" ] && [ -d "$HOME/code/megarepo" ] && source "$HOME/.bashrc-frontrow"
