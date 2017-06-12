@@ -63,3 +63,8 @@ fi;
 # if which brew &> /dev/null && $(brew --prefix autoenv > /dev/null 2>&1); then
 #     source $(brew --prefix autoenv)/activate.sh;
 # fi;
+
+# setup rbenv when appropriate
+if [ -e "$HOME/.rbenv" && -d "$HOME/.rbenv" ]; then
+    eval $(rbenv init -)
+fi
