@@ -6,9 +6,12 @@
 # entelo has standardized on mysql@5.6
 #  so put that in the path if we are running it in front of /usr/local/bin
 MYSQL_PATH="/usr/local/opt/mysql@5.6/bin"
+# likewise, entelo is on node 6
+NODE_PATH="/usr/local/opt/node@6/bin"
+
 
 unset PATH
-for p in $HOME/bin/MacOS $HOME/bin $HOME/.local/bin ${MYSQL_PATH} $HOME/.rbenv/shims $HOME/.rbenv/bin /usr/local/bin /usr/local/sbin /usr/bin /bin /usr/sbin /sbin /opt/X11/bin; do
+for p in $HOME/bin/MacOS $HOME/bin $HOME/.local/bin ${MYSQL_PATH} ${NODE_PATH} $HOME/.rbenv/shims $HOME/.rbenv/bin /usr/local/bin /usr/local/sbin /usr/bin /bin /usr/sbin /sbin /opt/X11/bin; do
     if [ -e "$p" ]; then
         if [ -z "$PATH" ]; then
             PATH="$p"
