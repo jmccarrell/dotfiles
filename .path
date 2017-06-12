@@ -1,13 +1,9 @@
 # set my path exactly how I want it.
 
-# initialize AP to ANACONDA_PATH, if set, or the empty string
-AP=${ANACONDA_PATH-}
-
 # haskell stack puts things in $HOME/.local/bin
 # ensure ~/bin/MacOS is very early in the path for emacsforosx
-
 unset PATH
-for p in $HOME/bin/MacOS $HOME/bin $HOME/.local/bin $HOME/.rbenv/shims $HOME/.rbenv/bin $AP /usr/local/bin /usr/local/sbin /usr/bin /bin /usr/sbin /sbin /opt/X11/bin /Library/TeX/texbin; do
+for p in $HOME/bin/MacOS $HOME/bin $HOME/.local/bin $AP /usr/local/bin /usr/local/sbin /usr/bin /bin /usr/sbin /sbin /opt/X11/bin; do
     if [ -e "$p" ]; then
         if [ -z "$PATH" ]; then
             PATH="$p"
@@ -18,25 +14,3 @@ for p in $HOME/bin/MacOS $HOME/bin $HOME/.local/bin $HOME/.rbenv/shims $HOME/.rb
 done
 unset p
 export PATH
-
-# add support for pyenv
-if which pyenv > /dev/null 2>&1; then
-  export PATH="/Users/jeff/.pyenv/shims:${PATH}"
-  export PYENV_SHELL=bash
-  source '/usr/local/Cellar/pyenv/1.0.10/libexec/../completions/pyenv.bash'
-  command pyenv rehash 2>/dev/null
-  pyenv() {
-    local command
-    command="$1"
-    if [ "$#" -gt 0 ]; then
-      shift
-    fi
-
-    case "$command" in
-    rehash|shell)
-      eval "$(pyenv "sh-$command" "$@")";;
-    *)
-      command pyenv "$command" "$@";;
-    esac
-  }
-fi
