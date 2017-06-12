@@ -8,7 +8,7 @@
 MYSQL_PATH="/usr/local/opt/mysql@5.6/bin"
 
 unset PATH
-for p in $HOME/bin/MacOS $HOME/bin $HOME/.local/bin ${MYSQL_PATH} /usr/local/bin /usr/local/sbin /usr/bin /bin /usr/sbin /sbin /opt/X11/bin; do
+for p in $HOME/bin/MacOS $HOME/bin $HOME/.local/bin ${MYSQL_PATH} $HOME/.rbenv/shims $HOME/.rbenv/bin /usr/local/bin /usr/local/sbin /usr/bin /bin /usr/sbin /sbin /opt/X11/bin; do
     if [ -e "$p" ]; then
         if [ -z "$PATH" ]; then
             PATH="$p"
