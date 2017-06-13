@@ -1,0 +1,15 @@
+#!/bin/bash
+# sync Jeffs repos through git
+
+# set -ex
+
+PATHS="/e/notes /j/notes /j/proj/jwm-dotfiles"
+for P in ${PATHS}; do
+    echo $P ...
+    cd ${P}
+    # remove deleted files
+    git ls-files --deleted -z | xargs -0 git rm >/dev/null 2>&1
+    git add . > /dev/null 2>&1
+    git commit -m "auto-sync $(date)"
+done
+         
