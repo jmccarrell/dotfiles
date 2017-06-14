@@ -315,10 +315,10 @@
   :diminish helm-mode
   :init (progn
           (require 'helm-config)
-          ;; (use-package helm-projectile
-          ;;   :ensure t
-          ;;   :commands helm-projectile
-          ;;   :bind ("C-c p h" . helm-projectile))
+          (use-package helm-projectile
+            :ensure t
+            :commands helm-projectile
+            :bind ("C-c p h" . helm-projectile))
           (use-package helm-ag :defer 10  :ensure t)
           (setq helm-locate-command "mdfind -interpret -name %s %s"
                 helm-ff-newfile-prompt-p nil
