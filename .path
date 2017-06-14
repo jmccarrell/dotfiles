@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 # set my path exactly how I want it.
 
 # haskell stack puts things in $HOME/.local/bin
