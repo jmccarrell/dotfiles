@@ -36,8 +36,11 @@ fast_forward_ref() {
 
 # Push reference $1 to $syncrepo
 push_ref() {
-  log_msg "Pushing ref $1"
-  if ! git push --tags $syncrepo $1
+  local git_path="$1"
+  local syncrepo="$2"
+  local ref="$3"
+  log_msg "Pushing ref $ref to $syncrepo"
+  if ! echo git -C $git_path push --tags $syncrepo $ref
   then
     exit 1
   fi
@@ -65,7 +68,7 @@ check_ref() {
   elif [ "x$revlist2" = "x" ]
   then
     # Ref $ref is ahead of $syncrepo/$ref and can be pushed.
-    echo push_ref $ref || exit 1
+    push_ref $git_path $syncrepo $ref || exit 1
   else
     log_msg "Ref $ref and $syncrepo/$ref have diverged."
     exit 1
