@@ -6,88 +6,129 @@
 # syncrepo=norang
 # reporoot=~/git
 
-# Display repository name only once
-log_repo() {
-  [ "x$lastrepo" == "x$repo" ] || {
-    printf "\nREPO: ${repo}\n"
-    lastrepo="$repo"
-  }
-}
-
 # Log a message for a repository
-log_msg() {
-  log_repo
+git_sync_log_msg() {
   printf "  $1\n"
 }
 
-# fast-forward reference $1 to $syncrepo/$1
-fast_forward_ref() {
-  log_msg "fast-forwarding ref $1"
-  current_ref=$(cat .git/HEAD)
-  if [ "x$current_ref" = "xref: refs/heads/$1" ]
+# fast-forward reference $ref to $remote/$ref
+git_fast_forward_ref() {
+  local git_path="$1"
+  local remote="$2"
+  local ref="$3"
+  git_sync_log_msg "fast-forwarding ref $ref"
+  current_ref=$(cat $git_path/.git/HEAD)
+  if [ "x$current_ref" = "xref: refs/heads/$ref" ]
   then
     # Check for dirty index
-    files=$(git diff-index --name-only HEAD --)
-    git merge refs/remotes/$syncrepo/$1
+    files=$(git -C $git_path diff-index --name-only HEAD --)
+    git -C $git_path merge refs/remotes/$remote/$ref
   else
-    git branch -f $1 refs/remotes/$syncrepo/$1
+    git -C $git_path branch -f $ref refs/remotes/$remote/$ref
   fi
 }
 
-# Push reference $1 to $syncrepo
-push_ref() {
+# Push reference $1 to $remote
+git_push_ref() {
   local git_path="$1"
-  local syncrepo="$2"
+  local remote="$2"
   local ref="$3"
-  log_msg "Pushing ref $ref to $syncrepo"
-  if ! echo git -C $git_path push --tags $syncrepo $ref
+  git_sync_log_msg "Pushing ref $ref to $remote"
+  if ! git -C $git_path push --tags $remote $ref
   then
-    exit 1
+    return 1
   fi
 }
 
 # Check if a ref can be moved
 #   - fast-forwards if behind the sync repo and is fast-forwardable
 #   - Does nothing if ref is up to date
-#   - Pushes ref to $syncrepo if ref is ahead of syncrepo and fastforwardable
+#   - Pushes ref to $remote if ref is ahead of remote and fastforwardable
 #   - Fails if ref and $syncrop/ref have diverged
-check_ref() {
+git_check_ref() {
   local git_path="$1"
-  local syncrepo="$2"
+  local remote="$2"
   local ref="$3"
-  revlist1=$(git -C $git_path rev-list refs/remotes/$syncrepo/$ref..$ref)
-  revlist2=$(git -C $git_path rev-list $ref..refs/remotes/$syncrepo/$ref)
+  revlist1=$(git -C $git_path rev-list refs/remotes/$remote/$ref..$ref)
+  revlist2=$(git -C $git_path rev-list $ref..refs/remotes/$remote/$ref)
   if [ "x$revlist1" = "x" -a "x$revlist2" = "x" ]
   then
     # Ref $ref is up to date.
     :
   elif [ "x$revlist1" = "x" ]
   then
-    # Ref $ref is behind $syncrepo/$ref and can be fast-forwarded.
-    echo fast_forward_ref $ref || exit 1
+    # Ref $ref is behind $remote/$ref and can be fast-forwarded.
+    git_fast_forward_ref $git_path $remote $ref || return 1
   elif [ "x$revlist2" = "x" ]
   then
-    # Ref $ref is ahead of $syncrepo/$ref and can be pushed.
-    push_ref $git_path $syncrepo $ref || exit 1
+    # Ref $ref is ahead of $remote/$ref and can be pushed.
+    git_push_ref $git_path $remote $ref || return 1
   else
-    log_msg "Ref $ref and $syncrepo/$ref have diverged."
-    exit 1
+    git_sync_log_msg "Ref $ref and $remote/$ref have diverged."
+    return 1
   fi
 }
 
-# Check all local refs with matching refs in the $syncrepo
-check_refs () {
+# Check all local refs with matching refs in the $remote
+#  effectively this syncs all tracking branchs
+git_check_refs () {
   local git_path="$1"
-  local syncrepo="$2"
+  local remote="$2"
   git -C $git_path for-each-ref refs/heads/* | while read sha1 commit ref
   do
     ref=${ref/refs\/heads\//}
-    git -C $git_path for-each-ref refs/remotes/$syncrepo/$ref | while read sha2 commit ref2
+    git -C $git_path for-each-ref refs/remotes/$remote/$ref | while read sha2 commit ref2
     do
       if [ "x$sha2" != "x" -a "x$sha2" != "x" ]
       then
-        check_ref $git_path $syncrepo $ref || exit 1
+        git_check_ref $git_path $remote $ref || return 1
       fi
     done
   done
+}
+
+# sync the remote down to local
+git_update_remote () {
+  local git_path="$1"
+  local remote="$2"
+  upd_out=$(git -C $git_path remote update $remote 2>& 1 || return 1)
+  git_sync_log_msg "$git_path: $upd_out"
+  [ "x$upd_out" = "xFetching $remote" ] || {
+    git_sync_log_msg "$git_path: $upd_out"
+  }
+}
+
+# now use these functions to sync my shared repos
+gs_test () {
+  local git_path=$HOME/tmp/test-sync-repo
+  local remote=origin
+  git_update_remote $git_path $remote || return 1
+  git_check_refs $git_path $remote || return 1
+}
+
+gs_enotes () {
+  local git_path=/e/notes
+  local remote=origin
+  git_update_remote $git_path $remote || return 1
+  git_check_refs $git_path $remote || return 1
+}
+
+gs_jnotes () {
+  local git_path=/j/notes
+  local remote=origin
+  git_update_remote $git_path $remote || return 1
+  git_check_refs $git_path $remote || return 1
+}
+
+gs_dotfiles () {
+  local git_path=/j/proj/jwm-dotfiles
+  local remote=origin
+  git_update_remote $git_path $remote || return 1
+  git_check_refs $git_path $remote || return 1
+}
+
+gs_all () {
+  gs_enotes
+  gs_jnotes
+  gs_dotfiles
 }
