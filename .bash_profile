@@ -8,6 +8,11 @@ for file in ~/.{path,bash_prompt,exports,aliases,functions,extra}; do
 	[ -r "$file" ] && [ -f "$file" ] && source "$file";
 done;
 
+# load jeffs sh functions
+for file in ~/lib/git-sync.sh; do
+    [ -r "$file" ] && [ -f "$file" ] && source "$file";
+done;
+
 if which brew &> /dev/null; then
     for file in ~/.{iterm2_shell_integration.bash}; do
         [ -r "$file" ] && [ -f "$file" ] && source "$file";
