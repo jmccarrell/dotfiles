@@ -71,7 +71,7 @@ git_check_ref() {
 
 # Check all local refs with matching refs in the $remote
 #  effectively this syncs all tracking branchs
-git_check_refs () {
+git_check_refs() {
   local git_path="$1"
   local remote="$2"
   git -C $git_path for-each-ref refs/heads/* | while read sha1 commit ref
@@ -88,7 +88,7 @@ git_check_refs () {
 }
 
 # sync the remote down to local
-git_update_remote () {
+git_update_remote() {
   local git_path="$1"
   local remote="$2"
   upd_out=$(git -C $git_path remote update $remote 2>& 1 || return 1)
@@ -98,37 +98,37 @@ git_update_remote () {
   }
 }
 
+git_sync() {
+  local git_path="$1"
+  local remote="$2"
+  git_update_remote $git_path $remote || return 1
+  git_check_refs $git_path $remote || return 1
+}
+
 # now use these functions to sync my shared repos
-gs_test () {
-  local git_path=$HOME/tmp/test-sync-repo
-  local remote=origin
-  git_update_remote $git_path $remote || return 1
-  git_check_refs $git_path $remote || return 1
+gs_test() {
+  git_sync $HOME/tmp/test-sync-repo orgin
 }
 
-gs_enotes () {
-  local git_path=/e/notes
-  local remote=origin
-  git_update_remote $git_path $remote || return 1
-  git_check_refs $git_path $remote || return 1
+gs_enotes() {
+  git_sync /e/notes origin
 }
 
-gs_jnotes () {
-  local git_path=/j/notes
-  local remote=origin
-  git_update_remote $git_path $remote || return 1
-  git_check_refs $git_path $remote || return 1
+gs_jnotes() {
+  git_sync /j/notes origin
 }
 
-gs_dotfiles () {
-  local git_path=/j/proj/jwm-dotfiles
-  local remote=origin
-  git_update_remote $git_path $remote || return 1
-  git_check_refs $git_path $remote || return 1
+gs_dotfiles() {
+  git_sync /j/proj/jwm-dotfiles origin
 }
 
-gs_all () {
+gs_explore_ruby() {
+  git_sync /j/proj/explore-ruby origin
+}
+
+gs_all() {
   gs_enotes
   gs_jnotes
   gs_dotfiles
+  gs_explore_ruby
 }
