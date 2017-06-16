@@ -307,6 +307,13 @@
   :config
   (avy-setup-default))
 
+;; a better ruby mode
+(use-package enh-ruby-mod
+  :init (progn
+          (add-to-list 'auto-mode-alist
+             '("\\(?:\\.rb\\|ru\\|rake\\|thor\\|jbuilder\\|gemspec\\|podspec\\|/\\(?:Gem\\|Rake\\|Cap\\|Thor\\|Vagrant\\|Guard\\|Pod\\)file\\)\\'" . enh-ruby-mode))))
+
+
 ;; helm config derived from danielmai's config
 ;;  I don't use the Hyper key, so change the "H-w" binding to something I can live with.
 ;;  jwm: I choose M-i
