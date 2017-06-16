@@ -481,6 +481,10 @@
   (setq yas-snippet-dirs (concat user-emacs-directory "snippets"))
   (yas-global-mode))
 
+(use-package ztree
+  :defer t)
+
+
 ;;; Post initialization
 
 (when window-system
