@@ -308,7 +308,7 @@
   (avy-setup-default))
 
 ;; a better ruby mode
-(use-package enh-ruby-mod
+(use-package enh-ruby-mode
   :init (progn
           (add-to-list 'auto-mode-alist
              '("\\(?:\\.rb\\|ru\\|rake\\|thor\\|jbuilder\\|gemspec\\|podspec\\|/\\(?:Gem\\|Rake\\|Cap\\|Thor\\|Vagrant\\|Guard\\|Pod\\)file\\)\\'" . enh-ruby-mode))))
