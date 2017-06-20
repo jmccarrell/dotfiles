@@ -219,6 +219,10 @@
 (set-face-background 'font-lock-warning-face "Tomato")
 ;;; end jeffs colors
 
+;;; query functions for the host we are running on
+(defun jwm::entelo-host-p ()
+  (file-exists-p "/e/src/reputedly"))
+
 ;;; frame settings under window system
 ;;; preferences when under a window system, which these days is pretty much os x
 (when window-system
@@ -242,7 +246,10 @@
   ;;; (add-to-list 'default-frame-alist '(font . "lucidasanstypewriter-14"))
   (cond ((and (>= emacs-major-version 23) (eq 'darwin system-type))
          (message "jwm: display height %d" (display-pixel-height))
-         (cond ((>= (display-pixel-height) 1100)
+         (cond ((jwm::entelo-host-p)
+                (message "jwm: detected jeff entelo laptop.")
+                (add-to-list 'default-frame-alist '(font . "Monaco-12")))
+               ((>= (display-pixel-height) 1100)
                 (message "jwm: detected jeff personal laptop.")
                 (add-to-list 'default-frame-alist '(font . "Monaco-14")))
                (t
