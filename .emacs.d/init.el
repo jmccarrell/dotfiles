@@ -54,6 +54,11 @@
 ;; (put 'TeX-narrow-to-group         'disabled nil)
 ;; (put 'LaTeX-narrow-to-environment 'disabled nil)
 
+;;; jeffs functions
+;;; query functions for the host we are running on
+(defun jwm::entelo-host-p ()
+  (file-exists-p "/e/src/reputedly"))
+
 ;;; jeffs settings
 
 ;; mirror the mac user gesture for switching frames
@@ -232,10 +237,6 @@
 (set-face-foreground 'font-lock-warning-face "Seashell")
 (set-face-background 'font-lock-warning-face "Tomato")
 ;;; end jeffs colors
-
-;;; query functions for the host we are running on
-(defun jwm::entelo-host-p ()
-  (file-exists-p "/e/src/reputedly"))
 
 ;;; frame settings under window system
 ;;; preferences when under a window system, which these days is pretty much os x
