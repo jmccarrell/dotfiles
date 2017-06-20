@@ -109,8 +109,11 @@
       (delq nil
             (mapcar (lambda (x) (and (file-exists-p x) x))
                     `("/j/notes/todo.org",
+                      "/j/notes/notes.org",
                       "/c/davo/notes/davo.org",
-                      "/c/yadle/notes/yadle.org"))))
+                      "/c/yadle/notes/yadle.org",
+                      "/e/notes/entelo.org",
+                      "/e/notes/notes.org"))))
 
 ;; set up org mode
 (setq org-directory
