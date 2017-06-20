@@ -111,6 +111,17 @@
                     `("/j/notes/todo.org",
                       "/c/davo/notes/davo.org",
                       "/c/yadle/notes/yadle.org"))))
+
+;; set up org mode
+(setq org-directory
+      (cond ((jwm::entelo-host-p)
+             "/e/notes")
+            (t
+             "/j/notes")))
+
+;; the default place to put notes for capture mode
+(setq org-default-notes-file (concat org-directory "/notes.org"))
+
 ;; jwm: I don't like org mode for txt files.
 ;; (add-to-list 'auto-mode-alist '("\\.txt$" . org-mode))
 
