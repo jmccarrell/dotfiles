@@ -12,7 +12,6 @@ for file in \
  .editorconfig \
  .emacs.jwm.d/emacs-custom-future.el \
  .emacs.d/init.el \
- .emacs.d/settings.el \
  .exports \
  .functions \
  .gdbinit \
