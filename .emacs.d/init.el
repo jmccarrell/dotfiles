@@ -487,6 +487,11 @@
   (progn
     (global-undo-tree-mode)))
 
+;; try winner mode; most of my emacs configs use it.
+(use-package winner
+  :ensure t
+  :init (winner-mode 1))
+
 (use-package which-key
   :config
   :diminish which-key-mode
