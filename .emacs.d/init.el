@@ -113,22 +113,27 @@
 (setq org-agenda-files
       (delq nil
             (mapcar (lambda (x) (and (file-exists-p x) x))
-                    `("/j/notes/todo.org",
-                      "/j/notes/notes.org",
+                    `("~/Dropbox/org/todo.org",
+                      "~/Dropbox/org/notes.org",
                       "/c/davo/notes/davo.org",
                       "/c/yadle/notes/yadle.org",
-                      "/e/notes/entelo.org",
-                      "/e/notes/notes.org"))))
+                      "~/Dropbox/entelo/org/entelo.org",
+                      "~/Dropbox/entelo/org/e-notes.org"))))
 
 ;; set up org mode
 (setq org-directory
       (cond ((jwm::entelo-host-p)
-             "/e/notes")
+             "~/Dropbox/entelo/org")
             (t
-             "/j/notes")))
+             "~/Dropbox/org")))
 
 ;; the default place to put notes for capture mode
-(setq org-default-notes-file (concat org-directory "/notes.org"))
+(setq org-default-notes-file
+      (concat org-directory
+              (cond ((jwm::entelo-host-p)
+                     "/e-notes.org")
+                    (t
+                     "/notes.org"))))
 
 ;; jwm: I don't like org mode for txt files.
 ;; (add-to-list 'auto-mode-alist '("\\.txt$" . org-mode))
