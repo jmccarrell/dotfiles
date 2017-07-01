@@ -343,12 +343,31 @@
   :bind ("C-:" . company-complete)  ; In case I don't want to wait
 )
 
+;; elpy; derived from Howard Abrams config
+(use-package elpy
+  :ensure t
+  :commands elpy-enable
+  :init (with-eval-after-load 'python (elpy-enable))
+
+  :config
+  ;; (electric-indent-local-mode -1)
+  (delete 'elpy-module-highlight-indentation elpy-modules)
+  (delete 'elpy-module-flymake elpy-modules)
+)
+
 ;; a better ruby mode
 (use-package enh-ruby-mode
   :init (progn
           (add-to-list 'auto-mode-alist
              '("\\(?:\\.rb\\|ru\\|rake\\|thor\\|jbuilder\\|gemspec\\|podspec\\|/\\(?:Gem\\|Rake\\|Cap\\|Thor\\|Vagrant\\|Guard\\|Pod\\)file\\)\\'" . enh-ruby-mode))))
 
+;; this is Howard Abrams flycheck config
+(use-package flycheck
+  :ensure t
+  :init
+  (add-hook 'after-init-hook 'global-flycheck-mode)
+  :config
+  (setq-default flycheck-disabled-checkers '(emacs-lisp-checkdoc)))
 
 ;; helm config derived from danielmai's config
 ;;  I don't use the Hyper key, so change the "H-w" binding to something I can live with.
