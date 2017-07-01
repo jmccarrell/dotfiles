@@ -334,6 +334,15 @@
   :config
   (avy-setup-default))
 
+;; derived from Howard Abrams config.
+(use-package company
+  :ensure t
+  :diminish company-mode
+  :init
+  (add-hook 'after-init-hook 'global-company-mode)
+  :bind ("C-:" . company-complete)  ; In case I don't want to wait
+)
+
 ;; a better ruby mode
 (use-package enh-ruby-mode
   :init (progn
