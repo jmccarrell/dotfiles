@@ -384,6 +384,15 @@
   :config
   (add-hook 'haskell-mode-hook 'intero-mode))
 
+;; derived from Howard Abrams config
+(use-package jedi
+  :ensure t
+  :init
+  (add-to-list 'company-backends 'company-jedi)
+  (use-package company-jedi
+    :init
+    (setq company-jedi-python-bin "python")))
+
 (use-package macrostep
   :bind ("C-c e m" . macrostep-expand))
 
