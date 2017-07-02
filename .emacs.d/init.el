@@ -454,6 +454,11 @@
 ;;   ;; optional key bindings, easier than hs defaults
 ;;   (bind-key "C-c h" #'hs-toggle-hiding nxml-mode-map))
 
+;; I like rendering my org mode files as html with twitter bootstrap
+;;  [[https://github.com/marsmining/ox-twbs][ox-twbs]]
+(use-package ox-twbs
+  :defer 5)
+
 (use-package projectile
   :diminish projectile-mode
   :commands projectile-global-mode
