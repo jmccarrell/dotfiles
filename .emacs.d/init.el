@@ -252,16 +252,18 @@
               '(vertical-scroll-bars . nil)
               '(width . 100)
               '(height . 52)
-              ;; '(foreground-color . "white")
-              ;; '(foreground-color . "#839496")  ;; foreground from solarized-emacs
-              ;; I think the solarized foreground is a little too quiet;
-              ;;  it corresponds about to grey-44 in the standard colors in list-colors-display
-              ;; so bring it up a notch or two
-              '(foreground-color . "grey54")  ;; foreground from solarized-emacs
-              ;; '(background-color . "black")
-              '(background-color . "#002b36")  ;; background from solarized-emacs
-              ;; '(cursor-color . "DarkOrange")
-              '(cursor-color . "DarkOrange3")  ;; tone down cursor some with solarized colors
+              ;; after many years of setting my own colors
+              ;;  evolution happens, so rely on themes.
+              ;; ;; '(foreground-color . "white")
+              ;; ;; '(foreground-color . "#839496")  ;; foreground from solarized-emacs
+              ;; ;; I think the solarized foreground is a little too quiet;
+              ;; ;;  it corresponds about to grey-44 in the standard colors in list-colors-display
+              ;; ;; so bring it up a notch or two
+              ;; '(foreground-color . "grey54")  ;; foreground from solarized-emacs
+              ;; ;; '(background-color . "black")
+              ;; '(background-color . "#002b36")  ;; background from solarized-emacs
+              ;; ;; '(cursor-color . "DarkOrange")
+              ;; '(cursor-color . "DarkOrange3")  ;; tone down cursor some with solarized colors
               ))
   ;;; (add-to-list 'default-frame-alist '(font . "lucidasanstypewriter-14"))
   (cond ((and (>= emacs-major-version 23) (eq 'darwin system-type))
@@ -520,11 +522,12 @@
   ;; (run-with-idle-timer 60 t 'save-information)
   (add-hook 'after-init-hook 'session-initialize t))
 
-(use-package solarized-theme
-  :init
-  (progn
-    (when (display-graphic-p)
-      (load-theme 'solarized-dark t))))
+;; try zenburn for a while.
+;; (use-package solarized-theme
+;;   :init
+;;   (progn
+;;     (when (display-graphic-p)
+;;       (load-theme 'solarized-dark t))))
 
 (use-package try)
 
@@ -554,6 +557,11 @@
   :config
   (setq yas-snippet-dirs (concat user-emacs-directory "snippets"))
   (yas-global-mode))
+
+;; prefer zenburn to solarized.
+(use-package zenburn-theme
+  :init
+  (load-theme 'zenburn t))
 
 (use-package ztree
   :defer t)
