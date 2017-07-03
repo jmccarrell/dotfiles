@@ -169,9 +169,7 @@
 ;; delete the region when typing, just like as we expect nowadays.
 (delete-selection-mode t)
 
-;; jeff: turn off modes: paren, col-number
-;; (show-paren-mode t)
-
+(show-paren-mode t)
 (column-number-mode t)
 
 (global-visual-line-mode)
