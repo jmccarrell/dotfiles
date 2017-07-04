@@ -117,6 +117,8 @@
                       "~/Dropbox/org/notes.org",
                       "/c/davo/notes/davo.org",
                       "/c/yadle/notes/yadle.org",
+                      "/j/pdata/investing/logical-invest/logical-invest-notes.org",
+                      "/j/pdata/investing/portfolio123/portfolio123-notes.org",
                       "~/Dropbox/entelo/org/entelo.org",
                       "~/Dropbox/entelo/org/e-notes.org"))))
 
