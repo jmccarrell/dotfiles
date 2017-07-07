@@ -404,6 +404,12 @@
 (use-package helm-make
   :commands (helm-make helm-make-projectile))
 
+;; from bbatsov's configuration
+(use-package imenu-anywhere
+  :ensure t
+  :bind (("C-c i" . imenu-anywhere)
+         ("s-i" . imenu-anywhere)))
+
 (use-package intero
   :config
   (add-hook 'haskell-mode-hook 'intero-mode))
