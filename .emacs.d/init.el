@@ -156,8 +156,12 @@
 ;; always end a file with a newline
 (setq require-final-newline t)
 
+;; tab handling
 ;; prefer spaces to tabs
 (setq-default indent-tabs-mode nil)
+;; bbatsov recommends this, so try it
+;;  http://emacsredux.com/blog/2016/01/31/use-tab-to-indent-or-complete/
+(setq tab-always-indent 'complete)
 
 ;; set a high fill column
 (setq-default fill-column 108)
