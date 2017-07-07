@@ -143,6 +143,15 @@
 ;; jwm: I don't like org mode for txt files.
 ;; (add-to-list 'auto-mode-alist '("\\.txt$" . org-mode))
 
+;; follow this pattern from jwiegley
+(defun save-org-mode-files ()
+  (dolist (buf (buffer-list))
+    (with-current-buffer buf
+      (when (eq major-mode 'org-mode)
+        (if (and (buffer-modified-p) (buffer-file-name))
+            (save-buffer))))))
+
+(run-with-idle-timer 25 t 'save-org-mode-files)
 
 ;;; no longer needed with kill-visual-line
 ;; kill the whole line when at the beginning of it
