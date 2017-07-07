@@ -77,6 +77,9 @@
 ;; (setq auto-save-list-file-prefix
 ;;       (expand-file-name "~/tmp/emacs/emacs-saves"))
 
+;; revert buffers automatically when underlying files are changed externally
+(global-auto-revert-mode t)
+
 ;; prefer utf-8 encoding in all cases.
 (setq locale-coding-system 'utf-8)
 (set-terminal-coding-system 'utf-8)
