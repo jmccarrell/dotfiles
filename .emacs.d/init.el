@@ -149,7 +149,9 @@
     (with-current-buffer buf
       (when (eq major-mode 'org-mode)
         (if (and (buffer-modified-p) (buffer-file-name))
-            (save-buffer))))))
+            (progn
+              (message "save-org saving %s" buffer-file-name)
+              (save-buffer)))))))
 
 (run-with-idle-timer 25 t 'save-org-mode-files)
 
