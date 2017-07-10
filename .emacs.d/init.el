@@ -398,6 +398,12 @@
           (use-package helm-projectile
             :ensure t
             :commands helm-projectile
+            ;; this rebinding from tuhdo's helm- projectile tutorial
+            ;;  https://tuhdo.github.io/helm-projectile.html
+            ;; however, I don't see the stated benefit of getting the list of
+            ;;  projects from helm-projectile.
+            ;; so disable this for now.
+            ;;  :init (setq projectile-switch-project-action 'helm-projectile)
             :bind ("C-c p h" . helm-projectile))
           (use-package helm-ag :defer 10  :ensure t)
           (setq helm-locate-command "mdfind -interpret -name %s %s"
