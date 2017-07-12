@@ -196,6 +196,11 @@
 (global-visual-line-mode)
 (diminish 'visual-line-mode)
 
+;; turn on which-function mode enough so we can use it for bookmarks
+;; following Howard Abrams here.
+(setq which-func-unknown "")
+(which-function-mode -1)
+
 (setq uniquify-buffer-name-style 'forward)
 
 ;; enable the week of the year in calendar.
@@ -354,6 +359,25 @@
   :bind ("M-h" . avy-goto-char)
   :config
   (avy-setup-default))
+
+;; bookmarks, as Howard Abrams uses them.
+;;  minus the C-c b binding
+;;  N.B. ha/add-bookmark depends on which-function-mode
+(use-package bookmark
+  :init (setq bookmark-save-flag 1)
+  :config
+  (defun ha/add-bookmark (name)
+    (interactive
+     (list (let* ((filename  (file-name-base (buffer-file-name)))
+                  (project   (projectile-project-name))
+                  (func-name (which-function))
+                  (initial   (format "%s::%s:%s " project filename func-name)))
+             (read-string "Bookmark: " initial))))
+    (bookmark-set name))
+  :bind  (
+          ;; ("C-c b m" . ha/add-bookmark)
+          ("C-x r m" . ha/add-bookmark)
+          ("C-x r b" . helm-bookmarks)))
 
 ;; derived from Howard Abrams config.
 (use-package company
