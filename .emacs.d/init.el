@@ -172,6 +172,9 @@
 ;;  http://emacsredux.com/blog/2016/01/31/use-tab-to-indent-or-complete/
 (setq tab-always-indent 'complete)
 
+;; try highlight line mode out for size
+(hl-line-mode)
+
 ;; set a high fill column
 (setq-default fill-column 108)
 
