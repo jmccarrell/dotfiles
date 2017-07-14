@@ -122,23 +122,14 @@
                       "/c/yadle/notes/yadle.org",
                       "/j/pdata/investing/logical-invest/logical-invest-notes.org",
                       "/j/pdata/investing/portfolio123/portfolio123-notes.org",
-                      "~/Dropbox/entelo/org/entelo.org",
-                      "~/Dropbox/entelo/org/e-notes.org"))))
+                      "~/Dropbox/entelo/org/entelo.org"))))
 
 ;; set up org mode
-(setq org-directory
-      (cond ((jwm::entelo-host-p)
-             "~/Dropbox/entelo/org")
-            (t
-             "~/Dropbox/org")))
+(setq org-directory "~/Dropbox/org")
 
 ;; the default place to put notes for capture mode
 (setq org-default-notes-file
-      (concat org-directory
-              (cond ((jwm::entelo-host-p)
-                     "/e-notes.org")
-                    (t
-                     "/notes.org"))))
+      (concat org-directory "/notes.org")
 
 ;; jwm: I don't like org mode for txt files.
 ;; (add-to-list 'auto-mode-alist '("\\.txt$" . org-mode))
