@@ -508,7 +508,8 @@
   :defer 5)
 
 (use-package projectile
-  :diminish projectile-mode
+  ;; leave the modeline on so I can see what project I am in.
+  ;; :diminish (projectile-mode . "Pjtl")
   :commands projectile-global-mode
   :defer 5
   :bind-keymap ("C-c p" . projectile-command-map)
