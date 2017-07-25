@@ -605,6 +605,26 @@
   (progn
     (global-undo-tree-mode)))
 
+;; try visual regexp, again following Howard Abrams
+;;
+;; The [[https://github.com/benma/visual-regexp.el][Visual Regular Expressions]] project highlights the matches
+;; while you try to remember the differences between Perl's regular
+;; expressions and Emacs'...
+
+;; Begin with =C-c r= then type the regexp. To see the highlighted
+;; matches, type =C-c a= before you hit 'Return' to accept it.
+(use-package visual-regexp
+  :ensure t
+  :init
+  (use-package visual-regexp-steroids :ensure t)
+
+  :bind (("C-c r" . vr/replace)
+         ("C-c q" . vr/query-replace)))
+
+  ;; ;; if you use multiple-cursors, this is for you:
+  ;; :config (use-package  multiple-cursors
+  ;;           :bind ("C-c m" . vr/mc-mark)))
+
 ;; try winner mode; most of my emacs configs use it.
 (use-package winner
   :ensure t
