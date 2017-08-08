@@ -451,6 +451,13 @@
   :bind (("C-c i" . imenu-anywhere)
          ("s-i" . imenu-anywhere)))
 
+;; from howard
+;;  to start it up, use M-x inf-ruby
+(use-package inf-ruby
+  :ensure t
+  :init
+  (add-hook 'ruby-mode-hook 'inf-ruby-minor-mode))
+
 (use-package intero
   :config
   (add-hook 'haskell-mode-hook 'intero-mode))
