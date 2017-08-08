@@ -550,6 +550,15 @@
                 (helm-do-grep-1 (list (projectile-project-root)) t))
             'projectile-command-map))
 
+;; copied from senny's init.el: https://github.com/senny/emacs.d/blob/master/init.el#L165
+(use-package rbenv
+  :ensure t
+  :defer t
+  :init (setq rbenv-show-active-ruby-in-modeline nil)
+  :config (progn
+            (global-rbenv-mode)
+            (add-hook 'enh-ruby-mode-hook 'rbenv-use-corresponding)))
+
 (use-package session
   :if (not noninteractive)
   :preface
