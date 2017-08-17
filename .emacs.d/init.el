@@ -383,6 +383,54 @@
   :bind ("C-:" . company-complete)  ; In case I don't want to wait
 )
 
+;; try direx from Howard Abrams config
+;; The [[https://github.com/m2ym/direx-el][direx]] package is a tree-based variation of dired, and it gives
+;; an /ide-like/ look and feel. Not sure of its useful-ness.
+
+(use-package direx
+  :ensure t
+  :bind (("C-c p X" . ha/projectile-direx)
+         :map direx:direx-mode-map
+         ("q" . kill-buffer-and-window))
+  :init
+  (defun kill-buffer-and-window (&optional buffer)
+    "Kills the buffer and closes the window it is in."
+    (interactive)
+    (kill-buffer buffer)
+    (delete-window))
+
+  (defun ha/projectile-direx (prefix)
+    "Start direx in the top-level of a project in a buffer window
+          that spans the entire left side of the frame."
+    (interactive "P")
+    (let ((file-name (file-name-nondirectory (buffer-file-name)))
+          (buffer (direx:find-directory-reuse-noselect (projectile-project-root)))
+          (window (ha/split-main-window 'left 30)))
+      (select-window window)
+      (direx:maybe-goto-current-buffer-item buffer)
+      (switch-to-buffer buffer)
+      (search-forward file-name))))
+
+;; The following helper function creates a window at the top-level,
+;; ignoring other windows in the frame.
+
+(defun ha/split-main-window (direction size)
+  "Split the main window in the DIRECTION where DIRECTION is a
+  symbol with possible values of 'right, 'left, 'above or 'below
+  and SIZE is the final size of the windows, if the window is split
+  horizontally (i.e. DIRECTION 'below or 'above) SIZE is assumed to
+  be the target height otherwise SIZE is assumed to be target width."
+  (let* ((new-window (split-window (frame-root-window) nil direction))
+         (horizontal (member direction '(right left))))
+    (save-excursion
+      (select-window new-window)
+      (enlarge-window (- size (if horizontal
+                                  (window-width)
+                                (window-height)))
+                      horizontal))
+    new-window))
+
+
 ;; elpy; derived from Howard Abrams config
 (use-package elpy
   :ensure t
@@ -565,6 +613,11 @@
   :config (progn
             (global-rbenv-mode)
             (add-hook 'enh-ruby-mode-hook 'rbenv-use-corresponding)))
+
+(use-package robe
+  :ensure t
+  :defer t
+  :config (add-hook 'ruby-mode-hook 'robe-mode))
 
 (use-package session
   :if (not noninteractive)
