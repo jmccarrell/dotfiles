@@ -663,6 +663,18 @@
   ;; (run-with-idle-timer 60 t 'save-information)
   (add-hook 'after-init-hook 'session-initialize t))
 
+;; smart parens; derived from Howard's config
+;;
+;; Can I get the same wonder from *paredit* and Lisp in my Ruby using
+;; [[https://github.com/Fuco1/smartparens][smartparens]]? Not really, as it isn’t as pedantic as
+;; =paredit=. Still, it may be good enough for Ruby:
+
+(use-package smartparens
+  :ensure t
+  :init
+  (add-hook 'ruby-mode-hook 'smartparens-strict-mode)
+  :diminish smartparens-mode)
+
 ;; try zenburn for a while.
 ;; (use-package solarized-theme
 ;;   :init
