@@ -61,9 +61,12 @@
 
 ;;; jeffs settings
 
-;; mirror the mac user gesture for switching frames
 (when (eq 'darwin system-type)
-  (bind-key "M-`" 'other-frame))
+  ;; mirror the mac user gesture for switching frames
+  (bind-key "M-`" 'other-frame)
+  ;; prevent my thumb from triggering this menu on the trackpad when in open laptop mode
+  ;;  ie, when I am working on the train
+  (bind-key [C-down-mouse-1] 'ignore))
 
 ;; Answering just 'y' or 'n' will do
 (defalias 'yes-or-no-p 'y-or-n-p)
