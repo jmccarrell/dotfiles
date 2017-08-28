@@ -134,6 +134,18 @@
 (setq org-default-notes-file
       (concat org-directory "/todo.org"))
 
+(setq org-entelo-notes-file "~/Dropbox/entelo/org/entelo.org")
+
+;; capture template.
+;;  support capture directly to my entelo org file
+(setq org-capture-templates
+  '(("t" "Todo" entry (file+headline "~/Dropbox/org/todo.org" "Tasks")
+     "* TODO %?\n %t\n  %i\n  %a")
+    ("e" "Entelo Todo" entry (file+headline "~/Dropbox/entelo/org/entelo.org" "Tasks")
+     "* TODO %?\n %t\n  %i\n  %a")
+    ("j" "Journal" entry (file+datetree "~/Dropbox/org/journal.org")
+     "* %?\nEntered on %U\n  %i\n  %a")))
+
 ;; my task states
 (setq org-todo-keywords
       '((sequence "TODO(t)" "NEXT(n!)" "DOING(g!)" "WAITING(w@/!)" "|" "DONE(d!)" "CANCELLED(c@)" "DEFERRED(D@)")))
