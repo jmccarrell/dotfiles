@@ -146,6 +146,13 @@
     ("j" "Journal" entry (file+datetree "~/Dropbox/org/journal.org")
      "* %?\nEntered on %U\n  %i\n  %a")))
 
+;; org language support
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((emacs-lisp . t)
+   (python . t)
+   (ruby . t)))
+
 ;; my task states
 (setq org-todo-keywords
       '((sequence "TODO(t)" "NEXT(n!)" "DOING(g!)" "WAITING(w@/!)" "|" "DONE(d!)" "CANCELLED(c@)" "DEFERRED(D@)")))
