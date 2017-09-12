@@ -97,23 +97,22 @@
 ;; complete things without hesitation
 (setq completion-auto-help nil)
 (setq completion-ignore-case t)
-;; (define-key minibuffer-local-completion-map " " 'minibuffer-complete)
-;; (define-key minibuffer-local-must-match-map " " 'minibuffer-complete)
 
-;; key some global key bindings I happen to like.
-(define-key global-map "\C-xy" 'revert-buffer)
-;; (define-key global-map "\C-x\C-e" 'compile)
-(define-key global-map "\e\C-g" 'goto-line)
+;; some global key bindings I happen to like.
+(bind-keys
+ ("C-x y" . revert-buffer)
+ ("C-M-g" . goto-line))
 
 ;;
 ;; org mode
 ;;
 ;; org mode wants these default global bindings set up.
-(global-set-key "\C-cl" 'org-store-link)
-(global-set-key "\C-cc" 'org-capture)
-(global-set-key "\C-ca" 'org-agenda)
-(global-set-key "\C-cb" 'org-iswitchb)
-;;
+(bind-keys
+ ("C-c l" org-store-link)
+ ("C-c c" org-capture)
+ ("C-c a" org-agenda)
+ ("C-c b" org-iswitchb))
+
 ;; my agenda files
 ;;  code shamelessly stolen from Sacha Chua's config
 (setq org-agenda-files
