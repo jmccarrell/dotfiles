@@ -338,7 +338,31 @@
          ;; default to changing nothing
          t)
         )
-  )
+
+  ;; these are lifted directly from Howard Abrams
+  (defun ha/text-scale-frame-change (fn)
+    (let* ((current-font-name (frame-parameter nil 'font))
+           (decomposed-font-name (x-decompose-font-name current-font-name))
+           (font-size (string-to-int (aref decomposed-font-name 5))))
+      (aset decomposed-font-name 5 (int-to-string (funcall fn font-size)))
+      (set-frame-font (x-compose-font-name decomposed-font-name))))
+
+  (defun ha/text-scale-frame-increase ()
+    (interactive)
+    (ha/text-scale-frame-change '1+))
+
+  (defun ha/text-scale-frame-decrease ()
+    (interactive)
+    (ha/text-scale-frame-change '1-))
+
+  (bind-keys
+   ("s-C-+" . ha/text-scale-frame-increase)
+   ("A-C-+" . ha/text-scale-frame-increase)
+   ("s-C-=" . ha/text-scale-frame-increase)
+   ("A-C-=" . ha/text-scale-frame-increase)
+   ("s-C--" . ha/text-scale-frame-decrease)
+   ("A-C--" . ha/text-scale-frame-decrease))
+)
 
 ;;; on OS X, set binding for meta to be command key, next to space bar
 ;;;  disable meaning of option key, so it is passed into emacs.
