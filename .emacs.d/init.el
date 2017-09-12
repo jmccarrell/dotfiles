@@ -725,6 +725,7 @@
   :ensure t
   :init
   (add-hook 'ruby-mode-hook 'smartparens-strict-mode)
+  (add-hook 'markdown-mode-hook 'smartparens-strict-mode)
   :diminish smartparens-mode)
 
 ;; try zenburn for a while.
