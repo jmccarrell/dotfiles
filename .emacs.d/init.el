@@ -108,10 +108,10 @@
 ;;
 ;; org mode wants these default global bindings set up.
 (bind-keys
- ("C-c l" org-store-link)
- ("C-c c" org-capture)
- ("C-c a" org-agenda)
- ("C-c b" org-iswitchb))
+ ("C-c l" . org-store-link)
+ ("C-c c" . org-capture)
+ ("C-c a" . org-agenda)
+ ("C-c b" . org-iswitchb))
 
 ;; my agenda files
 ;;  code shamelessly stolen from Sacha Chua's config
