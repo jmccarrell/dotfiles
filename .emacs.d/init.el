@@ -149,9 +149,11 @@
 ;; org language support
 (org-babel-do-load-languages
  'org-babel-load-languages
- '((emacs-lisp . t)
+ ;; order these by most frequently used
+ '((ruby . t)
+   (sh . t)
    (python . t)
-   (ruby . t)))
+   (emacs-lisp . t)))
 
 ;; my task states
 (setq org-todo-keywords
