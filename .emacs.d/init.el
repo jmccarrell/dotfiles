@@ -500,6 +500,8 @@
 ;; a better ruby mode
 (use-package enh-ruby-mode
   :init (progn
+          ;; prefer 2-space indentation style used at Entelo
+          (setq enh-ruby-deep-indent-paren nil)
           (add-to-list 'auto-mode-alist
              '("\\(?:\\.rb\\|ru\\|rake\\|thor\\|jbuilder\\|gemspec\\|podspec\\|/\\(?:Gem\\|Rake\\|Cap\\|Thor\\|Vagrant\\|Guard\\|Pod\\)file\\)\\'" . enh-ruby-mode))))
 
