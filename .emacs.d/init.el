@@ -150,6 +150,7 @@
  'org-babel-load-languages
  ;; order these by most frequently used
  '((ruby . t)
+   (sql . t)
    (sh . t)
    (python . t)
    (emacs-lisp . t)))
