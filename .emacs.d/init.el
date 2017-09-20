@@ -718,6 +718,11 @@
   ;; (run-with-idle-timer 60 t 'save-information)
   (add-hook 'after-init-hook 'session-initialize t))
 
+;; smartscan; derived from Sacha's config
+(use-package smartscan
+  :defer t
+  :config (global-smartscan-mode t))
+
 ;; smart parens; derived from Howard's config
 ;;
 ;; Can I get the same wonder from *paredit* and Lisp in my Ruby using
