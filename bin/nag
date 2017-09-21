@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+# search Jeffs common notes locations with the silver searcher
+ag $@ /{j,e,f}/notes ${HOME}/Dropbox/{,entelo/}org
