@@ -14,7 +14,7 @@ for file in ~/lib/git-sync.sh; do
 done;
 
 if which brew &> /dev/null; then
-    for file in ~/.{iterm2_shell_integration.bash}; do
+    for file in ~/.iterm2_shell_integration.bash; do
         [ -r "$file" ] && [ -f "$file" ] && source "$file";
     done;
 fi
