@@ -2,18 +2,11 @@
 # search Jeffs common notes locations with the silver searcher
 
 readonly -a source_dirs=( /{j,e,f}/notes ${HOME}/Dropbox/{,entelo/}org )
-echo "all source_dirs:" ${source_dirs[@]}
-echo "source_dirs indices:" ${!source_dirs[@]}
-echo "source_dirs length:" ${#source_dirs[@]}
 declare -a ag_dirs=()
 for d in ${source_dirs[@]}; do
     if [ -d $d ]; then
-        echo ${#ag_dirs[@]}
         ag_dirs[${#ag_dirs[@]}]=$d
-        echo dir: $d
     fi
 done
-echo "ag_dirs: " ${ag_dirs[@]}
-echo "all source_dirs:" ${source_dirs[@]}
 
 ag $@ ${ag_dirs[@]}
