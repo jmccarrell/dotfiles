@@ -402,12 +402,15 @@
 (use-package ag
   :commands ag)
 
-;; a better ace-jump-mode; derived from jwiegley
+;; a better ace-jump-mode; first derived from jwiegley
+;;  then I followed sacha's pattern using key-chord.
 (use-package avy
-  :load-path "site-lisp/avy"
-  :bind ("M-h" . avy-goto-char)
   :config
-  (avy-setup-default))
+  (progn
+    ;; use avy across all visible frames
+    ;;  https://github.com/abo-abo/avy/blob/master/doc/Changelog.org#allow-all-operations-to-work-across-frames
+    (setq avy-all-windows 'all-frames))
+    (avy-setup-default))
 
 ;; bookmarks, as Howard Abrams uses them.
 ;;  minus the C-c b binding
@@ -595,6 +598,32 @@
   (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
   (add-to-list 'auto-mode-alist '("\\.es6$" . js2-mode))
 )
+
+;; try key-chord; derived from sacha's config.
+(use-package key-chord
+  :init
+  (progn
+    ;; (fset 'key-chord-define 'my/key-chord-define)
+    (setq key-chord-one-key-delay 0.16)
+    (key-chord-mode 1)
+    ;; k can be bound too
+    ;; (key-chord-define-global "uu"     'undo)
+    ;; (key-chord-define-global "jr"     'my/goto-random-char-hydra/my/goto-random-char)
+    ;; (key-chord-define-global "kk"     'my/org/body)
+    (key-chord-define-global "jj"     'avy-goto-word-1)
+    (key-chord-define-global "jk"     'avy-goto-word-2)
+    ;; (key-chord-define-global "yy"    'my/window-movement/body)
+    ;; (key-chord-define-global "jw"     'switch-window)
+    (key-chord-define-global "jl"     'avy-goto-line)
+    ;; (key-chord-define-global "j."     'join-lines/body)
+                                        ;(key-chord-define-global "jZ"     'avy-zap-to-char)
+    ;; (key-chord-define-global "FF"     'find-file)
+    ;; (key-chord-define-global "qq"     'my/quantified-hydra/body)
+    ;; (key-chord-define-global "hh"     'my/key-chord-commands/body)
+    ;; (key-chord-define-global "xx"     'er/expand-region)
+    ;; (key-chord-define-global "  "     'my/insert-space-or-expand)
+    ;; (key-chord-define-global "JJ"     'my/switch-to-previous-buffer)))
+    ))
 
 (use-package macrostep
   :bind ("C-c e m" . macrostep-expand))
