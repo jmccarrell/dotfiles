@@ -105,11 +105,6 @@ git_sync() {
   git_check_refs $git_path $remote || return 1
 }
 
-# now use these functions to sync my shared repos
-gs_test() {
-  git_sync $HOME/tmp/test-sync-repo orgin
-}
-
 gs_enotes() {
   git_sync /e/notes origin
 }
@@ -122,6 +117,10 @@ gs_dotfiles() {
   git_sync /j/proj/jwm-dotfiles origin
 }
 
+gs_jeff_dotfiles() {
+  git_sync ${HOME}/jeff-dotfiles origin
+}
+
 gs_explore_ruby() {
   git_sync /j/proj/explore-ruby origin
 }
@@ -130,5 +129,6 @@ gs_all() {
   gs_enotes
   gs_jnotes
   gs_dotfiles
+  gs_jeff_dotfiles
   gs_explore_ruby
 }
