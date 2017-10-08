@@ -37,9 +37,6 @@ if which brew > /dev/null 2>&1; then
     export MANPATH=$(brew --prefix coreutils)/libexec/gnuman:$MANPATH
 fi
 
-# jwm: enable legacy perforce command line access
-export P4CONFIG=.p4config
-
 # jwm: setup for virtualenvwrapper when I need python2 work and I have installed into the base python
 # if pip install virtualenvwrapper 2>&1 | grep -E 'already satisfied.*virtualenvwrapper' 2>&1 > /dev/null; then
 #     export WORKON_HOME=$HOME/tmp/venvs-python2
