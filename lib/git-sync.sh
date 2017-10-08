@@ -74,7 +74,7 @@ git_check_ref() {
 git_check_refs() {
   local git_path="$1"
   local remote="$2"
-  git -C $git_path for-each-ref refs/heads/* | while read sha1 commit ref
+  git -C $git_path for-each-ref "refs/heads/*" | while read sha1 commit ref
   do
     ref=${ref/refs\/heads\//}
     git -C $git_path for-each-ref refs/remotes/$remote/$ref | while read sha2 commit ref2
