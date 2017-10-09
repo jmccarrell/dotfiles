@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+# search Jeffs entelo notes locations with the silver searcher
+
+readonly -a source_dirs=( /e/notes ${HOME}/Dropbox/entelo/org )
+declare -a ag_dirs=()
+for d in ${source_dirs[@]}; do
+    if [ -d $d ]; then
+        ag_dirs[${#ag_dirs[@]}]=$d
+    fi
+done
+
+ag $@ ${ag_dirs[@]}
