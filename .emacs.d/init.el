@@ -715,7 +715,7 @@
           (delete-region (line-beginning-position)
                          (1+ (line-end-position)))))))
 
-  ;; expanded folded secitons as required
+  ;; expanded folded sections as required
   (defun le::maybe-reveal ()
     (when (and (or (memq major-mode  '(org-mode outline-mode))
                    (and (boundp 'outline-minor-mode)
