@@ -1,5 +1,0 @@
-#!/bin/sh
-# startup Emacs for OSX variant of emacsclient.  cf: https://emacsformacosx.com/tips
-#  depends on a symlink to the correct binary in /Applications.
-which osascript > /dev/null 2>&1 && osascript -e 'tell application "Emacs" to activate'
-emacsclient -c "$@"
