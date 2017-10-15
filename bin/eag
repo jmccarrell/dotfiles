@@ -9,4 +9,4 @@ for d in ${source_dirs[@]}; do
     fi
 done
 
-ag $@ ${ag_dirs[@]}
+ag "$@" ${ag_dirs[@]}
