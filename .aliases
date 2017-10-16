@@ -12,11 +12,7 @@ alias -- -="cd -"
 alias d="cd ~/Documents/Dropbox"
 alias dl="cd ~/Downloads"
 alias dt="cd ~/Desktop"
-# jwm-start
-# alias p="cd ~/projects"
-alias p=pushd
-alias P=popd
-# jwm-end
+
 # alias g="git"
 alias h="history"
 alias j="jobs"
@@ -162,12 +158,14 @@ alias reload="exec $SHELL -l"
 alias path='echo -e ${PATH//:/\\n}'
 
 #
-## jeffs aliases (some more up by pushd/popd)
+## jeffs aliases
 #
 # c compilation; from 21st Century C, by Ben Klemens
 go_libs="-lm"
 go_flags="-g -Wall -include all_headers.h -O3"
 alias go_c="gcc $go_libs $go_flags"
+# alias p="cd ~/projects"
+alias p=pushd
+alias P=popd
 
-# run emacsforosx
-alias emacsclient=ec
+# jwm-end
