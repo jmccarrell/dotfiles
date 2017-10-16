@@ -168,4 +168,5 @@ alias go_c="gcc $go_libs $go_flags"
 alias p=pushd
 alias P=popd
 
+alias ec=emacsclient
 # jwm-end
