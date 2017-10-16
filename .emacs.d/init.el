@@ -689,7 +689,9 @@
             #'(lambda ()
                 (interactive)
                 (helm-do-grep-1 (list (projectile-project-root)) t))
-            'projectile-command-map))
+            'projectile-command-map)
+  (bind-key "s p" 'helm-do-ag-project-root 'projectile-command-map)
+  (bind-key "s a" 'helm-do-ag 'projectile-command-map))
 
 ;; copied from senny's init.el: https://github.com/senny/emacs.d/blob/master/init.el#L165
 (use-package rbenv
