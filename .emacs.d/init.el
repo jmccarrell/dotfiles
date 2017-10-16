@@ -405,6 +405,7 @@
 ;; a better ace-jump-mode; first derived from jwiegley
 ;;  then I followed sacha's pattern using key-chord.
 (use-package avy
+  :bind (("C-c w" . avy-org-refile-as-child))
   :config
   (progn
     ;; use avy across all visible frames
