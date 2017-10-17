@@ -566,9 +566,9 @@
   :init
   (add-hook 'ruby-mode-hook 'inf-ruby-minor-mode))
 
-(use-package intero
-  :config
-  (add-hook 'haskell-mode-hook 'intero-mode))
+;; (use-package intero
+;;   :config
+;;   (add-hook 'haskell-mode-hook 'intero-mode))
 
 ;; derived from Howard Abrams config
 (use-package jedi
