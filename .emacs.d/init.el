@@ -675,7 +675,8 @@
 
 (use-package projectile
   ;; leave the modeline on so I can see what project I am in.
-  ;; :diminish (projectile-mode . "Pjtl")
+  ;; diminish projectile mode to work around https://github.com/bbatsov/projectile/issues/1183
+  :diminish (projectile-mode . "Pjtl")
   :commands projectile-global-mode
   :defer 5
   :bind-keymap ("C-c p" . projectile-command-map)
