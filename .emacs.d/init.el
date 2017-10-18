@@ -395,6 +395,9 @@
   (set-variable (quote mac-command-modifier) 'meta)
   (set-variable (quote mac-right-option-modifier) 'none))
 
+(defun jwm::prog-mode-hook ()
+  (superword-mode t))
+(add-hook 'prog-mode-hook #'jwm::prog-mode-hook)
 
 ;;; Configure libraries
 
