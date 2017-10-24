@@ -574,14 +574,17 @@
 ;;   :config
 ;;   (add-hook 'haskell-mode-hook 'intero-mode))
 
+;; jwm
+;; fix jedi company init errors by removing jedi for now.
+;;
 ;; derived from Howard Abrams config
-(use-package jedi
-  :ensure t
-  :init
-  (add-to-list 'company-backends 'company-jedi)
-  (use-package company-jedi
-    :init
-    (setq company-jedi-python-bin "python")))
+;; (use-package jedi
+;;   :ensure t
+;;   :init
+;;   (add-to-list 'company-backends 'company-jedi)
+;;   (use-package company-jedi
+;;     :init
+;;     (setq company-jedi-python-bin "python")))
 
 ;; derived from Howard Abrams config
 (use-package js2-mode
