@@ -552,6 +552,7 @@
          ("C-x b" . helm-mini)
          ("C-`" . helm-resume)
          ("M-x" . helm-M-x)
+         ("C-h <SPC>" . helm-all-mark-rings)
          ("C-x C-f" . helm-find-files)))
 
 (use-package helm-make
