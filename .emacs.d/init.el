@@ -450,9 +450,9 @@
 
 (use-package direx
   :ensure t
-  :bind (("C-c p X" . ha/projectile-direx)
-         :map direx:direx-mode-map
-         ("q" . kill-buffer-and-window))
+  ;; :bind (("C-c p X" . ha/projectile-direx)
+  ;;        :map direx:direx-mode-map
+  ;;        ("q" . kill-buffer-and-window))
   :init
   (defun kill-buffer-and-window (&optional buffer)
     "Kills the buffer and closes the window it is in."
@@ -537,7 +537,8 @@
             ;;  projects from helm-projectile.
             ;; so disable this for now.
             ;;  :init (setq projectile-switch-project-action 'helm-projectile)
-            :bind ("C-c p h" . helm-projectile))
+            ;; :bind ("C-c p h" . helm-projectile)
+            )
           (use-package helm-ag :defer 10  :ensure t)
           (setq helm-locate-command "mdfind -interpret -name %s %s"
                 helm-ff-newfile-prompt-p nil
