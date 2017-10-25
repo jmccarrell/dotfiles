@@ -699,6 +699,12 @@
   (bind-key "s p" 'helm-do-ag-project-root 'projectile-command-map)
   (bind-key "s a" 'helm-do-ag 'projectile-command-map))
 
+;; a lighter weight session manager
+;;  https://github.com/thierryvolpiatto/psession
+(use-package psession
+  :ensure t
+  :config (psession-mode 1))
+
 ;; copied from senny's init.el: https://github.com/senny/emacs.d/blob/master/init.el#L165
 (use-package rbenv
   :ensure t
@@ -712,50 +718,6 @@
   :ensure t
   :defer t
   :config (add-hook 'ruby-mode-hook 'robe-mode))
-
-(use-package session
-  :if (not noninteractive)
-  :preface
-  (defun remove-session-use-package-from-settings ()
-    (when (string= (file-name-nondirectory (buffer-file-name)) "settings.el")
-      (save-excursion
-        (goto-char (point-min))
-        (when (re-search-forward "^ '(session-use-package " nil t)
-          (delete-region (line-beginning-position)
-                         (1+ (line-end-position)))))))
-
-  ;; expanded folded sections as required
-  (defun le::maybe-reveal ()
-    (when (and (or (memq major-mode  '(org-mode outline-mode))
-                   (and (boundp 'outline-minor-mode)
-                        outline-minor-mode))
-               (outline-invisible-p))
-      (if (eq major-mode 'org-mode)
-          (org-reveal)
-        (show-subtree))))
-
-  (defvar server-process nil)
-
-  (defun save-information ()
-    (with-temp-message "Saving Emacs information..."
-      (recentf-cleanup)
-
-      (loop for func in kill-emacs-hook
-            unless (memq func '(exit-gnus-on-exit server-force-stop))
-            do (funcall func))
-
-      (unless (or noninteractive
-                  running-alternate-emacs
-                  running-development-emacs
-                  (and server-process
-                       (eq 'listen (process-status server-process))))
-        (server-start))))
-
-  :config
-  (add-hook 'before-save-hook 'remove-session-use-package-from-settings)
-  (add-hook 'session-after-jump-to-last-change-hook 'le::maybe-reveal)
-  ;; (run-with-idle-timer 60 t 'save-information)
-  (add-hook 'after-init-hook 'session-initialize t))
 
 ;; smartscan; derived from Sacha's config
 (use-package smartscan
