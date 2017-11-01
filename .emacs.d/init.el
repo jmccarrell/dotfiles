@@ -722,12 +722,15 @@
   :defer t
   :config (add-hook 'ruby-mode-hook 'robe-mode))
 
+;; jwm
+;; I prefer helm-swoop to smartscan.
+;;
 ;; smartscan; derived from Sacha's config
-(use-package smartscan
-  :defer t
-  :config (global-smartscan-mode t))
+;; (use-package smartscan
+;;   :defer t
+;;   :config (global-smartscan-mode t))
 
-;; smart parens; derived from Howard's config
+;; smartparens; derived from Howard's config
 ;;
 ;; Can I get the same wonder from *paredit* and Lisp in my Ruby using
 ;; [[https://github.com/Fuco1/smartparens][smartparens]]? Not really, as it isn’t as pedantic as
