@@ -299,8 +299,8 @@
         (list '(menu-bar-lines . 1)
               '(tool-bar-lines . 0)
               '(vertical-scroll-bars . nil)
-              '(width . 100)
-              '(height . 52)
+              '(width . 130)
+              '(height . 60)
               ;; after many years of setting my own colors
               ;;  evolution happens, so rely on themes.
               ;; ;; '(foreground-color . "white")
