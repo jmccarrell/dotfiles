@@ -567,9 +567,8 @@
 ;; from howard
 ;;  to start it up, use M-x inf-ruby
 (use-package inf-ruby
-  :ensure t
   :init
-  (add-hook 'ruby-mode-hook 'inf-ruby-minor-mode))
+  (add-hook 'enh-ruby-mode-hook 'inf-ruby-minor-mode))
 
 ;; (use-package intero
 ;;   :config
@@ -720,7 +719,7 @@
 (use-package robe
   :ensure t
   :defer t
-  :config (add-hook 'ruby-mode-hook 'robe-mode))
+  :config (add-hook 'enh-ruby-mode-hook 'robe-mode))
 
 ;; jwm
 ;; I prefer helm-swoop to smartscan.
@@ -731,17 +730,12 @@
 ;;   :config (global-smartscan-mode t))
 
 ;; smartparens; derived from Howard's config
-;;
-;; Can I get the same wonder from *paredit* and Lisp in my Ruby using
-;; [[https://github.com/Fuco1/smartparens][smartparens]]? Not really, as it isn’t as pedantic as
-;; =paredit=. Still, it may be good enough for Ruby:
-
+;;  well, I started with Howards config.
+;; this is now a jwm creation.
 (use-package smartparens
-  :ensure t
-  :init
-  (add-hook 'ruby-mode-hook 'smartparens-strict-mode)
-  (add-hook 'markdown-mode-hook 'smartparens-strict-mode)
-  :diminish smartparens-mode)
+  :commands (smartparens-mode show-smartparens-mode)
+  :config
+  (sp-use-smartparens-bindings))
 
 ;; try zenburn for a while.
 ;; (use-package solarized-theme
