@@ -28,7 +28,12 @@ for file in \
  .tmux.conf \
  .vimrc \
  .wgetrc \
+ bin/commify \
  bin/diff-dot-files \
+ bin/eag \
+ bin/localtime \
+ bin/nag \
+ bin/sample \
  ; do
     # -q is a bit too quiet...
     git diff "${HOME}/${file}" "${proj_dir}/${file}"
