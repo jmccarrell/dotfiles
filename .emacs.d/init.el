@@ -416,6 +416,9 @@
     (setq avy-all-windows 'all-frames))
     (avy-setup-default))
 
+;; bats-mode
+(use-package bats-mode)
+
 ;; bookmarks, as Howard Abrams uses them.
 ;;  minus the C-c b binding
 ;;  N.B. ha/add-bookmark depends on which-function-mode
