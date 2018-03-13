@@ -18,7 +18,7 @@ function jwm_home_paths() {
                         $yarn_path
                        )
 
-    print -l ${jwm_paths[@]}
+    printf "%s\n" "${jwm_paths[@]}"
 }
 
 
@@ -27,26 +27,22 @@ function jwm_go_locations() {
     declare -a go_locations=($HOME/go
                              /j/proj/gopl-exercises)
 
-    print -l ${go_locations[@]}
+    printf "%s\n" "${go_locations[@]}"
 }
 
-declare -a go_paths=()
-declare -a go_bin_paths=()
-declare -a go_locations=( $(jwm_go_locations) )
-if (( ${#go_locations[@]} > 0 )); then
-    for gp in ${go_locations[@]}; do
-        if [[ -e $gp && -e ${gp}/bin ]]; then
-            # append this one
-            go_paths+=($gp)
-            go_bin_paths+=($gp/bin)
-        fi
-    done
-fi
-
-if (( ${#go_paths[@]} > 0 )); then
-    export GOPATH=$(join_by : ${go_paths[@]})
-fi
-# echo GOPATH is: ${GOPATH}
+# return every go project as a list of of lines
+function jwm_go_paths() {
+    declare -a go_paths=()
+    declare -a go_locations=( $(jwm_go_locations) )
+    if (( ${#go_locations[@]} > 0 )); then
+        for gp in ${go_locations[@]}; do
+            if [[ -e $gp && -e ${gp}/bin ]]; then
+                go_paths+=($gp)
+            fi
+        done
+    fi
+    printf "%s\n" "${go_paths[@]}"
+}
 
 # return the bin directory for every go project as a list of lines
 function jwm_go_bin_paths() {
@@ -58,9 +54,8 @@ function jwm_go_bin_paths() {
         fi
     done
 
-    print -l ${go_bin_paths[@]}
+    printf "%s\n" "${go_bin_paths[@]}"
 }
-
 
 declare -a standard_paths=(/usr/local/opt/go/libexec/bin
                            /usr/local/bin

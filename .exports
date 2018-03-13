@@ -45,3 +45,9 @@ fi
 #     fi
 #     source /usr/local/bin/virtualenvwrapper.sh
 # fi
+
+# set up go path
+declare -a go_paths=( $(jwm_go_paths) )
+if (( ${#go_paths[@]} > 0 )); then
+    export GOPATH=$(join_by : ${go_paths[@]})
+fi
