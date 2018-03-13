@@ -2,7 +2,7 @@
 # set my path exactly how I want it.
 
 # declare jeffs home paths
-jwm_home_paths() {
+function jwm_home_paths() {
 
     # entelo has standardized on node 6
     local node_path="/usr/local/opt/node@6/bin"
@@ -23,12 +23,16 @@ jwm_home_paths() {
 
 
 # define GOPATH, and set PATH from GOPATH as needed.
-# all I do is declare where to source go code from in the list go_locations
-declare -a go_locations=($HOME/go
-                         /j/proj/gopl-exercises)
+function jwm_go_locations() {
+    declare -a go_locations=($HOME/go
+                             /j/proj/gopl-exercises)
 
-declare go_paths=()
-declare go_bin_paths=()
+    print -l ${go_locations[@]}
+}
+
+declare -a go_paths=()
+declare -a go_bin_paths=()
+declare -a go_locations=( $(jwm_go_locations) )
 if (( ${#go_locations[@]} > 0 )); then
     for gp in ${go_locations[@]}; do
         if [[ -e $gp && -e ${gp}/bin ]]; then
@@ -39,13 +43,24 @@ if (( ${#go_locations[@]} > 0 )); then
     done
 fi
 
-# from https://stackoverflow.com/questions/1527049/join-elements-of-an-array
-function join_by { local d=$1; shift; echo -n "$1"; shift; printf "%s" "${@/#/$d}"; }
-
 if (( ${#go_paths[@]} > 0 )); then
     export GOPATH=$(join_by : ${go_paths[@]})
 fi
 # echo GOPATH is: ${GOPATH}
+
+# return the bin directory for every go project as a list of lines
+function jwm_go_bin_paths() {
+    declare -a go_locs=( $(jwm_go_locations) )
+    declare -a go_bin_paths=()
+    for gl in ${go_locs[@]}; do
+        if [[ -e $gl && -e $gl/bin ]]; then
+            go_bin_paths+=($gl/bin)
+        fi
+    done
+
+    print -l ${go_bin_paths[@]}
+}
+
 
 declare -a standard_paths=(/usr/local/opt/go/libexec/bin
                            /usr/local/bin
@@ -57,7 +72,7 @@ declare -a standard_paths=(/usr/local/opt/go/libexec/bin
                            /opt/X11/bin)
 
 unset PATH
-for p in $(jwm_home_paths) ${go_bin_paths[@]} ${standard_paths[@]}; do
+for p in $(jwm_home_paths) $(jwm_go_bin_paths) ${standard_paths[@]}; do
     if [ -e "$p" ]; then
         if [ -z "$PATH" ]; then
             PATH="$p"
