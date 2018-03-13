@@ -11,8 +11,51 @@ MYSQL_PATH="/usr/local/opt/mysql@5.6/bin"
 NODE_PATH="/usr/local/opt/node@6/bin"
 
 
+# declare jeffs home paths
+declare -a jwm_paths=($HOME/bin/MacOS
+                      $HOME/bin
+                      $HOME/.local/bin
+                      ${MYSQL_PATH}
+                      ${NODE_PATH}
+                      $HOME/.rbenv/shims
+                      $HOME/.rbenv/bin)
+
+# define GOPATH, and set PATH from GOPATH as needed.
+# all I do is declare where to source go code from in the list go_locations
+declare -a go_locations=($HOME/go
+                         /j/proj/gopl-exercises)
+
+declare go_paths=()
+declare go_bin_paths=()
+if (( ${#go_locations[@]} > 0 )); then
+    for gp in ${go_locations[@]}; do
+        if [[ -e $gp && -e ${gp}/bin ]]; then
+            # append this one
+            go_paths+=($gp)
+            go_bin_paths+=($gp/bin)
+        fi
+    done
+fi
+
+# from https://stackoverflow.com/questions/1527049/join-elements-of-an-array
+function join_by { local d=$1; shift; echo -n "$1"; shift; printf "%s" "${@/#/$d}"; }
+
+if (( ${#go_paths[@]} > 0 )); then
+    export GOPATH=$(join_by : ${go_paths[@]})
+fi
+# echo GOPATH is: ${GOPATH}
+
+declare -a standard_paths=(/usr/local/opt/go/libexec/bin
+                           /usr/local/bin
+                           /usr/local/sbin
+                           /usr/bin
+                           /bin
+                           /usr/sbin
+                           /sbin
+                           /opt/X11/bin)
+
 unset PATH
-for p in $HOME/bin/MacOS $HOME/bin $HOME/.local/bin ${MYSQL_PATH} ${NODE_PATH} $HOME/.rbenv/shims $HOME/.rbenv/bin /usr/local/opt/go/libexec/bin /usr/local/bin /usr/local/sbin /usr/bin /bin /usr/sbin /sbin /opt/X11/bin; do
+for p in ${jwm_paths[@]} ${go_bin_paths[@]} ${standard_paths[@]}; do
     if [ -e "$p" ]; then
         if [ -z "$PATH" ]; then
             PATH="$p"
@@ -21,5 +64,5 @@ for p in $HOME/bin/MacOS $HOME/bin $HOME/.local/bin ${MYSQL_PATH} ${NODE_PATH} $
         fi
     fi
 done
-unset p
+unset p jwm_paths go_paths go_bin_paths standard_paths
 export PATH
