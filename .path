@@ -57,17 +57,15 @@ function jwm_go_bin_paths() {
     printf "%s\n" "${go_bin_paths[@]}"
 }
 
-declare -a standard_paths=(/usr/local/opt/go/libexec/bin
-                           /usr/local/bin
-                           /usr/local/sbin
-                           /usr/bin
-                           /bin
-                           /usr/sbin
-                           /sbin
-                           /opt/X11/bin)
+function jwm_standard_paths() {
+    paths_fname=/etc/paths
+    if [[ -f ${paths_fname} && -r ${paths_fname} ]]; then
+        /bin/cat < $paths_fname
+    fi
+}
 
 unset PATH
-for p in $(jwm_home_paths) $(jwm_go_bin_paths) ${standard_paths[@]}; do
+for p in $(jwm_home_paths) $(jwm_go_bin_paths) $(jwm_standard_paths); do
     if [ -e "$p" ]; then
         if [ -z "$PATH" ]; then
             PATH="$p"
@@ -76,5 +74,5 @@ for p in $(jwm_home_paths) $(jwm_go_bin_paths) ${standard_paths[@]}; do
         fi
     fi
 done
-unset p go_paths go_bin_paths standard_paths
+unset p
 export PATH
