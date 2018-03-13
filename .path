@@ -1,24 +1,26 @@
 #!/usr/bin/env bash
 # set my path exactly how I want it.
 
-# haskell stack puts things in $HOME/.local/bin
-# ensure ~/bin/MacOS is very early in the path for emacsforosx
-
-# entelo has standardized on mysql@5.6
-#  so put that in the path if we are running it in front of /usr/local/bin
-MYSQL_PATH="/usr/local/opt/mysql@5.6/bin"
-# likewise, entelo is on node 6
-NODE_PATH="/usr/local/opt/node@6/bin"
-
-
 # declare jeffs home paths
-declare -a jwm_paths=($HOME/bin/MacOS
-                      $HOME/bin
-                      $HOME/.local/bin
-                      ${MYSQL_PATH}
-                      ${NODE_PATH}
-                      $HOME/.rbenv/shims
-                      $HOME/.rbenv/bin)
+jwm_home_paths() {
+
+    # entelo has standardized on node 6
+    local node_path="/usr/local/opt/node@6/bin"
+    # and entelo needs to find yarn stuff
+    local yarn_path=$HOME/.yarn/bin
+
+    local -a jwm_paths=($HOME/bin
+                        # haskell stack puts things in $HOME/.local/bin
+                        $HOME/.local/bin
+                        ${node_path}
+                        $HOME/.rbenv/shims
+                        $HOME/.rbenv/bin
+                        $yarn_path
+                       )
+
+    print -l ${jwm_paths[@]}
+}
+
 
 # define GOPATH, and set PATH from GOPATH as needed.
 # all I do is declare where to source go code from in the list go_locations
@@ -55,7 +57,7 @@ declare -a standard_paths=(/usr/local/opt/go/libexec/bin
                            /opt/X11/bin)
 
 unset PATH
-for p in ${jwm_paths[@]} ${go_bin_paths[@]} ${standard_paths[@]}; do
+for p in $(jwm_home_paths) ${go_bin_paths[@]} ${standard_paths[@]}; do
     if [ -e "$p" ]; then
         if [ -z "$PATH" ]; then
             PATH="$p"
@@ -64,5 +66,5 @@ for p in ${jwm_paths[@]} ${go_bin_paths[@]} ${standard_paths[@]}; do
         fi
     fi
 done
-unset p jwm_paths go_paths go_bin_paths standard_paths
+unset p go_paths go_bin_paths standard_paths
 export PATH
