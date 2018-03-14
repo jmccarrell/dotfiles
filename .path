@@ -24,8 +24,7 @@ function jwm_home_paths() {
 
 # define GOPATH, and set PATH from GOPATH as needed.
 function jwm_go_locations() {
-    declare -a go_locations=($HOME/go
-                             /j/proj/gopl-exercises)
+    declare -a go_locations=( /j/proj/gopl-exercises )
 
     printf "%s\n" "${go_locations[@]}"
 }
