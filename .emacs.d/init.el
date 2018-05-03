@@ -151,6 +151,8 @@
  ;; order these by most frequently used
  '((ruby . t)
    (sql . t)
+   (zsh . t)
+   (bash . t)
    (sh . t)
    (python . t)
    (emacs-lisp . t)))
