@@ -151,8 +151,6 @@
  ;; order these by most frequently used
  '((ruby . t)
    (sql . t)
-   (zsh . t)
-   (bash . t)
    (sh . t)
    (python . t)
    (emacs-lisp . t)))
@@ -776,6 +774,9 @@
   ;; ;; if you use multiple-cursors, this is for you:
   ;; :config (use-package  multiple-cursors
   ;;           :bind ("C-c m" . vr/mc-mark)))
+
+(use-package wgrep
+  :ensure t)
 
 ;; try winner mode; most of my emacs configs use it.
 (use-package winner
