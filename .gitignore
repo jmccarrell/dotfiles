@@ -6,6 +6,11 @@
 # Compiled Python files
 *.pyc
 
+# terraform state files
+.terraform
+*.tfstate
+*.tfstate.backup
+
 # Folder view configuration files
 .DS_Store
 Desktop.ini
