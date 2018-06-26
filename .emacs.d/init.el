@@ -747,6 +747,9 @@
 ;;     (when (display-graphic-p)
 ;;       (load-theme 'solarized-dark t))))
 
+(use-package terraform
+  :ensure t)
+
 (use-package try)
 
 (use-package undo-tree
