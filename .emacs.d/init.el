@@ -747,6 +747,9 @@
 ;;     (when (display-graphic-p)
 ;;       (load-theme 'solarized-dark t))))
 
+(use-package terraform
+  :ensure t)
+
 (use-package try)
 
 (use-package undo-tree
@@ -774,6 +777,9 @@
   ;; ;; if you use multiple-cursors, this is for you:
   ;; :config (use-package  multiple-cursors
   ;;           :bind ("C-c m" . vr/mc-mark)))
+
+(use-package wgrep
+  :ensure t)
 
 ;; try winner mode; most of my emacs configs use it.
 (use-package winner
