@@ -573,10 +573,6 @@
   :init
   (add-hook 'enh-ruby-mode-hook 'inf-ruby-minor-mode))
 
-;; (use-package intero
-;;   :config
-;;   (add-hook 'haskell-mode-hook 'intero-mode))
-
 ;; jwm
 ;; fix jedi company init errors by removing jedi for now.
 ;;
@@ -739,13 +735,6 @@
   :commands (smartparens-mode show-smartparens-mode)
   :config
   (sp-use-smartparens-bindings))
-
-;; try zenburn for a while.
-;; (use-package solarized-theme
-;;   :init
-;;   (progn
-;;     (when (display-graphic-p)
-;;       (load-theme 'solarized-dark t))))
 
 (use-package terraform
   :ensure t)
