@@ -720,6 +720,12 @@
   :defer t
   :config (add-hook 'enh-ruby-mode-hook 'robe-mode))
 
+;; initialize straight from the docs:
+;;  http://ensime.github.io/editors/emacs/scala-mode/#installation
+(use-package scala-mode
+  :interpreter
+  ("scala" . scala-mode))
+
 ;; jwm
 ;; I prefer helm-swoop to smartscan.
 ;;
