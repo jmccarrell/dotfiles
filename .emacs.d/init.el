@@ -742,7 +742,7 @@
   :config
   (sp-use-smartparens-bindings))
 
-(use-package terraform
+(use-package terraform-mode
   :ensure t)
 
 (use-package try)
