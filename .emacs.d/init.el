@@ -151,7 +151,8 @@
  ;; order these by most frequently used
  '((ruby . t)
    (sql . t)
-   (sh . t)
+   ;; ob-sh package seems to have disappeared
+   ;; (sh . t)
    (python . t)
    (emacs-lisp . t)))
 
