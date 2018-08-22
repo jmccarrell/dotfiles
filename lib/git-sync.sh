@@ -133,11 +133,16 @@ gs_learning_scala() {
     git_sync /j/proj/learning-scala/jwm origin
 }
 
+gs_ebooks() {
+    git_sync /j/ebooks origin
+}
+
 gs_all() {
   gs_enotes
   gs_jnotes
   gs_dotfiles
   gs_jeff_dotfiles
+  gs_ebooks
   # gs_explore_ruby
   # gs_fp_scala
   gs_learning_scala
