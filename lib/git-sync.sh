@@ -143,7 +143,7 @@ gs_all() {
   gs_dotfiles
   gs_jeff_dotfiles
   gs_ebooks
-  # gs_explore_ruby
+  gs_explore_ruby
   # gs_fp_scala
   gs_learning_scala
 }
