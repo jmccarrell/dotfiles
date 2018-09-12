@@ -138,12 +138,12 @@
 ;; capture template.
 ;;  support capture directly to my entelo org file
 (setq org-capture-templates
-  '(("t" "Todo" entry (file+headline "~/Dropbox/org/todo.org" "Tasks")
-     "* TODO %?\n %t\n  %i\n  %a")
-    ("e" "Entelo Todo" entry (file+headline "~/Dropbox/entelo/org/entelo.org" "Tasks")
-     "* TODO %?\n %t\n  %i\n  %a")
-    ("j" "Journal" entry (file+datetree "~/Dropbox/org/journal.org")
-     "* %?\nEntered on %U\n  %i\n  %a")))
+      '(("t" "Todo" entry (file+headline "~/Dropbox/org/todo.org" "Tasks")
+         "* TODO %?\n %t\n  %i\n  %a")
+        ("e" "Entelo Todo" entry (file+headline "~/Dropbox/entelo/org/entelo.org" "Tasks")
+         "* TODO %?\n %t\n  %i\n  %a")
+        ("j" "Journal" entry (file+datetree "~/Dropbox/org/journal.org")
+         "* %?\nEntered on %U\n  %i\n  %a")))
 
 ;; org language support
 (org-babel-do-load-languages
@@ -365,7 +365,7 @@
    ("A-C-=" . ha/text-scale-frame-increase)
    ("s-C--" . ha/text-scale-frame-decrease)
    ("A-C--" . ha/text-scale-frame-decrease))
-)
+  )
 
 ;;; on OS X, set binding for meta to be command key, next to space bar
 ;;;  disable meaning of option key, so it is passed into emacs.
@@ -386,10 +386,10 @@
 ;;;  and leave right option unbound to insert accented characters.
 ;;;
 ;;; possible mac variables to bind
-;;  	mac-command-modifier
-;; mac-control-modifier 	mac-function-modifier
-;; mac-option-modifier 	mac-right-command-modifier
-;; mac-right-control-modifier 	mac-right-option-modifier
+;;      mac-command-modifier
+;; mac-control-modifier         mac-function-modifier
+;; mac-option-modifier  mac-right-command-modifier
+;; mac-right-control-modifier   mac-right-option-modifier
 (when (and window-system (eq 'ns window-system))
   (message "setting mac meta/super key bindings")
   (set-variable (quote mac-option-modifier) 'super)
@@ -415,7 +415,7 @@
     ;; use avy across all visible frames
     ;;  https://github.com/abo-abo/avy/blob/master/doc/Changelog.org#allow-all-operations-to-work-across-frames
     (setq avy-all-windows 'all-frames))
-    (avy-setup-default))
+  (avy-setup-default))
 
 ;; bats-mode
 (use-package bats-mode)
@@ -446,7 +446,17 @@
   :init
   (add-hook 'after-init-hook 'global-company-mode)
   :bind ("C-:" . company-complete)  ; In case I don't want to wait
-)
+  )
+
+;; try bbatsov's crux
+(use-package crux
+  :init
+  (progn
+    (crux-with-region-or-buffer crux-cleanup-buffer-or-region)
+    )
+  :bind (
+         ("C-c n" . crux-cleanup-buffer-or-region))
+  )
 
 ;; try direx from Howard Abrams config
 ;; The [[https://github.com/m2ym/direx-el][direx]] package is a tree-based variation of dired, and it gives
@@ -506,7 +516,7 @@
   ;; (electric-indent-local-mode -1)
   (delete 'elpy-module-highlight-indentation elpy-modules)
   (delete 'elpy-module-flymake elpy-modules)
-)
+  )
 
 ;; a better ruby mode
 (use-package enh-ruby-mode
@@ -514,7 +524,7 @@
           ;; prefer 2-space indentation style used at Entelo
           (setq enh-ruby-deep-indent-paren nil)
           (add-to-list 'auto-mode-alist
-             '("\\(?:\\.rb\\|ru\\|rake\\|thor\\|jbuilder\\|gemspec\\|podspec\\|/\\(?:Gem\\|Rake\\|Cap\\|Thor\\|Vagrant\\|Guard\\|Pod\\)file\\)\\'" . enh-ruby-mode))))
+                       '("\\(?:\\.rb\\|ru\\|rake\\|thor\\|jbuilder\\|gemspec\\|podspec\\|/\\(?:Gem\\|Rake\\|Cap\\|Thor\\|Vagrant\\|Guard\\|Pod\\)file\\)\\'" . enh-ruby-mode))))
 
 ;; this is Howard Abrams flycheck config
 (use-package flycheck
@@ -605,7 +615,7 @@
 
   (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
   (add-to-list 'auto-mode-alist '("\\.es6$" . js2-mode))
-)
+  )
 
 ;; try key-chord; derived from sacha's config.
 (use-package key-chord
@@ -770,9 +780,9 @@
   :bind (("C-c r" . vr/replace)
          ("C-c q" . vr/query-replace)))
 
-  ;; ;; if you use multiple-cursors, this is for you:
-  ;; :config (use-package  multiple-cursors
-  ;;           :bind ("C-c m" . vr/mc-mark)))
+;; ;; if you use multiple-cursors, this is for you:
+;; :config (use-package  multiple-cursors
+;;           :bind ("C-c m" . vr/mc-mark)))
 
 (use-package wgrep
   :ensure t)
