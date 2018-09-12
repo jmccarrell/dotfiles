@@ -450,12 +450,16 @@
 
 ;; try bbatsov's crux
 (use-package crux
-  :init
-  (progn
-    (crux-with-region-or-buffer crux-cleanup-buffer-or-region)
-    )
-  :bind (
-         ("C-c n" . crux-cleanup-buffer-or-region))
+  ;; jwm: this defadvice throws warnings, so ignore it for now.
+  ;; :init
+  ;; (progn
+  ;;   (crux-with-region-or-buffer crux-cleanup-buffer-or-region)
+  ;;   )
+  :bind
+  (
+   ("C-c n" . crux-cleanup-buffer-or-region)
+   ("C-o" . crux-smart-open-line)
+   )
   )
 
 ;; try direx from Howard Abrams config
