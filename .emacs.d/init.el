@@ -458,9 +458,11 @@
   :bind
   (
    ("C-c n" . crux-cleanup-buffer-or-region)
-   ("C-o" . crux-smart-open-line)
-   )
-  )
+   ;; ("C-S-RET" . crux-smart-open-line-above)
+   ("M-o" . crux-smart-open-line)
+   ("C-c d" . crux-duplicate-current-line-or-region)
+   ("C-c M-d" . crux-duplicate-and-comment-current-line-or-region)
+   ))
 
 ;; try direx from Howard Abrams config
 ;; The [[https://github.com/m2ym/direx-el][direx]] package is a tree-based variation of dired, and it gives
