@@ -564,7 +564,7 @@
 
   ;; jwm: however, I can't seem to get C-= from my mac keyboard.
   ;;   so prefer C-c =
-  :bind ("C-c =" . ha/expand-region))
+  :bind ("C-@" . ha/expand-region))
 
 ;; this is Howard Abrams flycheck config
 (use-package flycheck
@@ -678,7 +678,7 @@
     ;; (key-chord-define-global "FF"     'find-file)
     ;; (key-chord-define-global "qq"     'my/quantified-hydra/body)
     ;; (key-chord-define-global "hh"     'my/key-chord-commands/body)
-    ;; (key-chord-define-global "xx"     'er/expand-region)
+    (key-chord-define-global "xx"     'er/expand-region)
     ;; (key-chord-define-global "  "     'my/insert-space-or-expand)
     ;; (key-chord-define-global "JJ"     'my/switch-to-previous-buffer)))
     ))
