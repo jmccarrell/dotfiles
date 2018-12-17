@@ -59,6 +59,9 @@
 (defun jwm::entelo-host-p ()
   (file-exists-p "/e/src/reputedly"))
 
+(defun jwm::sift-host-p ()
+  (file-exists-p "/s/notes/org/sift.org"))
+
 ;;; jeffs settings
 
 (when (eq 'darwin system-type)
@@ -113,19 +116,6 @@
  ("C-c a" . org-agenda)
  ("C-c b" . org-iswitchb))
 
-;; my agenda files
-;;  code shamelessly stolen from Sacha Chua's config
-(setq org-agenda-files
-      (delq nil
-            (mapcar (lambda (x) (and (file-exists-p x) x))
-                    `("~/Dropbox/org/todo.org",
-                      "~/Dropbox/org/notes.org",
-                      "/c/davo/notes/davo.org",
-                      "/c/yadle/notes/yadle.org",
-                      "/j/pdata/investing/logical-invest/logical-invest-notes.org",
-                      "/j/pdata/investing/portfolio123/portfolio123-notes.org",
-                      "~/Dropbox/entelo/org/entelo.org"))))
-
 ;; set up org mode
 (setq org-directory "~/Dropbox/org")
 
@@ -135,6 +125,22 @@
 
 (setq org-entelo-notes-file "~/Dropbox/entelo/org/entelo.org")
 
+(setq org-sift-notes-file "~/Dropbox/sift/org/sift.org")
+
+;; my agenda files
+;;  code shamelessly stolen from Sacha Chua's config
+(setq org-agenda-files
+      (delq nil
+            (mapcar (lambda (x) (and (file-exists-p x) x))
+                    `(org-default-notes-file,
+                      "~/Dropbox/org/notes.org",
+                      org-sift-notes-file,
+                      "/c/davo/notes/davo.org",
+                      "/c/yadle/notes/yadle.org",
+                      "/j/pdata/investing/logical-invest/logical-invest-notes.org",
+                      "/j/pdata/investing/portfolio123/portfolio123-notes.org",
+                      org-entelo-notes-file))))
+
 ;; capture template.
 ;;  support capture directly to my entelo org file
 (setq org-capture-templates
@@ -143,7 +149,9 @@
         ("e" "Entelo Todo" entry (file+headline "~/Dropbox/entelo/org/entelo.org" "Tasks")
          "* TODO %?\n %t\n  %i\n  %a")
         ("j" "Journal" entry (file+datetree "~/Dropbox/org/journal.org")
-         "* %?\nEntered on %U\n  %i\n  %a")))
+         "* %?\nEntered on %U\n  %i\n  %a")
+        ("s" "Sift Todo" entry (file+headline "~/Dropbox/sift/org/sift.org" "Tasks")
+         "* TODO %?\n %t\n  %i\n  %a")))
 
 ;; org language support
 (org-babel-do-load-languages
