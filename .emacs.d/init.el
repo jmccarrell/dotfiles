@@ -132,7 +132,7 @@
 (setq org-agenda-files
       (delq nil
             (mapcar (lambda (x) (and (file-exists-p x) x))
-                    `(org-default-notes-file,
+                    `("~/Dropbox/org/todo.org",
                       "~/Dropbox/org/notes.org",
                       org-sift-notes-file,
                       "/c/davo/notes/davo.org",
