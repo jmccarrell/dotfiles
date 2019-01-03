@@ -89,3 +89,6 @@ if [ -d "$HOME/.rbenv" ]; then
     esac
   }
 fi
+
+# setup rbenv when installed
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*

@@ -4,18 +4,18 @@
 # declare jeffs home paths
 function jwm_home_paths() {
 
-    # entelo has standardized on node 6
-    local node_path="/usr/local/opt/node@6/bin"
-    # and entelo needs to find yarn stuff
-    local yarn_path=$HOME/.yarn/bin
+    # # entelo has standardized on node 6
+    # local node_path="/usr/local/opt/node@6/bin"
+    # # and entelo needs to find yarn stuff
+    # local yarn_path=$HOME/.yarn/bin
 
     local -a jwm_paths=($HOME/bin
                         # haskell stack puts things in $HOME/.local/bin
-                        $HOME/.local/bin
-                        ${node_path}
+                        # $HOME/.local/bin
+                        # ${node_path}
                         $HOME/.rbenv/shims
                         $HOME/.rbenv/bin
-                        $yarn_path
+                        # $yarn_path
                        )
 
     printf "%s\n" "${jwm_paths[@]}"
@@ -63,8 +63,26 @@ function jwm_standard_paths() {
     fi
 }
 
+function jwm_rvm_path() {
+    # when rvm is installed, it wants $HOME/.rvm/bin
+    declare -a rvm_path=()
+    if [[ -s "$HOME/.rvm/scripts/rvm" ]]; then
+        rvm_path=($HOME/.rvm/bin)
+    fi
+    printf "%s\n" "${rvm_path[@]}"
+}
+
+function jwm_mongo_db_path() {
+    # when mongo is installed, provide its bin
+    declare -a mongo_path=()
+    if [[ -s "/usr/local/mongodb/mongodb-osx-x86_64-2.6.12/bin/mongo" ]]; then
+        mongo_path=(/usr/local/mongodb/mongodb-osx-x86_64-2.6.12/bin)
+    fi
+    printf "%s\n" "${mongo_path[@]}"
+}
+
 unset PATH
-for p in $(jwm_home_paths) $(jwm_go_bin_paths) $(jwm_standard_paths); do
+for p in $(jwm_home_paths) $(jwm_go_bin_paths) $(jwm_standard_paths) $(jwm_mongo_db_path) $(jwm_rvm_path); do
     if [ -e "$p" ]; then
         if [ -z "$PATH" ]; then
             PATH="$p"
