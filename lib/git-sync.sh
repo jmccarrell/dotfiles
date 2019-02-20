@@ -101,12 +101,13 @@ git_update_remote() {
 git_sync() {
   local git_path="$1"
   local remote="$2"
+  [[ -d $git_path ]] || return 1
   git_update_remote $git_path $remote || return 1
   git_check_refs $git_path $remote || return 1
 }
 
-gs_enotes() {
-  git_sync /e/notes origin
+gs_snotes() {
+  git_sync /s/notes origin
 }
 
 gs_jnotes() {
@@ -137,13 +138,17 @@ gs_ebooks() {
     git_sync /j/ebooks origin
 }
 
+gs_bogus() {
+    git_sync /does/not/exist
+}
+
 gs_all() {
-  gs_enotes
   gs_jnotes
   gs_dotfiles
   gs_jeff_dotfiles
   gs_ebooks
-  gs_explore_ruby
+  gs_snotes
+  # gs_explore_ruby
   # gs_fp_scala
-  gs_learning_scala
+  # gs_learning_scala
 }
