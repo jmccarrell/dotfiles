@@ -172,7 +172,7 @@
 ;;  this matches well with my TASKS/PROJECTS high level
 ;; further, I prefer the refiling to be per-buffer, not across all org-agenda-files
 ;;  to preserve context.  most often, I use the file as context.
-(setq org-refile-targets '((nil . (:level . 2))))
+(setq org-refile-targets '((nil . (:maxlevel . 2))))
 
 ;; jwm: I don't like org mode for txt files.
 ;; (add-to-list 'auto-mode-alist '("\\.txt$" . org-mode))
