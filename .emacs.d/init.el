@@ -60,7 +60,7 @@
   (file-exists-p "/e/src/reputedly"))
 
 (defun jwm::sift-host-p ()
-  (file-exists-p "/s/notes/org/sift.org"))
+  (file-exists-p (expand-file-name "~/code/java/build.gradle")))
 
 ;;; jeffs settings
 
