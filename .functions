@@ -249,6 +249,17 @@ function termtitle() {
 # jeffs functions
 #
 
+#
+# is this a sift laptop we are running on?
+#
+function sift_host_p {
+    if [[ -e "$HOME/code/java/build.gradle" ]]; then
+        return 0;
+    else
+        return 1;
+    fi;
+}
+
 # join an array into a string
 #  from https://stackoverflow.com/questions/1527049/join-elements-of-an-array
 # join_by ' , ' a b c
