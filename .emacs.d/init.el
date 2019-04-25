@@ -117,41 +117,31 @@
  ("C-c b" . org-iswitchb))
 
 ;; set up org mode
-(setq org-directory "~/Dropbox/org")
+(setq org-directory
+      (cond ((jwm::sift-host-p) "/s/notes/org")
+            (t "~/Dropbox/org")))
 
-;; the default place to put notes for capture mode
+;; The default place to put notes for capture mode
 (setq org-default-notes-file
-      (concat org-directory "/todo.org"))
-
-(setq org-entelo-notes-file "~/Dropbox/entelo/org/entelo.org")
-
-(setq org-sift-notes-file "~/Dropbox/sift/org/sift.org")
+      (concat org-directory
+              (cond ((jwm::sift-host-p) "/sift.org")
+                    (t "/todo.org"))))
 
 ;; my agenda files
 ;;  code shamelessly stolen from Sacha Chua's config
 (setq org-agenda-files
       (delq nil
             (mapcar (lambda (x) (and (file-exists-p x) x))
-                    `("~/Dropbox/org/todo.org",
-                      "~/Dropbox/org/notes.org",
-                      org-sift-notes-file,
-                      "/c/davo/notes/davo.org",
-                      "/c/yadle/notes/yadle.org",
-                      "/j/pdata/investing/logical-invest/logical-invest-notes.org",
-                      "/j/pdata/investing/portfolio123/portfolio123-notes.org",
-                      org-entelo-notes-file))))
+                    `("~/Dropbox/org/notes.org",
+                      org-default-notes-file))))
 
 ;; capture template.
 ;;  support capture directly to my entelo org file
 (setq org-capture-templates
-      '(("t" "Todo" entry (file+headline "~/Dropbox/org/todo.org" "Tasks")
-         "* TODO %?\n %t\n  %i\n  %a")
-        ("e" "Entelo Todo" entry (file+headline "~/Dropbox/entelo/org/entelo.org" "Tasks")
+      '(("t" "Todo" entry (file+headline org-default-notes-file "Tasks")
          "* TODO %?\n %t\n  %i\n  %a")
         ("j" "Journal" entry (file+datetree "~/Dropbox/org/journal.org")
-         "* %?\nEntered on %U\n  %i\n  %a")
-        ("s" "Sift Todo" entry (file+headline "~/Dropbox/sift/org/sift.org" "Tasks")
-         "* TODO %?\n %t\n  %i\n  %a")))
+         "* %?\nEntered on %U\n  %i\n  %a")))
 
 ;; org language support
 (org-babel-do-load-languages
