@@ -81,8 +81,35 @@ function jwm_mongo_db_path() {
     printf "%s\n" "${mongo_path[@]}"
 }
 
+# circa 1H2019, homebrew will provide python3 and 2 side by side, but leaves the default names
+#   python
+#   pip
+#   easy_install
+#   ...
+#  pointing to python2
+# As I want to more agressively migrate to python3, I want to prefer those names invoke 3.
+# According to brew info python, that means putting /usr/local/opt/python/libexec/bin early in path
+#
+# ❯ ls -l /usr/local/opt/python/libexec/bin
+# total 0
+# lrwxr-xr-x  1 jmccarrell  staff  26 Mar 29 09:34 easy_install -> ../../bin/easy_install-3.7
+# lrwxr-xr-x  1 jmccarrell  staff  58 Mar 25 13:59 idle -> ../../Frameworks/Python.framework/Versions/3.7/bin/idle3.7
+# lrwxr-xr-x  1 jmccarrell  staff  14 Mar 29 09:34 pip -> ../../bin/pip3
+# lrwxr-xr-x  1 jmccarrell  staff  59 Mar 25 13:59 pydoc -> ../../Frameworks/Python.framework/Versions/3.7/bin/pydoc3.7
+# lrwxr-xr-x  1 jmccarrell  staff  60 Mar 25 13:59 python -> ../../Frameworks/Python.framework/Versions/3.7/bin/python3.7
+# lrwxr-xr-x  1 jmccarrell  staff  68 Mar 25 13:59 python-config -> ../../Frameworks/Python.framework/Versions/3.7/bin/python3.7m-config
+# lrwxr-xr-x  1 jmccarrell  staff  16 Mar 29 09:34 wheel -> ../../bin/wheel3
+function python3_macos_path() {
+    macos_python3_path='/usr/local/opt/python/libexec/bin'
+    result=''
+    if [ -e "$macos_python3_path" ]; then
+        result="$macos_python3_path"
+    fi
+    printf "$result"
+}
+
 unset PATH
-for p in $(jwm_home_paths) $(jwm_go_bin_paths) $(jwm_standard_paths) $(jwm_mongo_db_path) $(jwm_rvm_path); do
+for p in $(python3_macos_path) $(jwm_home_paths) $(jwm_go_bin_paths) $(jwm_standard_paths) $(jwm_mongo_db_path) $(jwm_rvm_path); do
     if [ -e "$p" ]; then
         if [ -z "$PATH" ]; then
             PATH="$p"
