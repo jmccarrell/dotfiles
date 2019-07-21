@@ -12,13 +12,22 @@ if [[ ! -h $source_dir ]]; then
     exit 24
 fi
 
+# find the archive emacs dir
+archive_emacs_dir_base="$HOME/tmp/emacs.d-archive"
+newest_archive_copy=$(ls -1t $archive_emacs_dir_base | sed 1q)
+archive_emacs=$archive_emacs_dir_base/$newest_archive_copy
+print -l "found archive emacs dir: $archive_emacs"
+
 print -l "deleting symlink to literate version"
 rm $source_dir
 
-dotfile_bootstrap=/j/proj/jwm-dotfiles/bootstrap.sh
-if [[ ! -e $dotfile_bootstrap ]]; then
-    print -l "cant find the dotfiles bootstrap?"
-    exit 25
-fi
-print -l "doing the dotfiles copy thing"
-$dotfile_bootstrap -f
+mv -v $archive_emacs $source_dir
+exit 0
+
+# dotfile_bootstrap=/j/proj/jwm-dotfiles/bootstrap.sh
+# if [[ ! -e $dotfile_bootstrap ]]; then
+#     print -l "cant find the dotfiles bootstrap?"
+#     exit 25
+# fi
+# print -l "doing the dotfiles copy thing"
+# $dotfile_bootstrap -f
