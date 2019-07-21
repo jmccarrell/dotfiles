@@ -1,0 +1,24 @@
+#!/usr/bin/env zsh
+# switch to my classic emacs configuration
+#  useful as I evolve my decades old emacs config forward
+
+# move (presume classic) configuration into the archive
+source_dir=$HOME/.emacs.d
+
+# are we already using the literate config?
+if [[ ! -h $source_dir ]]; then
+    print -l "apparently you are not using the literate version?  found normal dir $source_dir"
+    ls -l $source_dir
+    exit 24
+fi
+
+print -l "deleting symlink to literate version"
+rm $source_dir
+
+dotfile_bootstrap=/j/proj/jwm-dotfiles/bootstrap.sh
+if [[ ! -e $dotfile_bootstrap ]]; then
+    print -l "cant find the dotfiles bootstrap?"
+    exit 25
+fi
+print -l "doing the dotfiles copy thing"
+$dotfile_bootstrap -f
