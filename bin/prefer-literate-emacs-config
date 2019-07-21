@@ -1,0 +1,37 @@
+#!/usr/bin/env zsh
+# switch to my evolving literate emacs configuration
+#  useful as I evolve my decades old emacs config forward
+
+# prepare
+literate_emacs_dir='/j/proj/literate-emacs.d'
+if [[ ! -d $literate_emacs_dir ]] || [[ ! -f $literate_emacs_dir/init.el ]]; then
+    print -l "Cant seem to find literate emacs.d; looking here: $literate_emacs_dir"
+    exit 23
+fi
+
+archive_emacs_dir_base="$HOME/tmp/emacs.d-archive"
+if [[ ! -e $archive_emacs_dir_base || ! -d $archive_emacs_dir_base ]]; then
+    print -l "making archive dir: $archive_emacs_dir_base"
+    mkdir $archive_emacs_dir_base
+fi
+
+# move (presume classic) configuration into the archive
+source_dir=$HOME/.emacs.d
+
+# are we already using the literate config?
+if [[ -h $source_dir ]]; then
+    print -l "already using literate version?  found symlink $source_dir"
+    ls -lh $source_dir
+    exit 24
+fi
+
+zmodload zsh/datetime
+archive_dir=$archive_emacs_dir_base/emacs.d-$EPOCHSECONDS
+print -l "moving presumed classic config to $archive_dir"
+mv -v $source_dir $archive_dir
+
+# now symlink in place the literate version
+ln -s $literate_emacs_dir $source_dir
+print -l "now using literate emacs"
+ls -lh $source_dir
+exit 0
