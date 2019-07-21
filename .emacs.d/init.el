@@ -398,6 +398,26 @@
   (superword-mode t))
 (add-hook 'prog-mode-hook #'jwm::prog-mode-hook)
 
+;; more programming mode supplemental functions
+(defun jwm::c-comment-region (start end)
+  "Comment out a region of C code using /*** and ***/ each on a line."
+  (interactive "r")
+  (goto-char start)
+  (insert "/***\n")
+  (goto-char (+ end 5))
+  (insert "***/\n")
+)
+
+(defun jwm::c-ifdef-region (start end)
+  "Comment out a region of C code using #if 0."
+  (interactive "r")
+  (goto-char start)
+  (insert "#if 0\n")
+  (goto-char (+ end 6))
+  (insert "#endif\n")
+)
+
+
 ;;; Configure libraries
 
 ;; ag config dervied from danielmai's config
