@@ -32,14 +32,15 @@
   ;;(defvar use-package-expand-minimally t)
   (require 'use-package))
 
-(require 'bind-key)
-(require 'diminish nil t)
+(use-package bind-key)
+(use-package diminish)
 
 ;;;
 ;;; jwm: leave the custom settings in settings.el
 ;;;  it is good enough for jwiegley
 (setq custom-file (expand-file-name "settings.el" user-emacs-directory))
-(load custom-file)
+(when (file-exists-p custom-file)
+  (load custom-file t))
 
 ;;; Enable disabled commands
 
@@ -251,9 +252,14 @@
 ;; begin-jwm: xterm-color config as of 20170102.1525
 ;; xterm-color config from: https://github.com/atomontage/xterm-color
 ;; comint install
-(require 'xterm-color)
-(progn (add-hook 'comint-preoutput-filter-functions 'xterm-color-filter)
-       (setq comint-output-filter-functions (remove 'ansi-color-process-output comint-output-filter-functions)))
+;; (require 'xterm-color)
+;; (progn (add-hook 'comint-preoutput-filter-functions 'xterm-color-filter)
+;;        (setq comint-output-filter-functions (remove 'ansi-color-process-output comint-output-filter-functions)))
+(use-package xterm-color
+  :config
+  (add-hook 'comint-preoutput-filter-functions 'xterm-color-filter)
+  (setq comint-output-filter-functions (remove 'ansi-color-process-output comint-output-filter-functions)))
+
 
 ;; comint uninstall
 ;; (progn (remove-hook 'comint-preoutput-filter-functions 'xterm-color-filter)
