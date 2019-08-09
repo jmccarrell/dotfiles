@@ -8,7 +8,18 @@ if [[ ! -d $literate_emacs_dir ]] || [[ ! -f $literate_emacs_dir/init.el ]]; the
     print -l "Cant seem to find literate emacs.d; looking here: $literate_emacs_dir"
     exit 23
 fi
+literate_init_el=$literate_emacs_dir/init.el
 
+emacs_dir=$HOME/.emacs.d
+emacs_init_el=${emacs_dir}/init.el
+if [[ -h $emacs_init_el ]]; then
+    rm $emacs_init_el
+fi
+
+ln -s $literate_init_el $emacs_init_el
+exit 0
+
+source_dir=$HOME/.emacs.d
 archive_emacs_dir_base="$HOME/tmp/emacs.d-archive"
 if [[ ! -e $archive_emacs_dir_base || ! -d $archive_emacs_dir_base ]]; then
     print -l "making archive dir: $archive_emacs_dir_base"
