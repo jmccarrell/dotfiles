@@ -138,12 +138,17 @@ gs_ebooks() {
     git_sync /j/ebooks origin
 }
 
+gs_literate-emacs-d() {
+    git_sync /j/proj/literate-emacs.d origin
+}
+
 gs_bogus() {
     git_sync /does/not/exist
 }
 
 gs_all() {
   gs_jnotes
+  gs_literate-emacs-d
   gs_dotfiles
   gs_jeff_dotfiles
   gs_ebooks
