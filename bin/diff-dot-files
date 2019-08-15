@@ -10,8 +10,6 @@ for file in \
  .bashrc \
  .curlrc \
  .editorconfig \
- .emacs.jwm.d/emacs-custom-future.el \
- .emacs.d/init.el \
  .exports \
  .functions \
  .gdbinit \
@@ -30,10 +28,13 @@ for file in \
  .wgetrc \
  bin/commify \
  bin/diff-dot-files \
- bin/eag \
  bin/localtime \
  bin/nag \
+ bin/prefer-classic-emacs-config \
+ bin/prefer-literate-emacs-config \
+ bin/sag \
  bin/sample \
+ lib/git-sync.sh \
  ; do
     # -q is a bit too quiet...
     git diff "${HOME}/${file}" "${proj_dir}/${file}"
