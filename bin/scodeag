@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+# search sift code with the silver searcher
+
+readonly -a source_dirs=($HOME/code $HOME/salt $HOME/salt-gcp $HOME/terraform)
+declare -a ag_dirs=()
+for d in ${source_dirs[@]}; do
+    if [ -d $d ]; then
+        ag_dirs[${#ag_dirs[@]}]=$d
+    fi
+done
+
+if (( ${#ag_dirs[@]} <= 0 )); then
+   echo "no directories to search"
+   exit 1
+fi
+
+ag "$@" ${ag_dirs[@]}
