@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # search Jeffs common notes locations with the silver searcher
 
-readonly -a source_dirs=( /{j,e,f}/notes /j/pdata/notes ${HOME}/Dropbox/{,entelo/}org )
+readonly -a source_dirs=( /{j,e,f}/notes /j/pdata/notes ${HOME}/Dropbox )
 declare -a ag_dirs=()
 for d in ${source_dirs[@]}; do
     if [ -d $d ]; then
