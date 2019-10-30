@@ -107,15 +107,15 @@ git_sync() {
 }
 
 gs_snotes() {
-  git_sync /s/notes origin
+  git_sync ${HOME}/pdata/employers/sift/notes origin
 }
 
 gs_jnotes() {
-  git_sync /j/notes origin
+  git_sync ${HOME}/notes origin
 }
 
 gs_dotfiles() {
-  git_sync /j/proj/jwm-dotfiles origin
+  git_sync ${HOME}/proj/jwm-dotfiles origin
 }
 
 gs_jeff_dotfiles() {
@@ -123,27 +123,27 @@ gs_jeff_dotfiles() {
 }
 
 gs_explore_ruby() {
-  git_sync /j/proj/explore-ruby origin
+  git_sync ${HOME}/proj/explore-ruby origin
 }
 
 gs_fp_scala() {
-    git_sync /j/proj/functional-programming-in-scala/jwm origin
+  git_sync ${HOME}/proj/functional-programming-in-scala/jwm origin
 }
 
 gs_learning_scala() {
-    git_sync /j/proj/learning-scala/jwm origin
+  git_sync ${HOME}/proj/learning-scala/jwm origin
 }
 
 gs_ebooks() {
-    git_sync /j/ebooks origin
+  git_sync ${HOME}/ebooks origin
 }
 
 gs_literate-emacs-d() {
-    git_sync /j/proj/literate-emacs.d origin
+  git_sync ${HOME}/proj/literate-emacs.d origin
 }
 
 gs_bogus() {
-    git_sync /does/not/exist
+  git_sync /does/not/exist
 }
 
 gs_all() {
@@ -153,7 +153,4 @@ gs_all() {
   gs_jeff_dotfiles
   gs_ebooks
   gs_snotes
-  # gs_explore_ruby
-  # gs_fp_scala
-  # gs_learning_scala
 }

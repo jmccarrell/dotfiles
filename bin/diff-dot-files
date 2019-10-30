@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-proj_dir='/j/proj/jwm-dotfiles'
+proj_dir="${HOME}/proj/jwm-dotfiles"
 
 for file in \
  .ackrc \

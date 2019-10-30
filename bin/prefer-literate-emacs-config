@@ -3,7 +3,7 @@
 #  useful as I evolve my decades old emacs config forward
 
 # prepare
-literate_emacs_dir='/j/proj/literate-emacs.d'
+literate_emacs_dir="${HOME}/proj/literate-emacs.d"
 if [[ ! -d $literate_emacs_dir ]] || [[ ! -f $literate_emacs_dir/init.el ]]; then
     print -l "Cant seem to find literate emacs.d; looking here: $literate_emacs_dir"
     exit 23

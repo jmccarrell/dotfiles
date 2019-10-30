@@ -2,7 +2,7 @@
 # switch to my classic emacs configuration
 #  useful as I evolve my decades old emacs config forward
 
-classic_init_el=/j/proj/jwm-dotfiles/.emacs.d/init.el
+classic_init_el=${HOME}/proj/jwm-dotfiles/.emacs.d/init.el
 
 emacs_dir=$HOME/.emacs.d
 emacs_init_el=${emacs_dir}/init.el
@@ -35,7 +35,7 @@ rm $source_dir
 mv -v $archive_emacs $source_dir
 exit 0
 
-# dotfile_bootstrap=/j/proj/jwm-dotfiles/bootstrap.sh
+# dotfile_bootstrap=${HOME}/proj/jwm-dotfiles/bootstrap.sh
 # if [[ ! -e $dotfile_bootstrap ]]; then
 #     print -l "cant find the dotfiles bootstrap?"
 #     exit 25
