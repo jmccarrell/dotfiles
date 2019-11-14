@@ -1,6 +1,15 @@
 #!/usr/bin/env bash
 
-proj_dir="${HOME}/proj/jwm-dotfiles"
+# my "home" for this purpose varies from work laptop to home laptop
+jwm_home_dir() {
+    if [[ -e ${HOME}/jwm/notes && -d ${HOME}/jwm/notes ]]; then
+        printf "${HOME}/jwm"
+    else
+        printf "${HOME}"
+    fi
+}
+
+proj_dir="$(jwm_home_dir)/proj/jwm-dotfiles"
 
 for file in \
  .ackrc \

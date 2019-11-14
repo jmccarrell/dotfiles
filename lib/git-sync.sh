@@ -120,12 +120,21 @@ gs_sift_notes() {
     git_sync $(sift_notes_dir) origin
 }
 
+# my "home" for this purpose varies from work laptop to home laptop
+jwm_home_dir() {
+    if [[ -e ${HOME}/jwm/notes && -d ${HOME}/jwm/notes ]]; then
+        printf "${HOME}/jwm"
+    else
+        printf "${HOME}"
+    fi
+}
+
 gs_jnotes() {
-    git_sync ${HOME}/notes origin
+    git_sync $(jwm_home_dir)/notes origin
 }
 
 gs_dotfiles() {
-    git_sync ${HOME}/proj/jwm-dotfiles origin
+    git_sync $(jwm_home_dir)/proj/jwm-dotfiles origin
 }
 
 gs_jeff_dotfiles() {
@@ -133,23 +142,23 @@ gs_jeff_dotfiles() {
 }
 
 gs_explore_ruby() {
-    git_sync ${HOME}/proj/explore-ruby origin
+    git_sync $(jwm_home_dir)/proj/explore-ruby origin
 }
 
 gs_fp_scala() {
-    git_sync ${HOME}/proj/functional-programming-in-scala/jwm origin
+    git_sync $(jwm_home_dir)/proj/functional-programming-in-scala/jwm origin
 }
 
 gs_learning_scala() {
-    git_sync ${HOME}/proj/learning-scala/jwm origin
+    git_sync $(jwm_home_dir)/proj/learning-scala/jwm origin
 }
 
 gs_ebooks() {
-    git_sync ${HOME}/ebooks origin
+    git_sync $(jwm_home_dir)/ebooks origin
 }
 
 gs_literate-emacs-d() {
-    git_sync ${HOME}/proj/literate-emacs.d origin
+    git_sync $(jwm_home_dir)/proj/literate-emacs.d origin
 }
 
 gs_bogus() {
