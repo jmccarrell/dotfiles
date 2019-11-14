@@ -106,8 +106,18 @@ git_sync() {
   git_check_refs $git_path $remote || return 1
 }
 
-gs_snotes() {
-  git_sync ${HOME}/pdata/employers/sift/notes origin
+sift_notes_dir() {
+    if [[ -e ${HOME}/sift/notes && -d ${HOME}/sift/notes ]]; then
+        printf "${HOME}/sift/notes"
+    elif [[ -e ${HOME}/pdata/employers/sift/notes && -d ${HOME}/pdata/employers/sift/notes ]]; then
+        printf "${HOME}/pdata/employers/sift/notes"
+    else
+        printf "unknown"
+    fi
+}
+
+gs_sift_notes() {
+  git_sync $(sift_notes_dir) origin
 }
 
 gs_jnotes() {
@@ -152,5 +162,5 @@ gs_all() {
   gs_dotfiles
   gs_jeff_dotfiles
   gs_ebooks
-  gs_snotes
+  gs_sift_notes
 }
