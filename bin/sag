@@ -1,7 +1,12 @@
 #!/usr/bin/env bash
 # search Jeffs sift notes locations with the silver searcher
 
-readonly -a source_dirs=( ${HOME}/sift/notes )
+readonly -a source_dirs=(
+    ${HOME}/sift/notes
+    # vega locations
+    ${HOME}/pdata/employers/sift/notes
+)
+
 declare -a ag_dirs=()
 for d in ${source_dirs[@]}; do
     if [ -d $d ]; then
