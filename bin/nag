@@ -1,20 +1,21 @@
-#!/usr/bin/env bash
+#!/usr/local/bin/bash
 # search Jeffs common notes locations with the silver searcher
 
 readonly -a source_dirs=(
-    ${HOME}/notes
-    ${HOME}/Dropbox
-    ${HOME}/pdata/notes
-    ${HOME}/pdata/employers/{sift,entelo,frontrow}/notes
-    # sift locations
     ${HOME}/jwm/notes
+    ${HOME}/jwm/todo
+    ${HOME}/pdata/notes
+)
+
+readonly -a other_dirs=(
+    ${HOME}/pdata/employers/{sift,entelo,frontrow}/notes
 )
 
 declare -a ag_dirs=()
 for d in ${source_dirs[@]}; do
-    if [ -d $d ]; then
-        ag_dirs[${#ag_dirs[@]}]=$d
+    if [ -d "$d" ]; then
+        ag_dirs+=("$d")
     fi
 done
 
-ag "$@" ${ag_dirs[@]}
+ag $@ ${ag_dirs[@]}
