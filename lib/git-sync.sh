@@ -134,7 +134,7 @@ gs_notes() {
 
 gs_dotfiles() {
     git_sync $(jwm_dir)/proj/jwm-dotfiles origin
-    git_sync ${HOME}/jeff-dotfiles origin
+    git_sync $(jwm_dir)/proj/jeff-dotfiles origin
 }
 
 gs_ebooks() {
