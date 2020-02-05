@@ -106,18 +106,34 @@ git_sync() {
     git_check_refs $git_path $remote || return 1
 }
 
-sift_notes_dir() {
-    if [[ -e ${HOME}/sift/notes && -d ${HOME}/sift/notes ]]; then
-        printf "${HOME}/sift/notes"
-    elif [[ -e ${HOME}/pdata/employers/sift/notes && -d ${HOME}/pdata/employers/sift/notes ]]; then
-        printf "${HOME}/pdata/employers/sift/notes"
+
+sift_dir() {
+    if [[ -e ${HOME}/sift && -d ${HOME}/sift ]]; then
+        printf "${HOME}/sift"
+    elif [[ -e ${HOME}/pdata/employers/sift && -d ${HOME}/pdata/employers/sift ]]; then
+        printf "${HOME}/pdata/employers/sift"
     else
         printf "unknown"
     fi
 }
 
 gs_sift_notes() {
-    git_sync $(sift_notes_dir) origin
+    git_sync "$(sift_dir)/notes" origin
+}
+
+gs_sift_todo() {
+    git_sync "$(sift_dir)/todo" origin
+}
+
+gs_sift_pdata() {
+    git_sync "$(sift_dir)/pdata/todo" origin
+    git_sync "$(sift_dir)/pdata/notes" origin
+}
+
+gs_sift() {
+    gs_sift_todo
+    gs_sift_notes
+    gs_sift_pdata
 }
 
 jwm_dir() {
@@ -145,11 +161,15 @@ gs_literate-emacs-d() {
     git_sync $(jwm_dir)/proj/literate-emacs.d origin
 }
 
-gs_all() {
+gs_jwm() {
     gs_todo
     gs_notes
     gs_literate-emacs-d
     gs_dotfiles
     gs_ebooks
-    gs_sift_notes
+}
+
+gs_all() {
+    gs_jwm
+    gs_sift
 }
