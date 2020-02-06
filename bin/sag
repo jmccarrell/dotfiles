@@ -1,11 +1,22 @@
 #!/usr/local/bin/zsh --norcs
 # search Jeffs sift notes locations with the silver searcher
 
+function sift_home() {
+    declare -a dirs_to_search=("$HOME/sift" "$HOME/pdata/employers/sift")
+    for d in ${dirs_to_search[@]}; do
+        if [[ -d "$d" ]] && [[ -e "$d" ]]; then
+            printf "$d"
+            return
+        fi
+    done
+    printf "unknown"
+}
+
 readonly -a source_dirs=(
-    ${HOME}/sift/notes
-    ${HOME}/sift/todo
-    ${HOME}/sift/pdata/notes
-    ${HOME}/sift/pdata/todo
+    "$(sift_home)/notes"
+    "$(sift_home)/todo"
+    "$(sift_home)/pdata/notes"
+    "$(sift_home)/pdata/todo"
 )
 
 declare -a ag_dirs=()
