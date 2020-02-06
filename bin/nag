@@ -1,14 +1,11 @@
-#!/usr/local/bin/bash
+#!/usr/local/bin/zsh --norcs
 # search Jeffs common notes locations with the silver searcher
 
 readonly -a source_dirs=(
     ${HOME}/jwm/notes
     ${HOME}/jwm/todo
     ${HOME}/pdata/notes
-)
-
-readonly -a other_dirs=(
-    ${HOME}/pdata/employers/{sift,entelo,frontrow}/notes
+    ${HOME}/pdata/todo
 )
 
 declare -a ag_dirs=()
@@ -18,4 +15,9 @@ for d in ${source_dirs[@]}; do
     fi
 done
 
-ag $@ ${ag_dirs[@]}
+if (( ${#ag_dirs[@]} <= 0 )); then
+   echo "no directories to search"
+   exit 1
+fi
+
+ag "$@" ${ag_dirs[@]}

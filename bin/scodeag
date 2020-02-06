@@ -1,11 +1,11 @@
-#!/usr/bin/env bash
+#!/usr/local/bin/zsh --norcs
 # search sift code with the silver searcher
 
 readonly -a source_dirs=($HOME/code $HOME/salt $HOME/salt-gcp $HOME/terraform)
 declare -a ag_dirs=()
 for d in ${source_dirs[@]}; do
-    if [ -d $d ]; then
-        ag_dirs[${#ag_dirs[@]}]=$d
+    if [ -d "$d" ]; then
+        ag_dirs+=("$d")
     fi
 done
 
