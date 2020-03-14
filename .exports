@@ -46,6 +46,16 @@ fi
 #     source /usr/local/bin/virtualenvwrapper.sh
 # fi
 
+# circa Spring 2020, I prefer pipenv to manage virtualenv.
+#  so prefer pipenv's location for virtualenvs over virtualenv-wrapper's location
+#  ie, prefer
+#   $HOME/.local/share/virtualenvs
+#   over
+#   ~/.virtualenvs/
+#
+# pipenv itself does not need this, but emacs/elpy use it
+export WORKON_HOME=$HOME/.local/share/virtualenvs
+
 # set up go path
 declare -a go_paths=( $(jwm_go_paths) )
 if (( ${#go_paths[@]} > 0 )); then
