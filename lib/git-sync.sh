@@ -117,6 +117,10 @@ sift_dir() {
     fi
 }
 
+gs_sift_bin() {
+    git_sync "$(sift_dir)/sift-bin" origin
+}
+
 gs_sift_notes() {
     git_sync "$(sift_dir)/notes" origin
 }
@@ -134,6 +138,7 @@ gs_sift() {
     gs_sift_todo
     gs_sift_notes
     gs_sift_pdata
+    gs_sift_bin
 }
 
 jwm_dir() {
