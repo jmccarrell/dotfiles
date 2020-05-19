@@ -166,11 +166,16 @@ gs_literate-emacs-d() {
     git_sync $(jwm_dir)/proj/literate-emacs.d origin
 }
 
+gs_gcloud_training_2020() {
+    git_sync $(jwm_dir)/proj/gcloud-training-2020 origin
+}
+
 gs_jwm() {
     gs_todo
     gs_notes
     gs_literate-emacs-d
     gs_dotfiles
+    gs_gcloud_training_2020
     gs_ebooks
 }
 
