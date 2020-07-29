@@ -72,15 +72,6 @@ function jwm_rvm_path() {
     printf "%s\n" "${rvm_path[@]}"
 }
 
-function jwm_mongo_db_path() {
-    # when mongo is installed, provide its bin
-    declare -a mongo_path=()
-    if [[ -s "/usr/local/mongodb/mongodb-osx-x86_64-2.6.12/bin/mongo" ]]; then
-        mongo_path=(/usr/local/mongodb/mongodb-osx-x86_64-2.6.12/bin)
-    fi
-    printf "%s\n" "${mongo_path[@]}"
-}
-
 # circa 1H2019, homebrew will provide python3 and 2 side by side, but leaves the default names
 #   python
 #   pip
@@ -109,7 +100,7 @@ function python3_macos_path() {
 }
 
 unset PATH
-for p in $(python3_macos_path) $(jwm_home_paths) $(jwm_go_bin_paths) $(jwm_standard_paths) $(jwm_mongo_db_path) $(jwm_rvm_path); do
+for p in $(python3_macos_path) $(jwm_home_paths) $(jwm_go_bin_paths) $(jwm_standard_paths) $(jwm_rvm_path); do
     if [ -e "$p" ]; then
         if [ -z "$PATH" ]; then
             PATH="$p"
