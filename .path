@@ -3,19 +3,10 @@
 
 # declare jeffs home paths
 function jwm_home_paths() {
-
-    # # entelo has standardized on node 6
-    # local node_path="/usr/local/opt/node@6/bin"
-    # # and entelo needs to find yarn stuff
-    # local yarn_path=$HOME/.yarn/bin
-
     local -a jwm_paths=($HOME/bin
-                        # haskell stack puts things in $HOME/.local/bin
-                        # $HOME/.local/bin
-                        # ${node_path}
+                        $HOME/.local/bin
                         $HOME/.rbenv/shims
                         $HOME/.rbenv/bin
-                        # $yarn_path
                        )
 
     printf "%s\n" "${jwm_paths[@]}"
