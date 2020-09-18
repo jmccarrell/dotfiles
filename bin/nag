@@ -1,23 +1,34 @@
-#!/usr/local/bin/zsh --norcs
+#!/usr/bin/env zsh -f
 # search Jeffs common notes locations with the silver searcher
 
-readonly -a source_dirs=(
-    ${HOME}/jwm/notes
-    ${HOME}/jwm/todo
-    ${HOME}/pdata/notes
-    ${HOME}/pdata/todo
-)
+# this function produces duplicates, as often I will have the files in source_dirs
+#  also in my org agenda file list.
+# fix that: filter it through an associative array?
+function nag_search_dirs {
+    # these directories are not always here in the file system; cf: sift mac.  they are elsewhere.
+    #  this is a shortcoming of this simple approach
+    readonly -a source_dirs=(
+        ${HOME}/jwm/notes
+        ${HOME}/jwm/todo
+        ${HOME}/pdata/notes
+        ${HOME}/pdata/todo
+    )
+    for d in ${source_dirs[@]}; do
+        if [[ -d "$d" ]]; then
+            print -l "$d"
+        fi
+    done
 
-declare -a ag_dirs=()
-for d in ${source_dirs[@]}; do
-    if [ -d "$d" ]; then
-        ag_dirs+=("$d")
+    local emacs_org_agenda_fname="$HOME/.emacs.d/org-agenda-files-list"
+    if [[ -e "$emacs_org_agenda_fname" ]]; then
+        for d in $(cat "$emacs_org_agenda_fname"); do
+            # replace ~ with $HOME
+            d="${d//\~/$HOME}"
+            if [[ -e $d ]]; then
+                print -l "$d"
+            fi
+        done
     fi
-done
+}
 
-if (( ${#ag_dirs[@]} <= 0 )); then
-   echo "no directories to search"
-   exit 1
-fi
-
-ag "$@" ${ag_dirs[@]}
+ag "$@" $(nag_search_dirs)
