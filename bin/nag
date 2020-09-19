@@ -1,11 +1,34 @@
 #!/usr/bin/env zsh -f
 # search across notes and recent work locations with the silver searcher
 
-# this function produces duplicates, as often I will have files in the org agenda file list
-#  that reside in one of the directories in search_dirs.
-function nag_search_dirs {
-    # these directories are not always here in the file system; cf: sift mac.  they are elsewhere.
-    #  this is a shortcoming of this simple approach
+function is_sift_p {
+    integer sift_p=0
+    declare sift_code_file="$HOME/code/java/build.gradle"
+    if [[ -s $sift_code_file ]]; then
+        sift_p=1
+    fi
+    print $sift_p
+}
+# typeset -T -f is_sift
+
+function sift_search_dirs {
+    local sift_prefix="${HOME}/pdata/employers/sift"
+    if (( $(is_sift_p) )); then
+        sift_prefix="${HOME}/sift"
+    fi
+    local -r -a sift_dirs=(
+        ${sift_prefix}/notes
+        ${sift_prefix}/todo
+    )
+    for d in ${sift_dirs[@]}; do
+        if [[ -d "$d" ]]; then
+            print "$d"
+        fi
+    done
+}
+# typeset -T -f sift_search_dirs
+
+function jwm_search_dirs {
     local -r -a search_dirs=(
         ${HOME}/jwm/notes
         ${HOME}/jwm/todo
@@ -14,9 +37,17 @@ function nag_search_dirs {
     )
     for d in ${search_dirs[@]}; do
         if [[ -d "$d" ]]; then
-            print -l "$d"
+            print "$d"
         fi
     done
+}
+
+# this function produces duplicates, as often I will have files in the org agenda file list
+#  that reside in one of the directories in search_dirs.
+function nag_search_dirs {
+    sift_search_dirs
+
+    jwm_search_dirs
 
     # search current areas of interest, as represented in my emacs org agena list
     local -r emacs_org_agenda_fname="$HOME/.emacs.d/org-agenda-files-list"
@@ -26,12 +57,11 @@ function nag_search_dirs {
             filename="${filename//\~/$HOME}"
             if [[ -s $filename ]]; then
                 # replace files with the directories they reside in
-                print -l "$filename:h"
+                print "$filename:h"
             fi
         done < "$emacs_org_agenda_fname"
     fi
 }
-
 # turn on debug tracing just for this named function
 # typeset -T -f nag_search_dirs
 
