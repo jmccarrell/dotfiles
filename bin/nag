@@ -1,34 +1,40 @@
 #!/usr/bin/env zsh -f
-# search Jeffs common notes locations with the silver searcher
+# search across notes and recent work locations with the silver searcher
 
-# this function produces duplicates, as often I will have the files in source_dirs
-#  also in my org agenda file list.
-# fix that: filter it through an associative array?
+# this function produces duplicates, as often I will have files in the org agenda file list
+#  that reside in one of the directories in search_dirs.
 function nag_search_dirs {
     # these directories are not always here in the file system; cf: sift mac.  they are elsewhere.
     #  this is a shortcoming of this simple approach
-    readonly -a source_dirs=(
+    local -r -a search_dirs=(
         ${HOME}/jwm/notes
         ${HOME}/jwm/todo
         ${HOME}/pdata/notes
         ${HOME}/pdata/todo
     )
-    for d in ${source_dirs[@]}; do
+    for d in ${search_dirs[@]}; do
         if [[ -d "$d" ]]; then
             print -l "$d"
         fi
     done
 
-    local emacs_org_agenda_fname="$HOME/.emacs.d/org-agenda-files-list"
+    # search current areas of interest, as represented in my emacs org agena list
+    local -r emacs_org_agenda_fname="$HOME/.emacs.d/org-agenda-files-list"
     if [[ -e "$emacs_org_agenda_fname" ]]; then
-        for d in $(cat "$emacs_org_agenda_fname"); do
+        while read filename rest; do
             # replace ~ with $HOME
-            d="${d//\~/$HOME}"
-            if [[ -e $d ]]; then
-                print -l "$d"
+            filename="${filename//\~/$HOME}"
+            if [[ -s $filename ]]; then
+                # replace files with the directories they reside in
+                print -l "$filename:h"
             fi
-        done
+        done < "$emacs_org_agenda_fname"
     fi
 }
 
-ag "$@" $(nag_search_dirs)
+# turn on debug tracing just for this named function
+# typeset -T -f nag_search_dirs
+
+# de-dup using zsh unique array.  see the manual: zsh builtins: typeset -U
+declare -a -U unique_search_dirs=($(nag_search_dirs))
+ag $@ $unique_search_dirs
