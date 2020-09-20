@@ -42,13 +42,7 @@ function jwm_search_dirs {
     done
 }
 
-# this function produces duplicates, as often I will have files in the org agenda file list
-#  that reside in one of the directories in search_dirs.
-function nag_search_dirs {
-    sift_search_dirs
-
-    jwm_search_dirs
-
+function emacs_org_agenda_dirs {
     # search current areas of interest, as represented in my emacs org agena list
     local -r emacs_org_agenda_fname="$HOME/.emacs.d/org-agenda-files-list"
     if [[ -e "$emacs_org_agenda_fname" ]]; then
@@ -61,6 +55,15 @@ function nag_search_dirs {
             fi
         done < "$emacs_org_agenda_fname"
     fi
+}
+
+
+# this function produces duplicates, as often I will have files in the org agenda file list
+#  that reside in one of the directories in search_dirs.
+function nag_search_dirs {
+    sift_search_dirs
+    jwm_search_dirs
+    emacs_org_agenda_dirs
 }
 # turn on debug tracing just for this named function
 # typeset -T -f nag_search_dirs
