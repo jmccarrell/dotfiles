@@ -158,6 +158,10 @@ gs_dotfiles() {
     git_sync $(jwm_dir)/proj/jeff-dotfiles origin
 }
 
+function gs_jwm_bin {
+    git_sync $(jwm_dir)/proj/jwm-bin origin
+}
+
 gs_ebooks() {
     git_sync $(jwm_dir)/ebooks origin
 }
@@ -175,6 +179,7 @@ gs_jwm() {
     gs_notes
     gs_literate-emacs-d
     gs_dotfiles
+    gs_jwm_bin
     gs_gcloud_training_2020
     gs_ebooks
 }
