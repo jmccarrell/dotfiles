@@ -174,6 +174,11 @@ gs_gcloud_training_2020() {
     git_sync $(jwm_dir)/proj/gcloud-training-2020 origin
 }
 
+gs_sql_for_data_analytics() {
+    git_sync $(jwm_dir)/proj/sql-for-data-analytics origin
+}
+
+
 gs_jwm() {
     gs_todo
     gs_notes
@@ -181,6 +186,7 @@ gs_jwm() {
     gs_dotfiles
     gs_jwm_bin
     gs_gcloud_training_2020
+    gs_sql_for_data_analytics
     gs_ebooks
 }
 
