@@ -63,6 +63,17 @@ function jwm_rvm_path() {
     printf "%s\n" "${rvm_path[@]}"
 }
 
+# sift runs postgres 9.6, so provide that here
+function jwm_postgresql_path {
+    pg_path=()
+    # check for 9.6 from homebrew
+    pg_96="/usr/local/opt/postgresql@9.6/bin"
+    if [[ -s "$pg_96" ]]; then
+        pg_path=("$pg_96")
+    fi
+    printf "%s\n" "$pg_path[@]"
+}
+
 # circa Nov 2020, homebrew will provide python 3.7, 3.8 or 3.9
 #  with the default being 3.9.
 # this function chooses which of those to prefer.
@@ -85,15 +96,39 @@ function jwm_gcloud_sdk_path() {
     printf "$result"
 }
 
-unset PATH
-for p in $(jwm_python3_path) $(jwm_home_paths) $(jwm_go_bin_paths) $(jwm_gcloud_sdk_path) $(jwm_standard_paths) $(jwm_rvm_path); do
-    if [ -e "$p" ]; then
-        if [ -z "$PATH" ]; then
-            PATH="$p"
-        else
-            PATH="$PATH:$p"
+function jwm_set_path() {
+    local -A dedup
+    local -a result=()
+
+    # remove any duplicate path elements
+    for dir in \
+        $(jwm_home_paths) \
+        $(jwm_python3_path) \
+        $(jwm_go_bin_paths) \
+        $(jwm_gcloud_sdk_path) \
+        $(jwm_standard_paths) \
+        $(jwm_rvm_path) \
+        $(jwm_postgresql_path) \
+        ; do
+        if [ ${dedup[$dir]+_} ]; then
+            continue
         fi
-    fi
-done
-unset p
-export PATH
+        dedup[${dir}]=1
+
+        if [[ -e $dir ]]; then
+            result+=($dir)
+        fi
+    done
+
+    # join the path elements with :
+    local ifs_save="$IFS"
+    IFS=:
+    local p="${result[*]}"
+    IFS="$ifs_save"
+    # printf 'ifs_save: %s\n' $p
+
+    PATH=$p
+
+    # let pyenv do its thing last
+    if command -v pyenv 1>/dev/null 2>&1; then  eval "$(pyenv init -)"; fi
+}
