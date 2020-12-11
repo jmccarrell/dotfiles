@@ -267,6 +267,20 @@ function sift_host_p {
 # a , b , c
 function join_by { local d=$1; shift; echo -n "$1"; shift; printf "%s" "${@/#/$d}"; }
 
+# setup to install airflow dags
+# this requires:
+# - bareword python resolves to py2
+# - a specific version of rvm pointing to where I already have installed the needed gems (Cap)
+function sift_setup_for_airflow_dag_install {
+    jwm_prefer_python2
+    source ${HOME}/sift/src/integration/sift_function.sh
+    pushd ${HOME}/code
+    update_python_deps
+    popd
+    ~/code/airflow/dags/install_dependencies.sh
+    echo "now run in your shell:  rvm use ruby-2.7.0"
+}
+
 #
 # end jeffs functions
 #
