@@ -87,6 +87,23 @@ function jwm_python3_path() {
     printf "$result"
 }
 
+function jwm_python2_path() {
+    macos_python2_path='/usr/local/opt/python@2/bin'
+    result=''
+    if [ -e "$macos_python2_path" ]; then
+        result="$macos_python2_path"
+    fi
+    printf "$result"
+}
+
+function jwm_python_path() {
+    if [[ ! -z ${JWM_BAREWORD_PYTHON_IS_PY2} ]]; then
+        jwm_python2_path
+    else
+        jwm_python3_path
+    fi
+}
+
 function jwm_gcloud_sdk_path() {
     gcloud_sdk_bin='/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/bin'
     result=''
@@ -96,6 +113,17 @@ function jwm_gcloud_sdk_path() {
     printf "$result"
 }
 
+function jwm_prefer_python2() {
+    export JWM_BAREWORD_PYTHON_IS_PY2=t
+    jwm_set_path
+}
+
+function jwm_prefer_python3() {
+    unset JWM_BAREWORD_PYTHON_IS_PY2
+    jwm_set_path
+}
+
+
 function jwm_set_path() {
     local -A dedup
     local -a result=()
@@ -103,7 +131,7 @@ function jwm_set_path() {
     # remove any duplicate path elements
     for dir in \
         $(jwm_home_paths) \
-        $(jwm_python3_path) \
+        $(jwm_python_path) \
         $(jwm_go_bin_paths) \
         $(jwm_gcloud_sdk_path) \
         $(jwm_standard_paths) \
