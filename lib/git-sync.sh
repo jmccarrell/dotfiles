@@ -178,6 +178,10 @@ gs_sql_for_data_analytics() {
     git_sync $(jwm_dir)/proj/sql-for-data-analytics origin
 }
 
+gs_course_java_oo_specialization() {
+    git_sync $(jwm_dir)/proj/course-oo-java-specialization
+}
+
 
 gs_jwm() {
     gs_todo
@@ -187,6 +191,7 @@ gs_jwm() {
     gs_jwm_bin
     gs_gcloud_training_2020
     gs_sql_for_data_analytics
+    gs_course_java_oo_specialization
     gs_ebooks
 }
 
