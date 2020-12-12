@@ -179,7 +179,7 @@ gs_sql_for_data_analytics() {
 }
 
 gs_course_java_oo_specialization() {
-    git_sync $(jwm_dir)/proj/course-oo-java-specialization
+    git_sync $(jwm_dir)/proj/course-oo-java-specialization origin
 }
 
 
