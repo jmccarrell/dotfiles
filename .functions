@@ -282,5 +282,19 @@ function sift_setup_for_airflow_dag_install {
 }
 
 #
+# select the JVM version in use
+#
+# see all versions with -V/--verbose
+#  set a version with -v/--version
+#  cf: https://www.kevinhooke.com/2017/10/05/switching-java-versions-on-mac-os/
+function jwm_prefer_java_8 {
+    export JAVA_HOME=$(/usr/libexec/java_home --version 1.8)
+}
+
+function jwm_prefer_java_11 {
+    export JAVA_HOME=$(/usr/libexec/java_home --version 11)
+}
+
+#
 # end jeffs functions
 #
