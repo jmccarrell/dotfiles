@@ -78,13 +78,11 @@ function jwm_postgresql_path {
 #  with the default being 3.9.
 # this function chooses which of those to prefer.
 # py3.9 had a conflict installing pandas as of pandas, so rely on py 3.8 for now in Nov 2020.
+# but prefer `brew link python@3.8` to choose which py3 to provide.
 function jwm_python3_path() {
-    macos_python3_path='/usr/local/opt/python@3.8/libexec/bin'
-    result=''
-    if [ -e "$macos_python3_path" ]; then
-        result="$macos_python3_path"
-    fi
-    printf "$result"
+    # choose which py3 via brew link
+    # so this function turns into a no-op
+    printf ''
 }
 
 function jwm_python2_path() {
