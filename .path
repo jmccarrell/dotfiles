@@ -157,4 +157,7 @@ function jwm_set_path() {
 
     # let pyenv do its thing last
     if command -v pyenv 1>/dev/null 2>&1; then  eval "$(pyenv init -)"; fi
+
+    # let sdkman do its thing
+    [[ -s "${HOME}/.sdkman/bin/sdkman-init.sh" ]] && source "${HOME}/.sdkman/bin/sdkman-init.sh"
 }
